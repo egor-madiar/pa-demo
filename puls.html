@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Плутос · Пульс продаж — прототип</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0A0A0C; --bg:#101014; --bg2:#131319; --card:#17171C;
+  --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.13);
+  --ink:rgba(255,255,255,.93); --ink2:rgba(255,255,255,.62); --ink3:rgba(255,255,255,.45);
+  --gold:#C9A45C; --goldB:#E4C078; --goldbg:rgba(201,164,92,.10); --goldhair:rgba(201,164,92,.32);
+  --ok:#4CC39A; --okbg:rgba(46,155,130,.13);
+  --warn:#D99A55; --warnbg:rgba(201,123,46,.13);
+  --bad:#E37E76; --badbg:rgba(179,53,46,.14);
+  --blue:#8FA8E8; --bluebg:rgba(109,138,224,.13);
+  --sBlue:#6D8AE0; --plan:rgba(255,255,255,.16);
+  --r:16px; --ri:11px; --ease:cubic-bezier(.32,.72,0,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--void)}
+body{background:var(--bg);color:var(--ink);font:15px/1.6 'Manrope',-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(900px 500px at 82% -10%, rgba(201,164,92,.08), transparent 60%),
+             radial-gradient(700px 480px at -8% 40%, rgba(109,138,224,.05), transparent 60%);}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");}
+h1{font-family:'Prata',Georgia,serif;font-weight:400;font-size:clamp(28px,4vw,42px);line-height:1.18;letter-spacing:-.012em}
+h2{font-family:'Prata',Georgia,serif;font-weight:400;font-size:clamp(21px,2.4vw,27px);line-height:1.25;letter-spacing:-.008em;margin:0 0 6px}
+h3{font-size:15.5px;font-weight:700;letter-spacing:-.01em}
+a{color:var(--goldB);text-decoration:none} a:hover{color:#F0D090}
+.mut{color:var(--ink2)} .dim{color:var(--ink3)} .small{font-size:13px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
+.nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:100;
+  display:flex;align-items:center;gap:6px;padding:7px 8px 7px 18px;border-radius:999px;
+  background:rgba(16,16,21,.72);border:1px solid var(--hair2);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  box-shadow:0 12px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06);white-space:nowrap}
+.brand{font-weight:800;letter-spacing:.16em;font-size:12.5px;margin-right:8px}
+.brand i{color:var(--gold);font-style:normal}
+.navtab{border:none;background:transparent;color:var(--ink2);font:600 13px/1 'Manrope',sans-serif;padding:9px 15px;border-radius:999px;cursor:pointer;transition:all .35s var(--ease)}
+.navtab.on{background:rgba(255,255,255,.95);color:#101014}
+.navtab:not(.on):hover{color:var(--ink)}
+.demopill{font-size:10.5px;font-weight:800;letter-spacing:.1em;color:var(--goldB);border:1px solid var(--goldhair);background:var(--goldbg);padding:5px 10px;border-radius:999px;margin-left:4px}
+@media(max-width:660px){.nav{left:12px;right:12px;transform:none;justify-content:space-between;padding-left:14px}.demopill{display:none}.navtab{padding:9px 11px}}
+.main{padding:108px 0 120px;position:relative;z-index:2}
+.shell{background:rgba(255,255,255,.028);border:1px solid var(--hair);border-radius:var(--r);padding:6px;transition:transform .5s var(--ease), border-color .5s var(--ease)}
+.shell>.core{background:var(--card);border-radius:var(--ri);padding:18px 20px;height:100%;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.shell:hover{border-color:var(--hair2)}
+.lift:hover{transform:translateY(-3px)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:10.5px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--gold)}
+.btnP{display:inline-flex;align-items:center;gap:12px;border:none;cursor:pointer;background:rgba(255,255,255,.95);color:#101014;font:700 14px/1 'Manrope',sans-serif;padding:8px 8px 8px 22px;border-radius:999px;transition:all .4s var(--ease)}
+.btnP:hover{background:#fff;transform:translateY(-1px)} .btnP:active{transform:scale(.98)}
+.btnP .arr{width:32px;height:32px;border-radius:50%;background:#101014;color:#fff;display:flex;align-items:center;justify-content:center;transition:transform .4s var(--ease)}
+.btnP:hover .arr{transform:translate(2px,-2px)}
+.btnG{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--hair2);cursor:pointer;background:transparent;color:var(--ink);font:600 13.5px/1 'Manrope',sans-serif;padding:12px 20px;border-radius:999px;transition:all .35s var(--ease)}
+.btnG:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.04)} .btnG:active{transform:scale(.98)}
+.btnG.sm{padding:9px 14px;font-size:12.5px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;padding:4px 11px;border-radius:999px;white-space:nowrap}
+.c-gold{background:var(--goldbg);color:var(--goldB);border:1px solid var(--goldhair)}
+.c-ok{background:var(--okbg);color:var(--ok)} .c-warn{background:var(--warnbg);color:var(--warn)}
+.c-bad{background:var(--badbg);color:var(--bad)} .c-blue{background:var(--bluebg);color:var(--blue)} .c-dim{background:rgba(255,255,255,.05);color:var(--ink2)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:920px){.grid2,.grid3{grid-template-columns:1fr}}
+.subtabs{display:flex;gap:2px;background:rgba(255,255,255,.03);border:1px solid var(--hair);border-radius:999px;padding:4px;margin:0 0 26px;max-width:560px;overflow-x:auto}
+.stab{flex:1;border:none;background:transparent;color:var(--ink3);font:700 12.5px/1 'Manrope',sans-serif;padding:10px 14px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:all .4s var(--ease)}
+.stab.on{background:rgba(255,255,255,.95);color:#101014}
+/* bento KPI */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.b4{grid-column:span 4}.b6{grid-column:span 6}.b8{grid-column:span 8}.b12{grid-column:span 12}
+@media(max-width:920px){.b4,.b6,.b8{grid-column:span 12}}
+.tile .tv{font-family:'Prata',Georgia,serif;font-size:clamp(28px,2.8vw,37px);font-weight:400;letter-spacing:-.01em;font-variant-numeric:tabular-nums;line-height:1.1}
+.tile .tv.north{font-size:clamp(44px,5vw,62px)}
+.tile .tv em{font-style:normal;color:var(--goldB)}
+.tile .tl{font-size:12.5px;color:var(--ink2);margin-top:6px;line-height:1.5}
+table.t{border-collapse:collapse;width:100%;font-size:13.5px}
+table.t th{text-align:left;padding:9px 12px;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);border-bottom:1px solid var(--hair2);white-space:nowrap}
+table.t td{padding:9px 12px;border-bottom:1px solid var(--hair);vertical-align:middle;line-height:1.5}
+table.t tr:last-child td{border-bottom:none}
+table.t tr.clickable{cursor:pointer;transition:background .3s var(--ease)}
+table.t tr.clickable:hover td{background:rgba(255,255,255,.03)}
+.tw{overflow-x:auto;border:1px solid var(--hair);border-radius:12px;background:var(--card);margin:10px 0}
+.tw table.t{min-width:600px}
+.num{white-space:nowrap;font-variant-numeric:tabular-nums}
+.row{display:flex;align-items:center;gap:10px;padding:6px 0}
+.row .lbl{flex:0 0 170px;font-size:12.5px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .bars{flex:1;min-width:80px}
+.row .val{flex:0 0 auto;font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums;text-align:right;min-width:56px}
+@media(max-width:560px){.row{flex-wrap:wrap}.row .lbl{flex:1 1 100%;white-space:normal}.row .bars{min-width:0;flex:1 1 55%}}
+.bar{height:9px;border-radius:0 4px 4px 0;margin:2px 0;min-width:2px}
+.bar.plan{background:var(--plan)}
+.bar.fact{background:var(--sBlue)}
+.legend{display:flex;gap:16px;font-size:11.5px;color:var(--ink3);margin:2px 0 10px;flex-wrap:wrap}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.transcript{background:var(--bg2);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;max-height:340px;overflow-y:auto;font-size:13.5px;line-height:1.7}
+.tr-line{margin:0 0 10px}
+.tr-line b{color:var(--blue)} .tr-line.client b{color:var(--goldB)}
+.tr-line .tc{color:var(--ink3);font-size:11px;margin-right:6px;font-variant-numeric:tabular-nums}
+.check{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--hair);font-size:13px}
+.check:last-child{border-bottom:none}
+.check .m{flex:0 0 20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:11px;margin:8px 0;font-size:13px;line-height:1.55;border:1px solid var(--hair)}
+.a-bad{background:var(--badbg)} .a-warn{background:var(--warnbg)}
+.flow{display:flex;gap:0;align-items:stretch;overflow-x:auto;padding:6px 0}
+.fnode{flex:1;min-width:132px;background:var(--card);border:1px solid var(--hair);border-radius:11px;padding:12px;font-size:12px;text-align:center;color:var(--ink2)}
+.fnode b{display:block;font-size:12.5px;margin-bottom:3px;color:var(--ink)}
+.farrow{flex:0 0 24px;display:flex;align-items:center;justify-content:center;color:var(--ink3)}
+table.cmp{border-collapse:collapse;width:100%;font-size:13.5px;min-width:700px}
+table.cmp th{text-align:left;padding:12px 16px;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);border-bottom:1px solid var(--hair2);white-space:nowrap}
+table.cmp td{padding:12px 16px;border-bottom:1px solid var(--hair);vertical-align:top;line-height:1.55}
+table.cmp tr:last-child td{border-bottom:none}
+table.cmp tr.ours td{background:var(--goldbg)}
+table.cmp tr.ours td:first-child{border-left:2px solid var(--gold)}
+.rv{opacity:0;transform:translateY(22px);filter:blur(5px);transition:opacity .8s var(--ease),transform .8s var(--ease),filter .8s var(--ease)}
+.rv.in{opacity:1;transform:none;filter:none}
+.fade{animation:fu .5s var(--ease) both}
+@keyframes fu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hidden{display:none!important}
+.footer{border-top:1px solid var(--hair);color:var(--ink3);font-size:12px;padding:20px 0 26px;position:relative;z-index:2}
+.dark-cta{background:linear-gradient(160deg,#15151B,#101014 70%);border:1px solid var(--hair2);border-radius:20px;padding:34px 36px;position:relative;overflow:hidden}
+.dark-cta::before{content:"";position:absolute;right:-120px;top:-120px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle, rgba(201,164,92,.14), transparent 65%)}
+.benefit{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--hair)}
+.benefit:last-child{border-bottom:none}
+.benefit .ic{flex:0 0 36px;height:36px;border-radius:10px;background:var(--goldbg);border:1px solid var(--goldhair);display:flex;align-items:center;justify-content:center}
+.benefit .ic svg{stroke:var(--goldB)}
+.benefit b{display:block;margin-bottom:3px;font-size:14.5px}
+.benefit .val{color:var(--ink2);font-size:13.5px;line-height:1.6}
+
+/* ══ КП V3: редизайн предложения ══ */
+.os{margin-top:88px}
+.oshead{display:flex;align-items:baseline;gap:16px}
+.onum{font-family:'Prata',Georgia,serif;font-size:14px;color:var(--gold);letter-spacing:.14em;flex:0 0 auto;transform:translateY(-4px)}
+.onum::after{content:"";display:block;height:1px;background:linear-gradient(90deg,var(--goldhair),transparent);margin-top:7px}
+.os h2{font-size:clamp(25px,3vw,36px)}
+.osub{color:var(--ink2);font-size:14.5px;max-width:680px;margin-top:10px;line-height:1.65}
+.bgrid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:26px}
+.bx{grid-column:span 4;display:flex}
+.bx.w6{grid-column:span 6}
+.bx.w12{grid-column:span 12}
+@media(max-width:960px){.bx,.bx.w6{grid-column:span 6}}
+@media(max-width:640px){.bx,.bx.w6{grid-column:span 12}}
+.bx .core{display:flex;flex-direction:column;gap:12px;padding:22px}
+.icx{width:46px;height:46px;border-radius:14px;flex:0 0 46px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(155deg,rgba(255,255,255,.07),rgba(255,255,255,.015));
+  border:1px solid var(--hair2);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);color:var(--goldB)}
+.icx svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.icx.mono{color:var(--ink2)}
+.bt{font-size:15.5px;font-weight:700;letter-spacing:-.01em;line-height:1.35}
+.bd{font-size:13.5px;color:var(--ink2);line-height:1.62}
+.caserow{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+a.case{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--ink2);
+  border:1px solid var(--hair);border-radius:999px;padding:7px 14px;transition:all .35s var(--ease)}
+a.case:hover{color:var(--goldB);border-color:var(--goldhair);transform:translateY(-1px)}
+a.case .go{color:var(--goldB)}
+.chsum{display:flex;flex-wrap:wrap;gap:8px 36px;align-items:baseline;margin-top:24px;padding:22px 26px}
+.chsum .b{display:flex;flex-direction:column;gap:4px}
+.chsum .n{font-family:'Prata',Georgia,serif;font-size:clamp(26px,3vw,34px);color:var(--goldB);line-height:1}
+.chsum .t{font-size:12.5px;color:var(--ink2);font-weight:600}
+.chgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+@media(max-width:960px){.chgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.chgrid{grid-template-columns:1fr}}
+.chx .core{padding:18px;display:flex;flex-direction:column;gap:12px}
+.chtop{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.chname{font-weight:800;font-size:14px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.chname .icx{width:36px;height:36px;border-radius:11px;flex:0 0 36px}
+.chname .icx svg{width:17px;height:17px}
+.chn{font-family:'Prata',Georgia,serif;font-size:20px;line-height:1.15}
+.chn i{font-style:normal;font-family:'Manrope',sans-serif;font-size:11px;color:var(--ink3);font-weight:600;display:block;margin-top:4px;letter-spacing:.01em}
+.kbflow{display:grid;grid-template-columns:1fr 40px 1.18fr 40px 1fr;align-items:stretch;margin-top:26px}
+@media(max-width:880px){.kbflow{grid-template-columns:1fr}.kbarr{transform:rotate(90deg);margin:2px auto;height:34px}}
+.kbarr{display:flex;align-items:center;justify-content:center;color:var(--gold);opacity:.85}
+.kbnode{display:flex}
+.kbnode .core{padding:22px;display:flex;flex-direction:column;gap:12px;align-items:flex-start;width:100%}
+.kbtitle{font-size:15px;font-weight:800;letter-spacing:-.01em}
+.kbtags{display:flex;flex-wrap:wrap;gap:6px}
+.kbtag{font-size:11.5px;font-weight:600;color:var(--ink2);border:1px solid var(--hair);border-radius:999px;padding:4px 11px;white-space:nowrap}
+.kbfacts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+@media(max-width:860px){.kbfacts{grid-template-columns:1fr}}
+.kbfact{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink2);line-height:1.55;padding:14px 16px;border:1px solid var(--hair);border-radius:13px;background:rgba(255,255,255,.02)}
+.kbfact svg{width:16px;height:16px;flex:0 0 16px;stroke:var(--ok);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
+.paygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+@media(max-width:860px){.paygrid{grid-template-columns:1fr}}
+.pay{display:flex}
+.pay .core{padding:26px 24px;display:flex;flex-direction:column;gap:9px;width:100%}
+.payv{font-family:'Prata',Georgia,serif;font-size:clamp(34px,3.6vw,44px);line-height:1.05;color:var(--goldB);font-variant-numeric:tabular-nums;letter-spacing:-.01em;white-space:nowrap}
+.payl{font-size:14px;font-weight:700;color:var(--ink);line-height:1.4}
+.payd{font-size:12.5px;color:var(--ink3);line-height:1.6;margin-top:auto}
+details.acc{border:1px solid var(--hair);border-radius:14px;background:rgba(255,255,255,.02);margin-top:14px;transition:border-color .4s var(--ease)}
+details.acc:hover{border-color:var(--hair2)}
+details.acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:13px;padding:15px 20px;font-size:13.5px;font-weight:700;color:var(--ink2);transition:color .3s var(--ease)}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary:hover{color:var(--ink)}
+details.acc .plus{width:26px;height:26px;border-radius:50%;border:1px solid var(--hair2);flex:0 0 26px;position:relative;transition:transform .5s var(--ease)}
+details.acc .plus::before,details.acc .plus::after{content:"";position:absolute;left:50%;top:50%;background:var(--goldB)}
+details.acc .plus::before{width:10px;height:1.5px;transform:translate(-50%,-50%)}
+details.acc .plus::after{width:1.5px;height:10px;transform:translate(-50%,-50%)}
+details.acc[open] .plus{transform:rotate(135deg)}
+details.acc .accb{padding:4px 20px 20px;color:var(--ink2);font-size:13.5px;line-height:1.7}
+details.acc .accb .tw{margin:8px 0 4px}
+.optrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+@media(max-width:640px){.optrow{grid-template-columns:1fr}}
+.opt{border:1px solid var(--hair);border-radius:13px;padding:15px 17px;background:rgba(255,255,255,.02)}
+.opt em{font-style:normal;display:block;font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.opt b{display:block;font-size:14px;letter-spacing:-.01em}
+.opt span{font-size:12px;color:var(--ink3);line-height:1.55;display:block;margin-top:4px}
+.priceX{font-family:'Prata',Georgia,serif;font-size:clamp(46px,5vw,58px);color:var(--goldB);line-height:1;letter-spacing:-.01em;margin-top:4px}
+.priceSub{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.mangrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+@media(max-width:860px){.mangrid{grid-template-columns:1fr}}
+.veri{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;line-height:1.6;padding:9px 0;border-bottom:1px solid var(--hair)}
+.veri:last-child{border-bottom:none}
+.veri svg{width:15px;height:15px;flex:0 0 15px;margin-top:4px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="brand">PLUTOS<i>·</i>AUTO</span>
+  <button class="navtab on" data-v="demo" onclick="switchView('demo')">Демо</button>
+  <button class="navtab" data-v="offer" onclick="switchView('offer')">Предложение</button>
+  <span class="demopill">ДЕМО-ДАННЫЕ</span>
+</nav>
+
+<!-- ═══════ ДЕМО ═══════ -->
+<div class="main" id="view-demo"><div class="wrap">
+  <div class="eyebrow rv">Пульс продаж · август 2026</div>
+  <h1 class="rv">Компания на одном экране</h1>
+  <p class="mut rv" style="margin:14px 0 26px;max-width:720px">Каждый показатель — из списка KPI собственника. В боевой версии данные приходят сами: из телефонии, amoCRM и логистики. Здесь — реалистичная демонстрация.</p>
+
+  <div class="subtabs rv" style="max-width:400px">
+    <button class="stab on" data-st="pulse" onclick="subTab('pulse')">Пульс · KPI</button>
+    <button class="stab" data-st="calls" onclick="subTab('calls')">Звонки и качество</button>
+  </div>
+
+  <!-- ПУЛЬС -->
+  <section id="st-pulse">
+    <div class="bento rv">
+      <div class="shell b4"><div class="core tile">
+        <div class="tv north"><em>14</em><span style="font-size:22px;color:var(--ink3);font-weight:600"> / 16</span></div>
+        <div class="tl">сделок закрыто к плану месяца — главная цифра компании</div>
+        <div style="margin-top:10px"><span class="chip c-warn">▲ нужно +2 до плана</span></div>
+      </div></div>
+      <div class="shell b4"><div class="core tile">
+        <div class="tv">9,8%</div>
+        <div class="tl">средняя маржинальность (план 10,5%)</div>
+        <div style="margin-top:10px"><span class="chip c-warn">−0,7 п.п. · разбор: конвертация</span></div>
+      </div></div>
+      <div class="shell b4"><div class="core tile">
+        <div class="tv">6,3 <span style="font-size:16px;color:var(--ink3)">млн ₽</span></div>
+        <div class="tl">допы: лизинг · страховка · детейлинг · тюнинг</div>
+        <div style="margin-top:10px"><span class="chip c-ok">112% плана</span></div>
+      </div></div>
+      <div class="shell b4"><div class="core tile">
+        <div class="tv">2 ч 40 м</div>
+        <div class="tl">медианное время ответа (SLA — 1 рабочий день)</div>
+        <div style="margin-top:10px"><span class="chip c-ok">в SLA</span></div>
+      </div></div>
+      <div class="shell b4"><div class="core tile">
+        <div class="tv">11 <span style="font-size:16px;color:var(--ink3)">дней</span></div>
+        <div class="tl">среднее время авто в шоуруме (план 14)</div>
+        <div style="margin-top:10px"><span class="chip c-ok">быстрее плана</span></div>
+      </div></div>
+      <div class="shell b4"><div class="core tile">
+        <div class="tv">214</div>
+        <div class="tl">звонков за неделю · расшифровано 100%</div>
+        <div style="margin-top:10px"><span class="chip c-bad">3 алерта — см. «Звонки»</span></div>
+      </div></div>
+    </div>
+
+    <div class="bento rv" style="margin-top:14px">
+      <div class="shell b6"><div class="core">
+        <h3>Экономика последней сделки · план / факт</h3>
+        <p class="small dim" style="margin:2px 0 8px">BMW X5 40d '21 · передан 22.08 · клиент: салон, Москва</p>
+        <div class="tw"><table class="t">
+          <tr><th>Статья</th><th class="num">План</th><th class="num">Факт</th><th>Отклонение</th></tr>
+          <tr><td>Закуп у дилера (DE)</td><td class="num">€61 500</td><td class="num">€62 300</td><td><span class="chip c-warn">▲ +1,3%</span></td></tr>
+          <tr><td>Логистика DE→Москва</td><td class="num">180 000 ₽</td><td class="num">195 000 ₽</td><td><span class="chip c-warn">▲ +8,3%</span></td></tr>
+          <tr><td>Таможня + утильсбор</td><td class="num">3 150 000 ₽</td><td class="num">3 150 000 ₽</td><td><span class="chip c-ok">0%</span></td></tr>
+          <tr><td>Конвертация EUR→RUB</td><td class="num">1,5%</td><td class="num">1,9%</td><td><span class="chip c-bad">▲ +0,4 п.п.</span></td></tr>
+          <tr><td>Комиссия (фикс)</td><td class="num">450 000 ₽</td><td class="num">450 000 ₽</td><td><span class="chip c-ok">0%</span></td></tr>
+          <tr><td><b>Маржа сделки</b></td><td class="num"><b>10,2%</b></td><td class="num"><b>9,1%</b></td><td><span class="chip c-bad">▼ −1,1 п.п.</span></td></tr>
+        </table></div>
+      </div></div>
+      <div class="shell b6"><div class="core">
+        <h3>Сроки логистики · план / факт, дни</h3>
+        <div class="legend"><span><i style="background:var(--plan)"></i>план</span><span><i style="background:var(--sBlue)"></i>факт</span></div>
+        <div id="logistics"></div>
+        <h3 style="margin-top:16px">Оформление документов, дни</h3>
+        <div id="docs" style="margin-top:6px"></div>
+      </div></div>
+      <div class="shell b6"><div class="core">
+        <h3>Конверсия лид → сделка по источникам</h3>
+        <div id="conv" style="margin-top:8px"></div>
+        <p class="small dim" style="margin-top:8px">Считается по связке «источник в amoCRM → закрытая сделка». Сейчас этот показатель не считается нигде.</p>
+      </div></div>
+      <div class="shell b6"><div class="core">
+        <h3>Стоимость лида по каналам, ₽</h3>
+        <div id="cpl" style="margin-top:8px"></div>
+        <p class="small dim" style="margin-top:8px">Ориентир владельца: Tank ≈ 40 000 ₽/лид у классических дилеров — ваши каналы кратно дешевле.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ЗВОНКИ -->
+  <section id="st-calls" class="hidden">
+    <div class="bento">
+      <div class="shell b8"><div class="core">
+        <h3>Звонки за неделю — 100% расшифровано и оценено · показана выборка 6 из 214</h3>
+        <div class="tw"><table class="t" id="calltable"></table></div>
+        <p class="small dim">Нажмите на строку — откроется разбор звонка.</p>
+      </div></div>
+      <div class="b4" style="display:grid;gap:14px;align-content:start">
+        <div class="shell"><div class="core">
+          <h3>Рейтинг менеджеров · балл из 100</h3>
+          <div id="rating" style="margin-top:8px"></div>
+          <p class="small dim" style="margin-top:6px">Не для наказаний — видно, кому какой навык подтянуть.</p>
+        </div></div>
+        <div class="shell"><div class="core">
+          <h3>Алерты — система заметила сама</h3>
+          <div class="alert a-bad"><span style="flex:0 0 18px;margin-top:2px"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--bad);fill:none;stroke-width:1.7;stroke-linecap:round"><circle cx="12" cy="12" r="8.5"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span><div><b>Обещал перезвонить — задачи нет.</b> Артём, звонок по Cayenne 24.08: «наберу завтра». <span class="chip c-ok" style="margin-top:6px">задача создана автоматически</span></div></div>
+          <div class="alert a-warn"><span style="flex:0 0 18px;margin-top:2px"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--warn);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round"><path d="M12 4l8.5 15h-17z"/><path d="M12 10.5v3.6M12 16.9v.2"/></svg></span><div><b>Допы не предложены в 3 звонках</b> — потенциал ≈ 340 тыс ₽.</div></div>
+          <div class="alert a-warn"><span style="flex:0 0 18px;margin-top:2px"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--warn);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round"><path d="M12 4l8.5 15h-17z"/><path d="M12 10.5v3.6M12 16.9v.2"/></svg></span><div><b>SLA под угрозой:</b> заявка с сайта ждала 9 часов.</div></div>
+        </div></div>
+      </div>
+      <div class="shell b12"><div class="core" id="callview"></div></div>
+    </div>
+  </section>
+
+
+</div></div>
+
+<!-- ═══════ ПРЕДЛОЖЕНИЕ ═══════ -->
+<div class="main hidden" id="view-offer"><div class="wrap"><div class="eyebrow rv">Коммерческое предложение · Пульс продаж</div><h1 class="rv">Каждый звонок записан, оценён<br>и превращён в цифры управления</h1><p class="mut rv" style="margin:18px 0 0;max-width:720px">Сейчас звонки уходят в сим-карты и Telegram — их не слышно, и они не превращаются в управленческие цифры. Ниже — что меняется, что это стоит у других и когда окупается.</p><div class="os rv"><div class="oshead"><span class="onum">01</span><h2>Что вы получаете</h2></div><p class="osub">Шесть эффектов — от контроля до легальной телефонии. Каждый проверен в автобизнесе, кейсы кликаются.</p><div class="bgrid"><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div><div class="bt">100% звонков — оценка по вашему чек-листу</div><div class="bd">Весь отдел слышно за 15 минут в неделю вместо выборочной прослушки.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M4 20v-8M9.3 20V4.5M14.6 20v-9M20 20V8"/></svg></div><div class="bt">Дашборд ровно по вашим KPI</div><div class="bd">План/факт по статьям, маршруты, конверсия, допы, ₽/лид — считается само, без Excel.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3.2 2"/></svg></div><div class="bt">Скорость ответа — по каждому менеджеру</div><div class="bd">Ваш SLA «предложение за 1 день» становится измеримым. Скорость — это конверсия.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M12 4l8.5 15h-17z"/><path d="M12 10.5v3.6M12 16.9v.2"/></svg></div><div class="bt">Алерты спасают живые сделки</div><div class="bd">«Обещал перезвонить — задачи нет» → система сама ставит задачу в amoCRM.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10.5 12h5M10.5 16h5"/></svg></div><div class="bt">Легальная телефония вместо сим-карт</div><div class="bd">Маркировка звонков по закону, +7 и +375 в одной системе — дозвон растёт.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M9 10.2h6M9 13.8h6"/></svg></div><div class="bt">Фикс без звёздочек</div><div class="bd">Всё, что нужно системе для работы, — наша забота, а не ваша строка расходов.</div></div></div></div></div><div class="caserow rv"><a class="case" href="https://sber.pro/cases/sila-tehnologii-kak-rechevaya-analitika-pomogla-frank-auto-uvelichit-prodazhi/" target="_blank" rel="noopener">Frank Auto: контроль 10 ч → 30 мин <span class="go">↗</span></a><a class="case" href="https://sber.pro/cases/tsifrovoi-razgovor-kak-v-forvard-avto-vnedrili-rechevuyu-analitiku-dlya-otdela-prodazh/" target="_blank" rel="noopener">Форвард-Авто: допродажи 3% → 20% <span class="go">↗</span></a><a class="case" href="https://www.calltouch.ru/blog/analiz-kachestva-zvonkov-v-novom-kuzove-kak-v-avtoindustrii-povyshat-konversiyu-iz-lida-v-prodazhu-s-pomoshhyu-ii-tehnologij-kejs-avto-ru-biznes/" target="_blank" rel="noopener">Авто.ру Бизнес: +1,2 млн ₽ за неделю <span class="go">↗</span></a></div></div><div class="os rv"><div class="oshead"><span class="onum">02</span><h2>Почему это выгоднее именно вам</h2></div><div class="bgrid"><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M12 3.5l8.5 4.7L12 12.9 3.5 8.2z"/><path d="M3.5 13l8.5 4.7L20.5 13"/><path d="M3.5 17.4l8.5 4.7 8.5-4.7"/></svg></div><div class="bt">Один контур вместо трёх подрядчиков</div><div class="bd">CRM-интегратор + аналитика + контроль звонков — три исполнителя без общего экрана. Здесь всё в одном дашборде.</div></div></div></div><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.1"/><path d="M12 3v2.6M12 18.4V21M3 12h2.6M18.4 12H21M5.8 5.8l1.8 1.8M16.4 16.4l1.8 1.8M18.2 5.8l-1.8 1.8M7.6 16.4l-1.8 1.8"/></svg></div><div class="bt">Собран по вашему списку KPI</div><div class="bd">Ваши формулировки и ваши статьи сделки — не шаблон интегратора.</div></div></div></div><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M9 10.2h6M9 13.8h6"/></svg></div><div class="bt">Фикс вместо вечной подписки</div><div class="bd">Подписка 49 000 ₽/мес не заканчивается никогда. Фикс — меньше пяти её месяцев, система ваша.</div></div></div></div><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M12 3l7.5 3.6v5.1c0 4.6-3.2 7.5-7.5 8.8-4.3-1.3-7.5-4.2-7.5-8.8V6.6z"/><path d="M8.8 12.2l2.3 2.3 4.4-4.9"/></svg></div><div class="bt">Прозрачность как у вас</div><div class="bd">Все цены сравнения кликаются, состав — поимённым списком в договоре.</div></div></div></div></div></div><div class="os rv"><div class="oshead"><span class="onum">03</span><h2>Шаг 0 — база знаний компании</h2></div><p class="osub">Первое, что мы делаем, — собираем ваш «источник правды». На нём обучаются все ИИ-инструменты: они отвечают по вашим документам, а не «из головы».</p><div class="kbflow rv"><div class="kbnode"><div class="shell" style="width:100%"><div class="core"><div class="icx mono"><svg viewBox="0 0 24 24"><path d="M3.5 6.5c0-1.1.9-2 2-2h4l2 2.5h7a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/></svg></div><div class="kbtitle">Ваши документы</div><div class="kbtags"><span class="kbtag">Прайсы и опции</span><span class="kbtag">Регламенты</span><span class="kbtag">Маршруты и сроки</span><span class="kbtag">Лучшие ответы менеджеров</span><span class="kbtag">Вопросы клиентов</span></div></div></div></div><div class="kbarr"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M14 6.5l5.5 5.5-5.5 5.5"/></svg></div><div class="kbnode"><div class="shell" style="width:100%;border-color:var(--goldhair)"><div class="core"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%"><div class="icx"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7" ry="2.7"/><path d="M5 5.5V18c0 1.5 3.1 2.7 7 2.7s7-1.2 7-2.7V5.5"/><path d="M5 11.7c0 1.5 3.1 2.7 7 2.7s7-1.2 7-2.7"/></svg></div><span class="chip c-gold">входит в цену</span></div><div class="kbtitle">База знаний — источник правды</div><div class="bd">Единое, выверенное ядро: цены, сроки и формулировки, которым ИИ обязан следовать.</div></div></div></div><div class="kbarr"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M14 6.5l5.5 5.5-5.5 5.5"/></svg></div><div class="kbnode"><div class="shell" style="width:100%"><div class="core"><div class="icx mono"><svg viewBox="0 0 24 24"><path d="M12 3.5l8.5 4.7L12 12.9 3.5 8.2z"/><path d="M3.5 13l8.5 4.7L20.5 13"/><path d="M3.5 17.4l8.5 4.7 8.5-4.7"/></svg></div><div class="kbtitle">Все ИИ-системы компании</div><div class="kbtags"><span class="kbtag">Оценка звонков</span><span class="kbtag">Ответы клиентам</span><span class="kbtag">Каждая следующая система</span></div></div></div></div></div><div class="kbfacts rv"><div class="kbfact"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>ИИ <b style="color:var(--ink)">не выдумывает цены</b> — каждый ответ опирается на ваши документы</span></div><div class="kbfact"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Говорит <b style="color:var(--ink)">вашим языком</b> — формулировками ваших лучших менеджеров</span></div><div class="kbfact"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>База — <b style="color:var(--ink)">ваш актив</b>: каждая следующая система переиспользует её бесплатно</span></div></div><p class="small dim rv" style="margin-top:12px">Технически это RAG (retrieval-augmented generation) — отраслевой стандарт надёжных ИИ-ответов.</p></div><div class="os rv"><div class="oshead"><span class="onum">04</span><h2>Окупаемость — временем и сделками</h2></div><p class="osub">Эффекты измерены в автобизнесе — кейсы выше кликаются. Ваш план — 16 сделок в месяц.</p><div class="paygrid"><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">40–50 ч</div><div class="payl">в месяц возвращаем руководителю</div><div class="payd">Контроль 10 ч/нед → 30 мин (Frank Auto) плюс отчёты без ручной сборки. Окупаемость временем — 2–3 месяца.</div></div></div></div><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">+1–2</div><div class="payl">сделки в месяц — эффект на продажи</div><div class="payd">Конверсия +2 п.п. (Frank Auto) на вашем плане 16 сделок; допродажи 3% → 20% (Форвард-Авто).</div></div></div></div><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">6,5 мес</div><div class="payl">подписки SalesAI = наш фикс разово</div><div class="payd">Подписка не заканчивается никогда. Пульс после этого срока работает бесплатно.</div></div></div></div></div></div><div class="os rv"><div class="oshead"><span class="onum">05</span><h2>Цена: под ключ — против сборки из частей</h2></div><p class="osub">Цены исполнителей — с их публичных страниц, проверено 26.08.2026. Ссылки прямые.</p><div class="grid2 rv" style="margin-top:24px;align-items:stretch"><div class="shell"><div class="core">
+      <div class="eyebrow" style="margin-bottom:12px">Как это покупает рынок — по частям</div>
+      <div style="display:grid;gap:11px;font-size:13.5px">
+        <div style="display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--hair);padding-bottom:10px"><span>AI-оценка звонков<br><span class="dim small"><a href="https://salesai.ru/pricing/" target="_blank" rel="noopener">подписка SalesAI, тариф Team</a> · только звонки, без вашего дашборда</span></span><b class="num">49 000 ₽/мес<br><span class="dim small" style="font-weight:500">предоплата за 3 мес — 147 000 ₽</span></b></div>
+        <div style="display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--hair);padding-bottom:10px"><span>Дашборд руководителя<br><span class="dim small"><a href="https://kokoc.com/razrabotka-dashborda-dlya-biznesa/" target="_blank" rel="noopener">студии, Kokoc</a> · только дашборд</span></span><b class="num">от 300 тыс ₽</b></div>
+        <div style="display:flex;justify-content:space-between;gap:12px"><span>Контроль качества руками<br><span class="dim small"><a href="https://ropsharing.ru/okk-2" target="_blank" rel="noopener">РОП-шеринг</a> · выборочно, навсегда</span></span><b class="num">34–91 тыс ₽/мес</b></div>
+      </div>
+      <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--hair2)">
+        <div class="small dim">Первые 3 месяца по частям</div>
+        <div style="font-size:24px;font-weight:800">≈ 549 000 ₽</div>
+        <div class="small dim" style="margin-top:4px">147 000 (SalesAI, предоплата) + 300 000 (дашборд) + 3 × 34 000 (контроль руками)</div>
+        <div class="small mut" style="margin-top:4px">И это два разных подрядчика, единого экрана нет, а подписки после трёх месяцев продолжаются.</div>
+      </div>
+    </div></div><div class="shell rv" style="border-color:var(--goldhair)"><div class="core"><div class="eyebrow" style="color:var(--goldB);margin-bottom:10px">У нас — всё это под ключ</div><div style="display:grid"><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Телефония +7 и +375: запись, маркировка по закону</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Интеграция с вашей amoCRM</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>AI-оценка 100% звонков по вашему чек-листу</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Дашборд всех ваших KPI — тот, что в демо</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Алерты и еженедельный отчёт в Telegram</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Запуск, настройка и передача — целиком на нас</span></div></div><div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--goldhair)"><div class="small dim">Одна цена · один подрядчик · система ваша</div><div class="priceX">€3 000</div><div class="priceSub"><span class="chip c-gold">≈ 318 000 ₽</span><span class="chip c-dim">счёт в евро или в рублях — как удобнее вам</span></div><div class="optrow"><div class="opt"><em>Дальше — вариант 1</em><b>Сопровождение · 30 000 ₽ в месяц</b><span>Поддержка, донастройка, новые отчёты.</span></div><div class="opt"><em>Дальше — вариант 2</em><b>Обучение команды · 50 000 ₽ разово</b><span>Передаём управление — дальше ведёте сами.</span></div></div><details class="acc rv"><summary><span class="plus"></span>Условия и гарантии</summary><div class="accb"><b style="color:var(--ink)">Состав фиксируем поимённым списком функций</b> в приложении к договору — никаких «примерно». Оплата 50/50: половина на старте, половина по приёмке. Два круга правок включены. Расширения по мере роста — по согласованному прайсу. Расширения — сквозная аналитика до маржи, новые отчёты — по согласованному прайсу.</div></details></div></div></div></div></div><div class="os rv"><div class="oshead"><span class="onum">06</span><h2>Это ваша внутренняя инфраструктура</h2></div><p class="osub">Индивидуальная разработка под ваши процессы — корпоративный софт компании, а не аренда чужого сервиса.</p><div class="bgrid"><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l8.5-8.5M15.5 7.5L18 10M18.5 4.5L21 7"/></svg></div><div class="bt">Не подписка — собственность</div><div class="bd">Конкуренты в сравнении продают доступ. Мы строим актив: код, база и процесс остаются в компании навсегда.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.1"/><path d="M12 3v2.6M12 18.4V21M3 12h2.6M18.4 12H21M5.8 5.8l1.8 1.8M16.4 16.4l1.8 1.8M18.2 5.8l-1.8 1.8M7.6 16.4l-1.8 1.8"/></svg></div><div class="bt">Собран под ваши процессы</div><div class="bd">Ваши KPI, ваша amoCRM, ваши маршруты и статьи сделки — не шаблон интегратора.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M3.5 17.5 9 12l3.8 3.8 7.7-7.7"/><path d="M14.8 8.1h5.7v5.7"/></svg></div><div class="bt">Актив, который растёт</div><div class="bd">База знаний и накопленная история работают на каждый следующий инструмент — бесплатно.</div></div></div></div></div></div><div class="dark-cta rv" style="margin-top:64px">
+    <div class="eyebrow" style="color:var(--goldB)">Следующий шаг — 30 минут</div>
+    <h2 style="max-width:640px">Пришлите одну запись реального звонка</h2>
+    <p class="mut small" style="max-width:620px;margin-top:8px">Вернём её разбор по чек-листу в этом же интерфейсе — бесплатно. Увидите систему на своих данных, а не на демо.</p>
+    <div style="margin-top:20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+      <button class="btnP" onclick="switchView('demo')">Посмотреть демо ещё раз <span class="arr">→</span></button>
+      <span class="small dim">Прислать запись или согласовать показ — ответьте в чате, где получили эту ссылку.</span>
+    </div>
+  </div>
+  <p class="small dim rv" style="margin-top:20px">Кейсы Frank Auto, Форвард-Авто и Авто.ру Бизнес — публикации СберПро и Calltouch, 2025. Лицензии amoCRM (599–1 699 ₽/пользователь/мес) и абонплата телефонии (≈500–690 ₽/место) оплачиваются отдельно у любого исполнителя, включая нас.</p>
+</div></div>
+
+<div class="footer"><div class="wrap">Интерактивный прототип для Plutos Auto · все цифры на экране «Демо» — вымышленные и показывают механику · подготовлено 27.08.2026</div></div>
+
+<script>
+function pfRow(label,plan,fact,max,unit){
+ const pw=Math.round(plan/max*100), fw=Math.round(fact/max*100);
+ const diff=fact-plan;
+ const chip=diff>0?`<span class="chip ${diff/plan>0.07?"c-bad":"c-warn"}">▲ +${diff}${unit}</span>`:diff<0?`<span class="chip c-ok">${diff}${unit}</span>`:`<span class="chip c-ok">в плане</span>`;
+ return `<div class="row"><div class="lbl">${label}</div>
+   <div class="bars"><div class="bar plan" style="width:${pw}%"></div><div class="bar fact" style="width:${fw}%"></div></div>
+   <div class="val">${fact}${unit}</div><div style="flex:0 0 auto">${chip}</div></div>`;
+}
+function barRow(label,val,max,unit,color){
+ const w=Math.max(2,Math.round(val/max*100));
+ return `<div class="row"><div class="lbl">${label}</div>
+   <div class="bars"><div class="bar fact" style="width:${w}%;background:${color||"var(--sBlue)"}"></div></div>
+   <div class="val">${val.toLocaleString("ru-RU")}${unit}</div></div>`;
+}
+document.getElementById("logistics").innerHTML=[
+ pfRow("Германия → Москва",21,24,30," дн"),
+ pfRow("Словакия → Москва",18,19,30," дн"),
+ pfRow("Венгрия → Москва",20,20,30," дн"),
+ pfRow("Польша → Москва",17,16,30," дн")
+].join("");
+document.getElementById("docs").innerHTML=[
+ pfRow("Контракт и оплата",2,2,8," дн"),
+ pfRow("СБКТС",4,6,8," дн"),
+ pfRow("ЭПТС",3,3,8," дн"),
+ pfRow("Постановка на учёт",2,2,8," дн")
+].join("");
+document.getElementById("conv").innerHTML=[
+ barRow("Пул партнёров / рекомендации",24,26,"%"),
+ barRow("Сайт (квиз)",8,26,"%"),
+ barRow("Telegram-группа",6,26,"%"),
+ barRow("Радар спроса (новый канал)",4,26,"%")
+].join("");
+document.getElementById("cpl").innerHTML=[
+ barRow("Радар спроса",1100,8000," ₽"),
+ barRow("Авито",1900,8000," ₽"),
+ barRow("Telegram",3500,8000," ₽"),
+ barRow("Сайт (Директ)",7400,8000," ₽")
+].join("");
+document.getElementById("rating").innerHTML=[
+ barRow("Олег",84,100,""),
+ barRow("Евгений",76,100,""),
+ barRow("Артём",61,100,"")
+].join("");
+
+const CALLS=[
+ {t:"25.08 10:12",m:"Олег",c:"Салон «Гранд Моторс»",dir:"вх.",len:"6:24",sc:92,al:""},
+ {t:"25.08 11:40",m:"Евгений",c:"Лизинг «Меркурий»",dir:"исх.",len:"4:03",sc:81,al:""},
+ {t:"24.08 16:55",m:"Артём",c:"Частный клиент, Cayenne",dir:"вх.",len:"3:12",sc:54,al:"⛔"},
+ {t:"24.08 12:30",m:"Олег",c:"Салон «Люкс-Парк»",dir:"исх.",len:"7:48",sc:88,al:""},
+ {t:"23.08 15:04",m:"Евгений",c:"Автопарк «Дельта»",dir:"исх.",len:"5:31",sc:74,al:"▲"},
+ {t:"23.08 10:20",m:"Артём",c:"Частный клиент, G 63",dir:"вх.",len:"2:47",sc:66,al:"▲"}
+];
+const TRANSCRIPTS={
+ 0:{title:"Входящий · салон «Гранд Моторс» · Олег · 92/100",
+   lines:[["0:04","К","client","Добрый день, у клиента запрос на X5 40d, свежий, до семи миллионов на круг. Реально из Европы в сентябре?"],
+   ["0:12","Олег","","Добрый! Да, есть прямо в наличии: X5 40d двадцать первого года, сорок тысяч пробега, уже в Москве — и могу под заказ из Германии, три-четыре недели. Под ваш бюджет посчитаю оба варианта по статьям: закуп, логистика, таможня с утилём, наша комиссия фиксированная."],
+   ["1:05","К","client","А по документам что?"],
+   ["1:09","Олег","","СБКТС и ЭПТС делаем сами, в цене. Если клиент берёт в лизинг — у нас партнёрские условия, и страховку сразу посчитаем. Отправлю расчёт сегодня до 18:00, и предлагаю созвон завтра в 11 — покажу сток-лист под ваши марки."]],
+   checks:[["✓","Представился, узнал потребность и бюджет"],["✓","Предложил два варианта: наличие + под заказ"],["✓","Озвучил прозрачный расчёт по статьям"],["✓","Предложил допы: лизинг, страховка"],["✓","Назначил следующий шаг со сроком"],["✓","Задача в amoCRM: «Расчёт до 18:00» — создана"],["—","Возражений не было"]],
+   result:'<span class="chip c-ok">Сделка продвинута: расчёт + созвон назначен</span>'},
+ 2:{title:"Входящий · частный клиент, Porsche Cayenne · Артём · 54/100",
+   lines:[["0:03","К","client","Здравствуйте, видел у вас Cayenne. А чего так дорого выходит-то? Мне считали дешевле."],
+   ["0:10","Артём","","Ну, там таможня сейчас дорогая, утильсбор подняли…"],
+   ["0:31","К","client","А если через Беларусь? Говорят, дешевле выходит."],
+   ["0:36","Артём","","Через Беларусь можно, да… там по-разному считается. Я вам, наверное, завтра наберу, посчитаю."],
+   ["1:40","К","client","Ну ладно, жду."]],
+   checks:[["✗","Не выявил бюджет и сроки клиента"],["✗","Возражение «дорого» не отработано: нет разложения цены по статьям — главного аргумента компании"],["✗","Про Беларусь ответил неуверенно: не объяснил правила утильсбора"],["✗","Допы не предложены"],["✗","Следующий шаг без конкретики («наверное завтра»)"],["✗","Задача в amoCRM не создана — <b>создана системой автоматически</b>"],["✓","Вежлив, не перебивал"]],
+   result:'<span class="chip c-bad">Риск потери сделки · рекомендация: скрипт «прозрачный расчёт» + шпаргалка по утильсбору-2026</span>'}
+};
+function renderCalls(){
+ document.getElementById("calltable").innerHTML=`<tr><th>Когда</th><th>Менеджер</th><th>Контрагент</th><th></th><th class="num">Длит.</th><th class="num">Оценка</th><th></th></tr>`+
+ CALLS.map((c,i)=>`<tr class="clickable" onclick="openCall(${i})"><td class="num">${c.t}</td><td>${c.m}</td><td>${c.c}</td><td class="dim">${c.dir}</td><td class="num">${c.len}</td><td class="num"><b style="color:${c.sc>=80?"var(--ok)":c.sc>=68?"var(--warn)":"var(--bad)"}">${c.sc}</b></td><td>${c.al}</td></tr>`).join("");
+ openCall(0);
+}
+function openCall(i){
+ const t=TRANSCRIPTS[i]||null;
+ const el=document.getElementById("callview");
+ if(!t){el.innerHTML=`<p class="small mut">Для этого звонка в демо показан только рейтинг. Откройте звонки Олега (10:12) или Артёма (16:55) — там полный разбор.</p>`;return;}
+ el.innerHTML=`<h3>${t.title}</h3>
+  <div class="grid2" style="margin-top:12px">
+   <div><label class="small dim" style="display:block;margin-bottom:6px">Транскрипт (фрагмент) · стерео-линия, роли разделены автоматически</label>
+     <div class="transcript">${t.lines.map(l=>`<div class="tr-line ${l[2]}"><span class="tc">${l[0]}</span><b>${l[1]}:</b> ${l[3]}</div>`).join("")}</div></div>
+   <div><label class="small dim" style="display:block;margin-bottom:6px">Оценка по чек-листу компании</label>
+     ${t.checks.map(c=>`<div class="check"><span class="m" style="background:${c[0]==="✓"?"var(--okbg)":c[0]==="✗"?"var(--badbg)":"rgba(255,255,255,.06)"};color:${c[0]==="✓"?"var(--ok)":c[0]==="✗"?"var(--bad)":"var(--ink3)"}">${c[0]}</span><span>${c[1]}</span></div>`).join("")}
+     <div style="margin-top:12px">${t.result}</div></div>
+  </div>`;
+}
+function subTab(k){
+ document.querySelectorAll(".stab").forEach(b=>b.classList.toggle("on",b.dataset.st===k));
+ ["pulse","calls"].forEach(s=>document.getElementById("st-"+s).classList.toggle("hidden",s!==k));
+ document.getElementById("st-"+k).classList.add("fade");
+ if(k==="calls")renderCalls();
+}
+function switchView(v){
+ document.querySelectorAll(".navtab").forEach(t=>t.classList.toggle("on",t.dataset.v===v));
+ document.getElementById("view-demo").classList.toggle("hidden",v!=="demo");
+ document.getElementById("view-offer").classList.toggle("hidden",v!=="offer");
+ window.scrollTo({top:0,behavior:"instant"});
+ observeAll();
+}
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }),{threshold:.1});
+function observeAll(){ document.querySelectorAll(".rv:not(.in)").forEach(el=>io.observe(el)); }
+observeAll();
+</script>
+</body>
+</html>

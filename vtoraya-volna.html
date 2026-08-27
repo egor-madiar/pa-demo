@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Плутос · Вторая волна — Совет, Видимость в ИИ, Реактивация</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0A0A0C; --bg:#101014; --bg2:#131319; --card:#17171C;
+  --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.13);
+  --ink:rgba(255,255,255,.93); --ink2:rgba(255,255,255,.62); --ink3:rgba(255,255,255,.45);
+  --gold:#C9A45C; --goldB:#E4C078; --goldbg:rgba(201,164,92,.10); --goldhair:rgba(201,164,92,.32);
+  --ok:#4CC39A; --okbg:rgba(46,155,130,.13);
+  --warn:#D99A55; --warnbg:rgba(201,123,46,.13);
+  --bad:#E37E76; --badbg:rgba(179,53,46,.14);
+  --blue:#8FA8E8; --bluebg:rgba(109,138,224,.13);
+  --r:16px; --ri:11px;
+  --ease:cubic-bezier(.32,.72,0,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--void)}
+body{background:var(--bg);color:var(--ink);font:15px/1.6 'Manrope',-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(900px 500px at 78% -10%, rgba(201,164,92,.09), transparent 60%),
+             radial-gradient(700px 480px at -10% 30%, rgba(109,138,224,.05), transparent 60%);}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");}
+.serif{font-family:'Prata',Georgia,serif;font-weight:400}
+h1{font-family:'Prata',Georgia,serif;font-weight:400;font-size:clamp(30px,4.4vw,46px);line-height:1.18;letter-spacing:-.012em}
+h2{font-family:'Prata',Georgia,serif;font-weight:400;font-size:clamp(22px,2.6vw,29px);line-height:1.25;letter-spacing:-.008em;margin:0 0 6px}
+h3{font-size:16px;font-weight:700;letter-spacing:-.01em}
+p{max-width:820px}
+a{color:var(--goldB);text-decoration:none}
+a:hover{color:#F0D090}
+.mut{color:var(--ink2)} .dim{color:var(--ink3)} .small{font-size:13px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
+
+/* ── остров-навигация ── */
+.nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:100;
+  display:flex;align-items:center;gap:6px;padding:7px 8px 7px 18px;border-radius:999px;
+  background:rgba(16,16,21,.72);border:1px solid var(--hair2);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  box-shadow:0 12px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06);white-space:nowrap}
+.brand{font-weight:800;letter-spacing:.16em;font-size:12.5px;margin-right:8px}
+.brand i{color:var(--gold);font-style:normal}
+.navtab{border:none;background:transparent;color:var(--ink2);font:600 13px/1 'Manrope',sans-serif;
+  padding:9px 15px;border-radius:999px;cursor:pointer;transition:all .35s var(--ease)}
+.navtab.on{background:rgba(255,255,255,.95);color:#101014}
+.navtab:not(.on):hover{color:var(--ink)}
+.demopill{font-size:10.5px;font-weight:800;letter-spacing:.1em;color:var(--goldB);
+  border:1px solid var(--goldhair);background:var(--goldbg);padding:5px 10px;border-radius:999px;margin-left:4px}
+@media(max-width:660px){.nav{left:12px;right:12px;transform:none;justify-content:space-between;padding-left:14px}.demopill{display:none}.navtab{padding:9px 11px}}
+
+.main{padding:108px 0 120px;position:relative;z-index:2}
+
+/* ── двойной безель ── */
+.shell{background:rgba(255,255,255,.028);border:1px solid var(--hair);border-radius:var(--r);padding:6px;
+  transition:transform .5s var(--ease), border-color .5s var(--ease)}
+.shell>.core{background:var(--card);border-radius:var(--ri);padding:20px 22px;height:100%;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.shell:hover{border-color:var(--hair2)}
+.lift:hover{transform:translateY(-3px)}
+
+/* ── типовые ── */
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:10.5px;font-weight:800;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--ink3);margin-bottom:16px}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--gold)}
+.btnP{display:inline-flex;align-items:center;gap:12px;border:none;cursor:pointer;
+  background:rgba(255,255,255,.95);color:#101014;font:700 14px/1 'Manrope',sans-serif;
+  padding:8px 8px 8px 22px;border-radius:999px;transition:all .4s var(--ease)}
+.btnP:hover{background:#fff;transform:translateY(-1px)}
+.btnP:active{transform:scale(.98)}
+.btnP .arr{width:32px;height:32px;border-radius:50%;background:#101014;color:#fff;
+  display:flex;align-items:center;justify-content:center;transition:transform .4s var(--ease)}
+.btnP:hover .arr{transform:translate(2px,-2px)}
+.btnG{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--hair2);cursor:pointer;
+  background:transparent;color:var(--ink);font:600 13.5px/1 'Manrope',sans-serif;
+  padding:12px 20px;border-radius:999px;transition:all .35s var(--ease)}
+.btnG:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.04)}
+.btnG:active{transform:scale(.98)}
+.btnG.sm{padding:9px 14px;font-size:12.5px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;
+  padding:4px 11px;border-radius:999px;white-space:nowrap;letter-spacing:.02em}
+.c-gold{background:var(--goldbg);color:var(--goldB);border:1px solid var(--goldhair)}
+.c-ok{background:var(--okbg);color:var(--ok)}
+.c-warn{background:var(--warnbg);color:var(--warn)}
+.c-bad{background:var(--badbg);color:var(--bad)}
+.c-blue{background:var(--bluebg);color:var(--blue)}
+.c-dim{background:rgba(255,255,255,.05);color:var(--ink2)}
+select,input,textarea{font:14px/1.5 'Manrope',sans-serif;background:var(--bg2);border:1px solid var(--hair2);
+  border-radius:10px;padding:12px 14px;width:100%;color:var(--ink);outline:none;transition:border-color .35s var(--ease)}
+select:focus,input:focus,textarea:focus{border-color:var(--goldhair)}
+select option{background:#17171C}
+label.f{display:block;font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin:0 0 8px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:860px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
+
+/* ── шаги ── */
+.steps{display:flex;gap:2px;background:rgba(255,255,255,.03);border:1px solid var(--hair);border-radius:999px;padding:4px;margin:0 0 30px;overflow-x:auto}
+.stp{flex:1;padding:10px 8px;text-align:center;font-size:12px;font-weight:700;color:var(--ink3);
+  border-radius:999px;white-space:nowrap;transition:all .4s var(--ease)}
+.stp.act{background:rgba(255,255,255,.95);color:#101014}
+.stp.done{color:var(--ok);cursor:pointer}
+
+/* ── герой-цифры ── */
+.stat .n{font-family:'Prata',Georgia,serif;font-size:clamp(32px,3.8vw,44px);font-weight:400;letter-spacing:-.01em;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .n em{font-style:normal;color:var(--goldB)}
+.stat .l{font-size:12.5px;color:var(--ink2);margin-top:6px;line-height:1.5}
+.stat .src{font-size:11px;color:var(--ink3);margin-top:4px}
+
+/* ── карточки-находки ── */
+.lead-card .who{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.quote{font-size:14.5px;line-height:1.7;color:var(--ink);background:var(--bg2);
+  border-left:2px solid var(--gold);border-radius:0 10px 10px 0;padding:12px 16px;margin:12px 0}
+.srcicon{width:30px;height:30px;border-radius:9px;background:linear-gradient(155deg,rgba(255,255,255,.07),rgba(255,255,255,.015));border:1px solid var(--hair2);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+  display:inline-flex;align-items:center;justify-content:center;flex:0 0 30px}
+.srcicon svg{stroke:var(--goldB)}
+.msgbox{background:var(--bg2);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;
+  font-size:13.5px;line-height:1.75;white-space:pre-wrap;color:var(--ink2);max-height:270px;overflow-y:auto}
+.copied{color:var(--ok);font-weight:700;font-size:12.5px}
+
+/* ── воронка ── */
+.kb{display:grid;grid-template-columns:repeat(6,minmax(150px,1fr));gap:10px;overflow-x:auto;padding-bottom:8px}
+.kcol{background:rgba(255,255,255,.025);border:1px solid var(--hair);border-radius:12px;padding:10px;min-width:150px;transition:border-color .3s var(--ease),background .3s var(--ease)}
+.kcol.dropover{border-color:var(--goldhair);background:var(--goldbg)}
+.kcard{cursor:grab}
+.kcard:active{cursor:grabbing}
+.kcard.dragging{opacity:.4}
+.kcol h4{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin:2px 4px 10px;display:flex;justify-content:space-between}
+.kcard{background:var(--card);border:1px solid var(--hair);border-radius:9px;padding:10px 12px;font-size:12.5px;margin-bottom:7px}
+.kcard b{display:block;font-size:12.5px;margin-bottom:2px}
+.kcard .mv{display:flex;gap:4px;margin-top:8px}
+.kcard .mv button{flex:1;border:1px solid var(--hair);background:transparent;border-radius:6px;font-size:11px;padding:4px 0;cursor:pointer;color:var(--ink3);transition:all .3s var(--ease)}
+.kcard .mv button:hover:not(:disabled){color:var(--ink);border-color:var(--hair2)}
+.kcard .mv button:disabled{opacity:.25;cursor:default}
+
+/* ── прогресс ── */
+.pbar{height:4px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden}
+.pfill{height:100%;background:linear-gradient(90deg,var(--gold),var(--goldB));border-radius:99px;transition:width .35s var(--ease)}
+
+/* ── таблицы КП ── */
+.tw{overflow-x:auto;border:1px solid var(--hair);border-radius:14px;background:var(--card);margin:16px 0}
+table.cmp{border-collapse:collapse;width:100%;font-size:13.5px;min-width:700px}
+table.cmp th{text-align:left;padding:12px 16px;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);border-bottom:1px solid var(--hair2);white-space:nowrap}
+table.cmp td{padding:12px 16px;border-bottom:1px solid var(--hair);vertical-align:top;line-height:1.55}
+table.cmp tr:last-child td{border-bottom:none}
+table.cmp tr.ours td{background:var(--goldbg)}
+table.cmp tr.ours td:first-child{border-left:2px solid var(--gold)}
+.num{white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* ── анимации ── */
+.rv{opacity:0;transform:translateY(22px);filter:blur(5px);transition:opacity .8s var(--ease),transform .8s var(--ease),filter .8s var(--ease)}
+.rv.in{opacity:1;transform:none;filter:none}
+.fade{animation:fu .5s var(--ease) both}
+@keyframes fu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.pulse{animation:pl 1.3s ease-in-out infinite}
+@keyframes pl{0%,100%{opacity:1}50%{opacity:.35}}
+.hidden{display:none!important}
+.footer{border-top:1px solid var(--hair);color:var(--ink3);font-size:12px;padding:20px 0 26px;position:relative;z-index:2}
+.dark-cta{background:linear-gradient(160deg,#15151B, #101014 70%);border:1px solid var(--hair2);border-radius:20px;padding:34px 36px;position:relative;overflow:hidden}
+.dark-cta::before{content:"";position:absolute;right:-120px;top:-120px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle, rgba(201,164,92,.14), transparent 65%)}
+
+/* ══ КП V3: редизайн предложения ══ */
+.os{margin-top:88px}
+.oshead{display:flex;align-items:baseline;gap:16px}
+.onum{font-family:'Prata',Georgia,serif;font-size:14px;color:var(--gold);letter-spacing:.14em;flex:0 0 auto;transform:translateY(-4px)}
+.onum::after{content:"";display:block;height:1px;background:linear-gradient(90deg,var(--goldhair),transparent);margin-top:7px}
+.os h2{font-size:clamp(25px,3vw,36px)}
+.osub{color:var(--ink2);font-size:14.5px;max-width:680px;margin-top:10px;line-height:1.65}
+.bgrid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:26px}
+.bx{grid-column:span 4;display:flex}
+.bx.w6{grid-column:span 6}
+.bx.w12{grid-column:span 12}
+@media(max-width:960px){.bx,.bx.w6{grid-column:span 6}}
+@media(max-width:640px){.bx,.bx.w6{grid-column:span 12}}
+.bx .core{display:flex;flex-direction:column;gap:12px;padding:22px}
+.icx{width:46px;height:46px;border-radius:14px;flex:0 0 46px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(155deg,rgba(255,255,255,.07),rgba(255,255,255,.015));
+  border:1px solid var(--hair2);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);color:var(--goldB)}
+.icx svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.icx.mono{color:var(--ink2)}
+.bt{font-size:15.5px;font-weight:700;letter-spacing:-.01em;line-height:1.35}
+.bd{font-size:13.5px;color:var(--ink2);line-height:1.62}
+.caserow{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+a.case{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--ink2);
+  border:1px solid var(--hair);border-radius:999px;padding:7px 14px;transition:all .35s var(--ease)}
+a.case:hover{color:var(--goldB);border-color:var(--goldhair);transform:translateY(-1px)}
+a.case .go{color:var(--goldB)}
+.chsum{display:flex;flex-wrap:wrap;gap:8px 36px;align-items:baseline;margin-top:24px;padding:22px 26px}
+.chsum .b{display:flex;flex-direction:column;gap:4px}
+.chsum .n{font-family:'Prata',Georgia,serif;font-size:clamp(26px,3vw,34px);color:var(--goldB);line-height:1}
+.chsum .t{font-size:12.5px;color:var(--ink2);font-weight:600}
+.chgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+@media(max-width:960px){.chgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.chgrid{grid-template-columns:1fr}}
+.chx .core{padding:18px;display:flex;flex-direction:column;gap:12px}
+.chtop{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.chname{font-weight:800;font-size:14px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.chname .icx{width:36px;height:36px;border-radius:11px;flex:0 0 36px}
+.chname .icx svg{width:17px;height:17px}
+.chn{font-family:'Prata',Georgia,serif;font-size:20px;line-height:1.15}
+.chn i{font-style:normal;font-family:'Manrope',sans-serif;font-size:11px;color:var(--ink3);font-weight:600;display:block;margin-top:4px;letter-spacing:.01em}
+.kbflow{display:grid;grid-template-columns:1fr 40px 1.18fr 40px 1fr;align-items:stretch;margin-top:26px}
+@media(max-width:880px){.kbflow{grid-template-columns:1fr}.kbarr{transform:rotate(90deg);margin:2px auto;height:34px}}
+.kbarr{display:flex;align-items:center;justify-content:center;color:var(--gold);opacity:.85}
+.kbnode{display:flex}
+.kbnode .core{padding:22px;display:flex;flex-direction:column;gap:12px;align-items:flex-start;width:100%}
+.kbtitle{font-size:15px;font-weight:800;letter-spacing:-.01em}
+.kbtags{display:flex;flex-wrap:wrap;gap:6px}
+.kbtag{font-size:11.5px;font-weight:600;color:var(--ink2);border:1px solid var(--hair);border-radius:999px;padding:4px 11px;white-space:nowrap}
+.kbfacts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+@media(max-width:860px){.kbfacts{grid-template-columns:1fr}}
+.kbfact{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink2);line-height:1.55;padding:14px 16px;border:1px solid var(--hair);border-radius:13px;background:rgba(255,255,255,.02)}
+.kbfact svg{width:16px;height:16px;flex:0 0 16px;stroke:var(--ok);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
+.paygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+@media(max-width:860px){.paygrid{grid-template-columns:1fr}}
+.pay{display:flex}
+.pay .core{padding:26px 24px;display:flex;flex-direction:column;gap:9px;width:100%}
+.payv{font-family:'Prata',Georgia,serif;font-size:clamp(34px,3.6vw,44px);line-height:1.05;color:var(--goldB);font-variant-numeric:tabular-nums;letter-spacing:-.01em;white-space:nowrap}
+.payl{font-size:14px;font-weight:700;color:var(--ink);line-height:1.4}
+.payd{font-size:12.5px;color:var(--ink3);line-height:1.6;margin-top:auto}
+details.acc{border:1px solid var(--hair);border-radius:14px;background:rgba(255,255,255,.02);margin-top:14px;transition:border-color .4s var(--ease)}
+details.acc:hover{border-color:var(--hair2)}
+details.acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:13px;padding:15px 20px;font-size:13.5px;font-weight:700;color:var(--ink2);transition:color .3s var(--ease)}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary:hover{color:var(--ink)}
+details.acc .plus{width:26px;height:26px;border-radius:50%;border:1px solid var(--hair2);flex:0 0 26px;position:relative;transition:transform .5s var(--ease)}
+details.acc .plus::before,details.acc .plus::after{content:"";position:absolute;left:50%;top:50%;background:var(--goldB)}
+details.acc .plus::before{width:10px;height:1.5px;transform:translate(-50%,-50%)}
+details.acc .plus::after{width:1.5px;height:10px;transform:translate(-50%,-50%)}
+details.acc[open] .plus{transform:rotate(135deg)}
+details.acc .accb{padding:4px 20px 20px;color:var(--ink2);font-size:13.5px;line-height:1.7}
+details.acc .accb .tw{margin:8px 0 4px}
+.optrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+@media(max-width:640px){.optrow{grid-template-columns:1fr}}
+.opt{border:1px solid var(--hair);border-radius:13px;padding:15px 17px;background:rgba(255,255,255,.02)}
+.opt em{font-style:normal;display:block;font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.opt b{display:block;font-size:14px;letter-spacing:-.01em}
+.opt span{font-size:12px;color:var(--ink3);line-height:1.55;display:block;margin-top:4px}
+.priceX{font-family:'Prata',Georgia,serif;font-size:clamp(46px,5vw,58px);color:var(--goldB);line-height:1;letter-spacing:-.01em;margin-top:4px}
+.priceSub{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.mangrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+@media(max-width:860px){.mangrid{grid-template-columns:1fr}}
+.veri{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;line-height:1.6;padding:9px 0;border-bottom:1px solid var(--hair)}
+.veri:last-child{border-bottom:none}
+.veri svg{width:15px;height:15px;flex:0 0 15px;margin-top:4px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+
+/* ── вторая волна ── */
+.chapline{display:flex;align-items:center;gap:14px;margin:120px 0 0}
+.chapline .cn{font-family:'Prata',Georgia,serif;font-size:15px;color:var(--gold);letter-spacing:.14em;white-space:nowrap}
+.chapline .rule{flex:1;height:1px;background:linear-gradient(90deg,var(--goldhair),transparent)}
+.chap h2.big{font-size:clamp(30px,4vw,44px);margin-top:18px}
+.chapsub{color:var(--ink2);font-size:15px;max-width:700px;margin-top:12px;line-height:1.7}
+.herochips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+a.hchip{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700;color:var(--ink);
+  border:1px solid var(--hair2);border-radius:999px;padding:11px 18px;transition:all .35s var(--ease)}
+a.hchip:hover{border-color:var(--goldhair);color:var(--goldB);transform:translateY(-1px)}
+a.hchip .n{font-family:'Prata',Georgia,serif;color:var(--gold);font-size:13px}
+.limit{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink2);line-height:1.6;padding:13px 16px;border:1px solid var(--hair);border-radius:13px;background:rgba(255,255,255,.02)}
+.limit svg{width:16px;height:16px;flex:0 0 16px;stroke:var(--warn);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
+.xrow{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.6;padding:9px 0;border-bottom:1px solid var(--hair)}
+.xrow:last-child{border-bottom:none}
+.xrow svg{width:15px;height:15px;flex:0 0 15px;margin-top:4px;fill:none;stroke:var(--ink3);stroke-width:1.8;stroke-linecap:round}
+.audit{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:22px}
+@media(max-width:860px){.audit{grid-template-columns:1fr}}
+.aud .core{padding:19px 21px;display:flex;flex-direction:column;gap:8px}
+.aud .ah{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:800;letter-spacing:-.01em}
+.aud .ah .st{margin-left:auto}
+.aud .ab{font-size:13px;color:var(--ink2);line-height:1.6}
+</style>
+</head>
+<body>
+<nav class="nav"><span class="brand">PLUTOS<i>·</i>AUTO</span><a class="navtab" href="#sovet" style="text-decoration:none">Совет</a><a class="navtab" href="#geo" style="text-decoration:none">Видимость в ИИ</a><a class="navtab" href="#reactivation" style="text-decoration:none">Реактивация</a><span class="demopill">ВТОРАЯ ВОЛНА</span></nav>
+<div class="main"><div class="wrap"><div class="eyebrow rv">Плутос Авто · вторая волна · после запуска ядра</div><h1 class="rv">Три системы, которые усиливают<br>компанию после ядра</h1><p class="mut rv" style="margin:18px 0 0;max-width:740px">Радар, Пульс и Витрина закрывают продажи. Эти три — управление, видимость и возврат клиентов. Каждая работает отдельно, вместе — один организм на общей базе знаний.</p><div class="herochips rv"><a class="hchip" href="#sovet"><span class="n">01</span>Совет по созвонам</a><a class="hchip" href="#geo"><span class="n">02</span>Видимость в ИИ-поиске</a><a class="hchip" href="#reactivation"><span class="n">03</span>Реактивация базы партнёров</a></div><div class="chap" id="sovet"><div class="chapline rv"><span class="cn">Глава 01</span><span class="rule"></span></div><h2 class="big rv serif">Совет по созвонам</h2><p class="chapsub rv">Каждая встреча — записана, разобрана и превращена в задачи. А потом её читает «совет директоров» из ИИ-советников: продажи, финансы, риски, клиентский сервис — каждый со своим вердиктом.</p><div class="bgrid" style="margin-top:30px"><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div><div class="bt">Протокол сам, за минуты</div><div class="bd">Запись созвона → транскрипт с ролями → резюме и решения. Ничего не записывать руками.</div></div></div></div><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8.3 12.3l2.4 2.4 5-5.4"/></svg></div><div class="bt">Задачи не теряются</div><div class="bd">Каждое «надо сделать» из разговора становится задачей с ответственным — в вашей amoCRM.</div></div></div></div><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><circle cx="9" cy="8.3" r="3"/><path d="M3.5 19.5c.8-3.4 3-5.2 5.5-5.2s4.7 1.8 5.5 5.2"/><circle cx="17" cy="9.3" r="2.4"/><path d="M15.9 14.1c2.2.4 3.9 2 4.6 4.9"/></svg></div><div class="bt">Совет ИИ-советников</div><div class="bd">Шесть ролей читают каждую встречу: где риск, где деньги, что недожали в переговорах.</div></div></div></div><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M12 3l7.5 3.6v5.1c0 4.6-3.2 7.5-7.5 8.8-4.3-1.3-7.5-4.2-7.5-8.8V6.6z"/><path d="M8.8 12.2l2.3 2.3 4.4-4.9"/></svg></div><div class="bt">Всё в вашем контуре</div><div class="bd">Записи и разборы — в вашей системе, не в чужом облаке-подписке.</div></div></div></div></div><h3 class="rv" style="font-size:19px;margin-top:52px">Есть ли это у ваших конкурентов</h3><p class="small mut rv" style="margin-top:6px;max-width:680px">Внутренние инструменты управления снаружи не видны — поэтому мы проверили рынок готовых решений, которыми конкурент мог бы закрыть эту задачу.</p><div class="bgrid"><div class="bx w12 rv" style="display:flex"><div class="shell" style="width:100%;border-color:var(--goldhair)"><div class="core" style="flex-direction:row;display:flex;gap:16px;align-items:flex-start"><div class="icx"><svg viewBox="0 0 24 24"><path d="M13 2 4.5 13.5h5L8 22l8.5-11.5h-5z"/></svg></div><div><div class="bt">Мультиролевого совета нет ни у кого — проверено по 14 системам</div><div class="bd" style="margin-top:6px">Замер 26.08.2026: от SaaS-сервисов <a href="https://mymeet.ai/ru" target="_blank" rel="noopener">mymeet.ai</a> и <a href="https://navstreche.ru/" target="_blank" rel="noopener">НаВстрече</a> до корпоративного протоколирования 1С и ЦРТ (Нестор.BRIEF). Все умеют транскрипт и резюме; задачи в ваш трекер с контролем исполнения — единицы; мультиролевой ИИ-разбор каждой встречи — ни один. Готовым это не покупается — значит, у конкурентов этого нет и быстро не появится. Ваше преимущество: решения после встреч принимаются быстрее, ни одна договорённость не теряется, а качество переговоров растёт от вердиктов совета — без найма живых аналитиков.</div></div></div></div></div></div><h3 class="rv" style="font-size:19px;margin-top:52px">Эффект</h3><div class="paygrid"><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">≈ 20 ч</div><div class="payl">в месяц — протоколы и задачи без рук</div><div class="payd">10 созвонов в неделю × полчаса на протокол и разнос задач — это время системы, не людей.</div></div></div></div><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">0</div><div class="payl">решений, потерянных после встречи</div><div class="payd">Каждое «перезвоню» и «подготовлю» — задача с дедлайном в amoCRM, а не строчка в блокноте.</div></div></div></div><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">14</div><div class="payl">проверенных систем не делают этого</div><div class="payd">Мультиролевой совет — уникальная фича вашей компании, не подписка с рынка.</div></div></div></div></div><h3 class="rv" style="font-size:19px;margin-top:52px">Что умеет рынок готовых сервисов — и что входит у нас</h3><div class="grid2 rv" style="margin-top:24px;align-items:stretch"><div class="shell"><div class="core"><div class="eyebrow" style="margin-bottom:10px">Рынок готовых решений</div><div style="display:grid"><div class="xrow"><svg viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg><span>Транскрипт и резюме встречи — умеют почти все (<a href="https://mymeet.ai/ru" target="_blank" rel="noopener">mymeet.ai</a>, <a href="https://navstreche.ru/" target="_blank" rel="noopener">НаВстрече</a>)</span></div><div class="xrow"><svg viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg><span>Задачи — только списком в отчёте, не в вашей amoCRM с ответственными</span></div><div class="xrow"><svg viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg><span>Контроля исполнения договорённостей нет</span></div><div class="xrow"><svg viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg><span>Мультиролевого разбора встречи нет ни у одного из 14</span></div><div class="xrow"><svg viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg><span>Данные компании живут в чужом облаке по подписке</span></div></div><div class="small mut" style="margin-top:14px;padding-top:12px;border-top:1px solid var(--hair2)">Корпоративные системы в контуре (1С, ЦРТ) внедряются месяцами — и совета в них тоже нет.</div></div></div><div class="shell rv" style="border-color:var(--goldhair)"><div class="core"><div class="eyebrow" style="color:var(--goldB);margin-bottom:10px">Что входит у нас</div><div style="display:grid"><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Транскрипт с ролями и резюме каждой встречи</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Задачи с ответственными — в вашей amoCRM</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Совет из 6 ИИ-советников: вердикты по каждой встрече</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Работает в вашем контуре, на базе знаний компании</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Протокол в Telegram участникам — сразу после созвона</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Запуск, настройка и передача — целиком на нас</span></div></div><div class="small mut" style="margin-top:14px;padding-top:12px;border-top:1px solid var(--goldhair)">Движок уже работает в проде — внедряем, а не изобретаем.</div><details class="acc rv"><summary><span class="plus"></span>Условия и гарантии</summary><div class="accb"><b style="color:var(--ink)">Состав фиксируем поимённым списком функций</b> в приложении к договору — никаких «примерно». Оплата 50/50: половина на старте, половина по приёмке. Два круга правок включены. Стоимость и сроки — на 30-минутном показе, после согласования состава.</div></details></div></div></div><div class="dark-cta rv" style="margin-top:34px;padding:26px 30px"><div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><div class="icx"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div><div style="flex:1;min-width:260px"><b style="font-size:15px">Проверить за один день — бесплатно</b><div class="small mut" style="margin-top:4px">Пришлите запись одного реального созвона — вернём протокол с задачами и вердиктами советников в течение часа.</div></div></div></div></div><div class="chap" id="geo"><div class="chapline rv"><span class="cn">Глава 02</span><span class="rule"></span></div><h2 class="big rv serif">Видимость в ИИ-поиске</h2><p class="chapsub rv">Покупатели premium-авто уже спрашивают нейросети, «кто привезёт из Европы». Мы проверили ваш сайт и вашу нишу вживую 27.08.2026 — ниже ровно то, что видит (и чего не видит) поиск и ИИ сегодня.</p><div class="paygrid" style="margin-top:30px"><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">45%</div><div class="payl">московских онлайн-покупателей советуются с ИИ</div><div class="payd">Опрос Яндекса и РБК, март 2026.</div></div></div></div><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">42%</div><div class="payl">запросов к Яндексу покрывает Алиса</div><div class="payd">49,5 млн пользователей в месяц · seonews, 07.2026. Главный ИИ-канал РФ — не ChatGPT.</div></div></div></div><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">0</div><div class="payl">упоминаний Плутоса в нишевой выдаче</div><div class="payd">Наш замер 27.08.2026: цитируют рейтинги и конкурентов со статьями. Пока пусто — вход дешевле.</div></div></div></div></div><h3 class="rv" style="font-size:19px;margin-top:52px">Аудит plutosauto.ru — что видит поиск сегодня</h3><p class="small mut rv" style="margin-top:6px;max-width:680px">Каждый пункт проверен вживую 27.08.2026: сайт, sitemap, разметка, выдача. Это не гипотезы.</p><div class="audit"><div class="aud rv" style="display:flex"><div class="shell" style="width:100%"><div class="core"><div class="ah"><span class="icx mono" style="width:36px;height:36px;border-radius:11px;flex:0 0 36px"><svg viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10.5 12h5M10.5 16h5"/></svg></span>Заголовок сайта не отвечает ни на один запрос<span class="st chip c-warn">упускаете</span></div><div class="ab">Title и описание — «Премиальные и люксовые авто из Европы под заказ» и «Откройте для себя мир эксклюзивных автомобилей вместе с нами!». Ни «пригнать», ни «под ключ», ни сроков, ни процесса — поисковик и ИИ цитируют то, что отвечает на вопрос покупателя.</div></div></div></div><div class="aud rv" style="display:flex"><div class="shell" style="width:100%"><div class="core"><div class="ah"><span class="icx mono" style="width:36px;height:36px;border-radius:11px;flex:0 0 36px"><svg viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M9 4 3.5 6v14L9 18l6 2 5.5-2V4L15 6z"/><path d="M9 4v14M15 6v14"/></svg></span>Весь сайт — 6 страниц<span class="st chip c-warn">упускаете</span></div><div class="ab">В sitemap.xml: главная, FAQ, страница «спасибо», политика и согласие. Ни одной статьи под реальные вопросы: «сколько стоит пригнать», «утильсбор 2026», «сроки и маршруты». Цитировать нечего.</div></div></div></div><div class="aud rv" style="display:flex"><div class="shell" style="width:100%"><div class="core"><div class="ah"><span class="icx mono" style="width:36px;height:36px;border-radius:11px;flex:0 0 36px"><svg viewBox="0 0 24 24" style="width:17px;height:17px"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5 16 16"/></svg></span>FAQ на 20 вопросов уже есть — но ИИ его не видит<span class="st chip c-warn">половина дела</span></div><div class="ab">Хорошая база: 20 вопросов, есть сроки «3–4 недели» и лимиты льготного утиля. Но ни одной цифры цены или комиссии, нет микроразметки (0 блоков schema.org на сайте) — для поисковых роботов это просто текст без структуры.</div></div></div></div><div class="aud rv" style="display:flex"><div class="shell" style="width:100%"><div class="core"><div class="ah"><span class="icx mono" style="width:36px;height:36px;border-radius:11px;flex:0 0 36px"><svg viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M4 20v-8M9.3 20V4.5M14.6 20v-9M20 20V8"/></svg></span>Каталог наружу — 6 карточек без цен<span class="st chip c-warn">упускаете</span></div><div class="ab">На главной 6 моделей «под заказ». Тысячи живых позиций вашей таблицы стоков в интернете не существуют — поисковикам и ИИ нечего индексировать. Это закрывает «Витрина» из первой волны.</div></div></div></div><div class="aud rv" style="display:flex"><div class="shell" style="width:100%"><div class="core"><div class="ah"><span class="icx mono" style="width:36px;height:36px;border-radius:11px;flex:0 0 36px"><svg viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M13 2 4.5 13.5h5L8 22l8.5-11.5h-5z"/></svg></span>В нишевой выдаче вас нет<span class="st chip c-bad">критично</span></div><div class="ab">Проверка 27.08.2026: по запросу о пригоне из Европы в топе — агрегаторы и конкуренты со статьями. В <a href="https://avto-iz-evropy.ru/" target="_blank" rel="noopener">рейтинге «фирм для заказа авто из Европы»</a> — 11 компаний, включая WestMotors. Плутоса среди них нет.</div></div></div></div><div class="aud rv" style="display:flex"><div class="shell" style="width:100%"><div class="core"><div class="ah"><span class="icx mono" style="width:36px;height:36px;border-radius:11px;flex:0 0 36px"><svg viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M12 3l7.5 3.6v5.1c0 4.6-3.2 7.5-7.5 8.8-4.3-1.3-7.5-4.2-7.5-8.8V6.6z"/><path d="M8.8 12.2l2.3 2.3 4.4-4.9"/></svg></span>llms.txt отсутствует — и не нужен<span class="st chip c-ok">всё верно</span></div><div class="ab">Модный файл «для ИИ», который продают агентства: по замеру Ahrefs на 137 тыс. сайтов 97% таких файлов ИИ-боты ни разу не прочитали. Не тратим ваш бюджет на карго-культ.</div></div></div></div></div><h3 class="rv" style="font-size:19px;margin-top:52px">У конкурентов это уже есть — проверьте по ссылкам</h3><div class="bgrid"><div class="bx w12 rv" style="display:flex"><div class="shell" style="width:100%;border-color:var(--goldhair)"><div class="core" style="flex-direction:row;display:flex;gap:16px;align-items:flex-start"><div class="icx"><svg viewBox="0 0 24 24"><path d="M3.5 17.5 9 12l3.8 3.8 7.7-7.7"/><path d="M14.8 8.1h5.7v5.7"/></svg></div><div><div class="bt">WestMotors собрал полный набор для видимости — и попал в рейтинги</div><div class="bd" style="margin-top:6px"><a href="https://westmotors.ru/" target="_blank" rel="noopener">westmotors.ru</a>: блог, FAQ по каждой стране, каталоги в наличии с ценами, калькулятор, 240 отзывов на Google и 416 на Яндексе. Итог: он есть в <a href="https://avto-iz-evropy.ru/" target="_blank" rel="noopener">нишевом рейтинге</a>, вы — нет. Контентные статьи ведут и агрегаторы вроде <a href="https://avtoizes.ru/prigon-avto-iz-evropy-v-rossiyu/" target="_blank" rel="noopener">avtoizes.ru</a> («Пригон авто из Европы в 2026»), и белорусские игроки — <a href="https://yankeemotors.by/blog/lgotnaya-rastamozhka-avto-v-belarusi" target="_blank" rel="noopener">Yankee Motors</a>, <a href="https://avtogarant.by/stati/prigon-avto-iz-evropy-v-belarus-2026/" target="_blank" rel="noopener">Автогарант</a>. Именно их сейчас находят вместо вас — и именно их будет цитировать ИИ.</div></div></div></div></div></div><h3 class="rv" style="font-size:19px;margin-top:52px">Что делаем</h3><div class="bgrid"><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5 16 16"/></svg></div><div class="bt">Аудит с доказательствами</div><div class="bd">50–100 реальных промптов ниши в Алисе, ChatGPT и Perplexity — со скриншотами: кого цитируют, где вас нет.</div></div></div></div><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10.5 12h5M10.5 16h5"/></svg></div><div class="bt">Контент-хаб, который можно цитировать</div><div class="bd">Страницы под реальные вопросы покупателей: цены, сроки, утильсбор, гарантии. Ваш FAQ — уже готовая основа: докручиваем и размечаем.</div></div></div></div><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M9 4 3.5 6v14L9 18l6 2 5.5-2V4L15 6z"/><path d="M9 4v14M15 6v14"/></svg></div><div class="bt">Внешний контур</div><div class="bd">Яндекс Бизнес, справочники, отзовики, профильные СМИ и рейтинги — источники, из которых ИИ собирает ответы.</div></div></div></div><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M4 20v-8M9.3 20V4.5M14.6 20v-9M20 20V8"/></svg></div><div class="bt">Повторный замер — KPI в цифрах</div><div class="bd">Через 2–3 месяца тот же список промптов: доля голоса до и после. Эффект измерим, не «на глазок».</div></div></div></div></div><h3 class="rv" style="font-size:19px;margin-top:52px">Честно про этот канал</h3><p class="small mut rv" style="margin-top:6px;max-width:680px">Мы продаём ранний вход с измеримым замером — не чудо.</p><div class="kbfacts rv" style="margin-top:14px"><div class="limit"><svg viewBox="0 0 24 24"><path d="M12 4l8.5 15h-17z"/><path d="M12 10.5v3.6M12 16.9v.2"/></svg><span>Канал пока мал: у сопоставимых B2B-кейсов это сотни переходов в месяц, не тысячи. Зато переходы — от людей на этапе выбора.</span></div><div class="limit"><svg viewBox="0 0 24 24"><path d="M12 4l8.5 15h-17z"/><path d="M12 10.5v3.6M12 16.9v.2"/></svg><span>Гарантий попадания в конкретный ответ ИИ не существует — кто их обещает, тот лукавит. Мы гарантируем работы и замер.</span></div><div class="limit"><svg viewBox="0 0 24 24"><path d="M12 4l8.5 15h-17z"/><path d="M12 10.5v3.6M12 16.9v.2"/></svg><span>Лучше всего работает в связке с «Витриной» первой волны: без публичного каталога ИИ нечего цитировать.</span></div></div></div><div class="chap" id="reactivation"><div class="chapline rv"><span class="cn">Глава 03</span><span class="rule"></span></div><h2 class="big rv serif">Реактивация базы партнёров</h2><p class="chapsub rv">У вас 230+ партнёрских компаний. Часть — «спящие»: когда-то покупали, потом тихо пропали. Система будит их регулярными сток-рассылками и возвращает в кассу — с трекингом каждого отклика в amoCRM.</p><div class="bgrid" style="margin-top:30px"><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><circle cx="9" cy="8.3" r="3"/><path d="M3.5 19.5c.8-3.4 3-5.2 5.5-5.2s4.7 1.8 5.5 5.2"/><circle cx="17" cy="9.3" r="2.4"/><path d="M15.9 14.1c2.2.4 3.9 2 4.6 4.9"/></svg></div><div class="bt">Сегментация пула</div><div class="bd">Кто покупал что и когда, кто затих, кому какой сток интересен — база раскладывается по полочкам.</div></div></div></div><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M21 4 3.5 11l5.5 2.2M21 4l-3 15.5-6.8-6.3M21 4 9 13.2v5.3l2.9-2.6"/></svg></div><div class="bt">Регулярные сток-рассылки</div><div class="bd">Telegram, e-mail, WhatsApp: свежие позиции и персональные подборки — без ручной рутины.</div></div></div></div><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M4 20v-8M9.3 20V4.5M14.6 20v-9M20 20V8"/></svg></div><div class="bt">Каждый отклик — в amoCRM</div><div class="bd">Открыл, кликнул, ответил — видно в воронке. «Спящий» партнёр снова становится сделкой.</div></div></div></div><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><rect x="3.5" y="6" width="17" height="13" rx="2.5"/><path d="M3.5 9.5h17M15.5 14h2"/></svg></div><div class="bt">Касание почти ничего не стоит</div><div class="bd">Себестоимость сообщения — рубли. Возврат одного партнёра окупает всю систему.</div></div></div></div></div><h3 class="rv" style="font-size:19px;margin-top:52px">Есть ли это у ваших конкурентов</h3><div class="bgrid"><div class="bx w12 rv" style="display:flex"><div class="shell" style="width:100%;border-color:var(--goldhair)"><div class="core" style="flex-direction:row;display:flex;gap:16px;align-items:flex-start"><div class="icx"><svg viewBox="0 0 24 24"><path d="M21 4 3.5 11l5.5 2.2M21 4l-3 15.5-6.8-6.3M21 4 9 13.2v5.3l2.9-2.6"/></svg></div><div><div class="bt">Каналы-витрины есть у многих. Адресной работы с базой не видно ни у кого</div><div class="bd" style="margin-top:6px">Публичные Telegram-каналы со стоками ведут и конкуренты (у <a href="https://westmotors.ru/" target="_blank" rel="noopener">WestMotors</a> канал — прямо в шапке сайта), и вы сами — <a href="https://t.me/s/PlutosAuto" target="_blank" rel="noopener">t.me/PlutosAuto</a>. Но канал — это вещание на всех сразу. Адресная реактивация — когда система знает, что покупал каждый из 230+ партнёров, и присылает ему подборку под его профиль — снаружи не видна ни у одного конкурента, и её невозможно скопировать: это работа с вашей базой, которой у них нет. Ваше преимущество: партнёрская база, собранная годами, начинает продавать сама — раньше, чем конкуренты дозвонятся своим.</div></div></div></div></div></div><h3 class="rv" style="font-size:19px;margin-top:52px">Эффект</h3><div class="paygrid"><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">230+</div><div class="payl">партнёрских компаний уже в вашей базе</div><div class="payd">Актив собран годами — сейчас он просто лежит. Мы включаем его в продажи.</div></div></div></div><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">100%</div><div class="payl">базы получает свежий сток регулярно</div><div class="payd">Без ручной рутины: система сама собирает подборки под профиль каждого партнёра.</div></div></div></div><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">1</div><div class="payl">вернувшийся партнёр окупает систему</div><div class="payd">При вашей марже со сделки достаточно одного «проснувшегося», чтобы всё отбить.</div></div></div></div></div><h3 class="rv" style="font-size:19px;margin-top:52px">Что умеет рынок — и что входит у нас</h3><div class="grid2 rv" style="margin-top:24px;align-items:stretch"><div class="shell"><div class="core"><div class="eyebrow" style="margin-bottom:10px">Агентства рассылок и CRM-маркетинга</div><div style="display:grid"><div class="xrow"><svg viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg><span>Шаблонные реактивационные цепочки — без вашего стока и профилей партнёров</span></div><div class="xrow"><svg viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg><span>Процесс живёт у агентства: закончили сотрудничество — рассылки встали</span></div><div class="xrow"><svg viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg><span>Отклики — в отчёте агентства, а не сделками в вашей amoCRM</span></div><div class="xrow"><svg viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg><span>Сегментацию делают по «активности», а не по истории покупок стока</span></div></div><div class="small mut" style="margin-top:14px;padding-top:12px;border-top:1px solid var(--hair2)">Подписочный CRM-маркетинг не заканчивается никогда — и не оставляет вам процесса.</div></div></div><div class="shell rv" style="border-color:var(--goldhair)"><div class="core"><div class="eyebrow" style="color:var(--goldB);margin-bottom:10px">Что входит у нас</div><div style="display:grid"><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Сегментация всех 230+ партнёров по истории покупок</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Автоматические сток-рассылки: Telegram, e-mail, WhatsApp</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Персональные подборки под профиль партнёра</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Трекинг откликов и сделки — в вашей amoCRM</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Тексты и шаблоны на вашей базе знаний</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Запуск, настройка и передача — целиком на нас</span></div></div><div class="small mut" style="margin-top:14px;padding-top:12px;border-top:1px solid var(--goldhair)">Система остаётся вашей — рассылки не встанут.</div><details class="acc rv"><summary><span class="plus"></span>Условия и гарантии</summary><div class="accb"><b style="color:var(--ink)">Состав фиксируем поимённым списком функций</b> в приложении к договору — никаких «примерно». Оплата 50/50: половина на старте, половина по приёмке. Два круга правок включены. Стоимость и сроки — на 30-минутном показе, после согласования состава.</div></details></div></div></div></div><div class="os rv" id="baza"><div class="oshead"><span class="onum">И</span><h2>Всё это работает на одной базе знаний</h2></div><p class="osub">Если у вас уже запущен любой продукт первой волны — Радар, Пульс или Витрина, — база знаний компании уже собрана. Каждая система второй волны подключается к ней бесплатно: советники читают ваши регламенты, контент для ИИ-поиска опирается на ваши цены и сроки, рассылки говорят вашим языком.</p><div class="kbfacts rv" style="margin-top:20px"><div class="kbfact"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Один раз собрали — <b style="color:var(--ink)">работает на все системы</b>, первой и второй волны</span></div><div class="kbfact"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>ИИ <b style="color:var(--ink)">не выдумывает цены</b> — отвечает по вашим документам</span></div><div class="kbfact"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>База — <b style="color:var(--ink)">ваш актив</b> и главный источник правды компании</span></div></div></div><div class="os rv"><div class="oshead"><span class="onum">∞</span><h2>Это ваша внутренняя инфраструктура</h2></div><p class="osub">Как и продукты первой волны: индивидуальная разработка под ваши процессы — корпоративный софт компании, а не аренда чужого сервиса.</p><div class="bgrid"><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l8.5-8.5M15.5 7.5L18 10M18.5 4.5L21 7"/></svg></div><div class="bt">Не подписка — собственность</div><div class="bd">Агентства и SaaS продают доступ. Мы строим актив: код, база и процесс остаются в компании.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.1"/><path d="M12 3v2.6M12 18.4V21M3 12h2.6M18.4 12H21M5.8 5.8l1.8 1.8M16.4 16.4l1.8 1.8M18.2 5.8l-1.8 1.8M7.6 16.4l-1.8 1.8"/></svg></div><div class="bt">Под ваши процессы</div><div class="bd">Ваша amoCRM, ваш сток, ваши регламенты и ваша фирменная прозрачность — не шаблон.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M3.5 17.5 9 12l3.8 3.8 7.7-7.7"/><path d="M14.8 8.1h5.7v5.7"/></svg></div><div class="bt">Каждая система усиливает следующую</div><div class="bd">Витрина кормит видимость в ИИ, база знаний — советников и рассылки, Радар — воронку. Это один организм.</div></div></div></div></div></div><div class="dark-cta rv" style="margin-top:80px"><div class="eyebrow" style="color:var(--goldB)">Следующий шаг — 30 минут</div><h2 style="max-width:680px">Начнём с бесплатного касания — по любой из трёх систем</h2><p class="mut small" style="max-width:640px;margin-top:8px">Совет: пришлите запись созвона — вернём протокол с вердиктами за час. Видимость в ИИ: покажем 10 живых промптов Алисы по вашей нише — кого она цитирует сегодня. Реактивация: соберём план сегментации по обезличенному срезу базы.</p><div style="margin-top:20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap"><span class="small dim">Выбрать систему и согласовать показ — просто ответьте в чате, где получили эту ссылку. Состав, сроки и стоимость каждой системы — после показа, поимённым списком функций.</span></div></div><p class="small dim rv" style="margin-top:22px">Все факты о сайте и выдаче проверены вживую 27.08.2026 (plutosauto.ru, sitemap, разметка, нишевая выдача, рейтинги); рынок сервисов встреч — 14 систем, 26.08.2026; ссылки в тексте прямые. Данные об ИИ-поиске: опрос Яндекса и РБК (03.2026), seonews (07.2026), Ahrefs (замер llms.txt по 137 тыс. сайтов).</p></div></div>
+<div class="footer"><div class="wrap">Предложение для Plutos Auto · вторая волна · подготовлено 27.08.2026 · факты о сайте и нише проверены вживую 26–27.08.2026</div></div>
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",e=>{e.preventDefault();const t=document.querySelector(a.getAttribute("href"));if(t){const y=t.getBoundingClientRect().top+scrollY-90;scrollTo({top:y,behavior:"smooth"})}}));
+</script>
+</body>
+</html>
