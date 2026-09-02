@@ -415,7 +415,7 @@ function calcRows(c){
  return {total,rows:`<table class="calc2">
   <tr><td>Автомобиль (нетто)<span class="cm2">€${c.p.toLocaleString("ru-RU")} × ${RATE} ₽ · VAT ${c.vat} снят</span></td><td>${fmt(carRub)}</td></tr>
   <tr><td>Логистика до Москвы<span class="cm2">${c.src} · автовоз, страховка</span></td><td>${fmt(log)}</td></tr>
-  <tr><td>Таможенная пошлина<span class="cm2">физлицо, ${c.vol} см³</span></td><td>${fmt(duty)}</td></tr>
+  <tr><td>Таможенная пошлина<span class="cm2">демо-приближение по объёму; в боевой версии — ставки по возрасту машины и ваш маршрут РФ/РБ</span></td><td>${fmt(duty)}</td></tr>
   <tr><td>Утилизационный сбор<span class="cm2">${u.lg?"льготный: ≤160 л.с. и <3 л":c.hp+" л.с. — шкала 2026"}</span></td><td>${fmt(u.v)}</td></tr>
   <tr><td>СБКТС + ЭПТС + оформление</td><td>${fmt(cert)}</td></tr>
   <tr><td>Комиссия Plutos<span class="cm2">фиксированная</span></td><td>${fmt(fee)}</td></tr>
