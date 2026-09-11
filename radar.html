@@ -12,13 +12,13 @@
 :root{
   --void:#0A0A0C; --bg:#101014; --bg2:#131319; --card:#17171C;
   --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.13);
-  --ink:rgba(255,255,255,.93); --ink2:rgba(255,255,255,.62); --ink3:rgba(255,255,255,.45);
+  --ink:rgba(255,255,255,.93); --ink2:rgba(255,255,255,.62); --ink3:rgba(255,255,255,.55);
   --gold:#C9A45C; --goldB:#E4C078; --goldbg:rgba(201,164,92,.10); --goldhair:rgba(201,164,92,.32);
   --ok:#4CC39A; --okbg:rgba(46,155,130,.13);
   --warn:#D99A55; --warnbg:rgba(201,123,46,.13);
   --bad:#E37E76; --badbg:rgba(179,53,46,.14);
   --blue:#8FA8E8; --bluebg:rgba(109,138,224,.13);
-  --r:16px; --ri:10px;
+  --r:16px; --ri:12px;
   --ease:cubic-bezier(.32,.72,0,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -32,11 +32,11 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opac
 .serif{font-family:'Prata',Georgia,serif;font-weight:400}
 h1{font-family:'Prata',Georgia,serif;font-weight:400;font-size:clamp(30px,4.4vw,46px);line-height:1.18;letter-spacing:-.012em}
 h2{font-family:'Prata',Georgia,serif;font-weight:400;font-size:clamp(22px,2.6vw,29px);line-height:1.25;letter-spacing:-.008em;margin:0 0 6px}
-h3{font-size:16px;font-weight:700;letter-spacing:-.01em}
+h3{font-size:15.5px;font-weight:700;letter-spacing:-.01em}
 p{max-width:820px}
 a{color:var(--goldB);text-decoration:none}
 a:hover{color:#F0D090}
-.mut{color:var(--ink2)} .dim{color:var(--ink3)} .small{font-size:13px}
+.mut{color:var(--ink2)} .dim{color:var(--ink3)} .small{font-size:12.5px}
 .wrap{max-width:1180px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
 
 /* ── остров-навигация ── */
@@ -45,13 +45,13 @@ a:hover{color:#F0D090}
   background:rgba(16,16,21,.72);border:1px solid var(--hair2);
   backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
   box-shadow:0 12px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06);white-space:nowrap}
-.brand{font-weight:800;letter-spacing:.16em;font-size:12.5px;margin-right:8px}
+.brand{font-weight:700;letter-spacing:.1em;font-size:12.5px;margin-right:8px}
 .brand i{color:var(--gold);font-style:normal}
 .navtab{border:none;background:transparent;color:var(--ink2);font:600 13px/1 'Manrope',sans-serif;
   padding:9px 15px;border-radius:999px;cursor:pointer;transition:all .35s var(--ease)}
 .navtab.on{background:rgba(255,255,255,.95);color:#101014}
 .navtab:not(.on):hover{color:var(--ink)}
-.demopill{font-size:10.5px;font-weight:800;letter-spacing:.1em;color:var(--goldB);
+.demopill{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--goldB);
   border:1px solid var(--goldhair);background:var(--goldbg);padding:5px 10px;border-radius:999px;margin-left:4px}
 @media(max-width:660px){.nav{left:12px;right:12px;transform:none;justify-content:space-between;padding-left:14px}.demopill{display:none}.navtab{padding:9px 11px}}
 
@@ -66,7 +66,7 @@ a:hover{color:#F0D090}
 .lift:hover{transform:translateY(-3px)}
 
 /* ── типовые ── */
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:10.5px;font-weight:800;letter-spacing:.22em;
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.22em;
   text-transform:uppercase;color:var(--ink3);margin-bottom:16px}
 .eyebrow::before{content:"";width:22px;height:1px;background:var(--gold)}
 .btnP{display:inline-flex;align-items:center;gap:12px;border:none;cursor:pointer;
@@ -83,7 +83,7 @@ a:hover{color:#F0D090}
 .btnG:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.04)}
 .btnG:active{transform:scale(.98)}
 .btnG.sm{padding:9px 14px;font-size:12.5px}
-.chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;
   padding:4px 11px;border-radius:999px;white-space:nowrap;letter-spacing:.02em}
 .c-gold{background:var(--goldbg);color:var(--goldB);border:1px solid var(--goldhair)}
 .c-ok{background:var(--okbg);color:var(--ok)}
@@ -92,10 +92,10 @@ a:hover{color:#F0D090}
 .c-blue{background:var(--bluebg);color:var(--blue)}
 .c-dim{background:rgba(255,255,255,.05);color:var(--ink2)}
 select,input,textarea{font:14px/1.5 'Manrope',sans-serif;background:var(--bg2);border:1px solid var(--hair2);
-  border-radius:10px;padding:12px 14px;width:100%;color:var(--ink);outline:none;transition:border-color .35s var(--ease)}
+  border-radius:12px;padding:12px 14px;width:100%;color:var(--ink);outline:none;transition:border-color .35s var(--ease)}
 select:focus,input:focus,textarea:focus{border-color:var(--goldhair)}
 select option{background:#17171C}
-label.f{display:block;font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin:0 0 8px}
+label.f{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin:0 0 8px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
@@ -103,7 +103,7 @@ label.f{display:block;font-size:10.5px;font-weight:800;letter-spacing:.16em;text
 
 /* ── шаги ── */
 .steps{display:flex;gap:2px;background:rgba(255,255,255,.03);border:1px solid var(--hair);border-radius:999px;padding:4px;margin:0 0 30px;overflow-x:auto}
-.stp{flex:1;padding:10px 8px;text-align:center;font-size:12px;font-weight:700;color:var(--ink3);
+.stp{flex:1;padding:10px 8px;text-align:center;font-size:12.5px;font-weight:700;color:var(--ink3);
   border-radius:999px;white-space:nowrap;transition:all .4s var(--ease)}
 .stp.act{background:rgba(255,255,255,.95);color:#101014}
 .stp.done{color:var(--ok);cursor:pointer}
@@ -111,17 +111,17 @@ label.f{display:block;font-size:10.5px;font-weight:800;letter-spacing:.16em;text
 /* ── герой-цифры ── */
 .stat .n{font-family:'Prata',Georgia,serif;font-size:clamp(32px,3.8vw,44px);font-weight:400;letter-spacing:-.01em;font-variant-numeric:tabular-nums;line-height:1.1}
 .stat .n em{font-style:normal;color:var(--goldB)}
-.stat .l{font-size:12.5px;color:var(--ink2);margin-top:6px;line-height:1.5}
+.stat .l{font-size:12.5px;color:var(--ink2);margin-top:8px;line-height:1.5}
 .stat .src{font-size:11px;color:var(--ink3);margin-top:4px}
 
 /* ── карточки-находки ── */
 .lead-card .who{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.quote{font-size:14.5px;line-height:1.7;color:var(--ink);background:var(--bg2);
-  border-left:2px solid var(--gold);border-radius:0 10px 10px 0;padding:12px 16px;margin:12px 0}
+.quote{font-size:13.5px;line-height:1.7;color:var(--ink);background:var(--bg2);
+  border-left:2px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 16px;margin:12px 0}
 .srcicon{width:30px;height:30px;border-radius:9px;background:linear-gradient(155deg,rgba(255,255,255,.07),rgba(255,255,255,.015));border:1px solid var(--hair2);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
   display:inline-flex;align-items:center;justify-content:center;flex:0 0 30px}
 .srcicon svg{stroke:var(--goldB)}
-.msgbox{background:var(--bg2);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;
+.msgbox{background:var(--bg2);border:1px solid var(--hair);border-radius:12px;padding:14px 16px;
   font-size:13.5px;line-height:1.75;white-space:pre-wrap;color:var(--ink2);max-height:270px;overflow-y:auto}
 .copied{color:var(--ok);font-weight:700;font-size:12.5px}
 
@@ -132,7 +132,7 @@ label.f{display:block;font-size:10.5px;font-weight:800;letter-spacing:.16em;text
 .kcard{cursor:grab}
 .kcard:active{cursor:grabbing}
 .kcard.dragging{opacity:.4}
-.kcol h4{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin:2px 4px 10px;display:flex;justify-content:space-between}
+.kcol h4{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin:2px 4px 10px;display:flex;justify-content:space-between}
 .kcard{background:var(--card);border:1px solid var(--hair);border-radius:9px;padding:10px 12px;font-size:12.5px;margin-bottom:7px}
 .kcard b{display:block;font-size:12.5px;margin-bottom:2px}
 .kcard .mv{display:flex;gap:4px;margin-top:8px}
@@ -145,10 +145,10 @@ label.f{display:block;font-size:10.5px;font-weight:800;letter-spacing:.16em;text
 .pfill{height:100%;background:linear-gradient(90deg,var(--gold),var(--goldB));border-radius:99px;transition:width .35s var(--ease)}
 
 /* ── таблицы КП ── */
-.tw{overflow-x:auto;border:1px solid var(--hair);border-radius:14px;background:var(--card);margin:16px 0}
+.tw{overflow-x:auto;border:1px solid var(--hair);border-radius:12px;background:var(--card);margin:16px 0}
 table.cmp{border-collapse:collapse;width:100%;font-size:13.5px;min-width:700px}
-table.cmp th{text-align:left;padding:12px 16px;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);border-bottom:1px solid var(--hair2);white-space:nowrap}
-table.cmp td{padding:12px 16px;border-bottom:1px solid var(--hair);vertical-align:top;line-height:1.55}
+table.cmp th{text-align:left;padding:14px 16px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);border-bottom:1px solid var(--hair2);white-space:nowrap}
+table.cmp td{padding:14px 16px;border-bottom:1px solid var(--hair);vertical-align:top;line-height:1.55}
 table.cmp tr:last-child td{border-bottom:none}
 table.cmp tr.ours td{background:var(--goldbg)}
 table.cmp tr.ours td:first-child{border-left:2px solid var(--gold)}
@@ -162,17 +162,17 @@ table.cmp tr.ours td:first-child{border-left:2px solid var(--gold)}
 .pulse{animation:pl 1.3s ease-in-out infinite}
 @keyframes pl{0%,100%{opacity:1}50%{opacity:.35}}
 .hidden{display:none!important}
-.footer{border-top:1px solid var(--hair);color:var(--ink3);font-size:12px;padding:20px 0 26px;position:relative;z-index:2}
-.dark-cta{background:linear-gradient(160deg,#15151B, #101014 70%);border:1px solid var(--hair2);border-radius:20px;padding:34px 36px;position:relative;overflow:hidden}
+.footer{border-top:1px solid var(--hair);color:var(--ink3);font-size:12.5px;padding:20px 0 26px;position:relative;z-index:2}
+.dark-cta{background:linear-gradient(160deg,#15151B, #101014 70%);border:1px solid var(--hair2);border-radius:16px;padding:34px 36px;position:relative;overflow:hidden}
 .dark-cta::before{content:"";position:absolute;right:-120px;top:-120px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle, rgba(201,164,92,.14), transparent 65%)}
 
 /* ══ КП V3: редизайн предложения ══ */
 .os{margin-top:88px}
 .oshead{display:flex;align-items:baseline;gap:16px}
-.onum{font-family:'Prata',Georgia,serif;font-size:14px;color:var(--gold);letter-spacing:.14em;flex:0 0 auto;transform:translateY(-4px)}
+.onum{font-family:'Prata',Georgia,serif;font-size:13.5px;color:var(--gold);letter-spacing:.1em;flex:0 0 auto;transform:translateY(-4px)}
 .onum::after{content:"";display:block;height:1px;background:linear-gradient(90deg,var(--goldhair),transparent);margin-top:7px}
 .os h2{font-size:clamp(25px,3vw,36px)}
-.osub{color:var(--ink2);font-size:14.5px;max-width:680px;margin-top:10px;line-height:1.65}
+.osub{color:var(--ink2);font-size:13.5px;max-width:680px;margin-top:12px;line-height:1.65}
 .bgrid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:26px}
 .bx{grid-column:span 4;display:flex}
 .bx.w6{grid-column:span 6}
@@ -180,52 +180,52 @@ table.cmp tr.ours td:first-child{border-left:2px solid var(--gold)}
 @media(max-width:960px){.bx,.bx.w6{grid-column:span 6}}
 @media(max-width:640px){.bx,.bx.w6{grid-column:span 12}}
 .bx .core{display:flex;flex-direction:column;gap:12px;padding:22px}
-.icx{width:46px;height:46px;border-radius:14px;flex:0 0 46px;display:flex;align-items:center;justify-content:center;
+.icx{width:46px;height:46px;border-radius:12px;flex:0 0 46px;display:flex;align-items:center;justify-content:center;
   background:linear-gradient(155deg,rgba(255,255,255,.07),rgba(255,255,255,.015));
   border:1px solid var(--hair2);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);color:var(--goldB)}
 .icx svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .icx.mono{color:var(--ink2)}
 .bt{font-size:15.5px;font-weight:700;letter-spacing:-.01em;line-height:1.35}
 .bd{font-size:13.5px;color:var(--ink2);line-height:1.62}
-.caserow{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-a.case{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--ink2);
+.caserow{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+a.case{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--ink2);
   border:1px solid var(--hair);border-radius:999px;padding:7px 14px;transition:all .35s var(--ease)}
 a.case:hover{color:var(--goldB);border-color:var(--goldhair);transform:translateY(-1px)}
 a.case .go{color:var(--goldB)}
-.chsum{display:flex;flex-wrap:wrap;gap:8px 36px;align-items:baseline;margin-top:24px;padding:22px 26px}
+.chsum{display:flex;flex-wrap:wrap;gap:8px 36px;align-items:baseline;margin-top:26px;padding:22px 26px}
 .chsum .b{display:flex;flex-direction:column;gap:4px}
 .chsum .n{font-family:'Prata',Georgia,serif;font-size:clamp(26px,3vw,34px);color:var(--goldB);line-height:1}
-.chsum .t{font-size:12.5px;color:var(--ink2);font-weight:600}
+.chsum .t{font-size:12.5px;color:var(--ink2);font-weight:700}
 .chgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
 @media(max-width:960px){.chgrid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.chgrid{grid-template-columns:1fr}}
 .chx .core{padding:18px;display:flex;flex-direction:column;gap:12px}
 .chtop{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
-.chname{font-weight:800;font-size:14px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
-.chname .icx{width:36px;height:36px;border-radius:11px;flex:0 0 36px}
+.chname{font-weight:700;font-size:13.5px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.chname .icx{width:36px;height:36px;border-radius:12px;flex:0 0 36px}
 .chname .icx svg{width:17px;height:17px}
 .chn{font-family:'Prata',Georgia,serif;font-size:20px;line-height:1.15}
-.chn i{font-style:normal;font-family:'Manrope',sans-serif;font-size:11px;color:var(--ink3);font-weight:600;display:block;margin-top:4px;letter-spacing:.01em}
+.chn i{font-style:normal;font-family:'Manrope',sans-serif;font-size:11px;color:var(--ink3);font-weight:700;display:block;margin-top:4px;letter-spacing:.01em}
 .kbflow{display:grid;grid-template-columns:1fr 40px 1.18fr 40px 1fr;align-items:stretch;margin-top:26px}
 @media(max-width:880px){.kbflow{grid-template-columns:1fr}.kbarr{transform:rotate(90deg);margin:2px auto;height:34px}}
 .kbarr{display:flex;align-items:center;justify-content:center;color:var(--gold);opacity:.85}
 .kbnode{display:flex}
 .kbnode .core{padding:22px;display:flex;flex-direction:column;gap:12px;align-items:flex-start;width:100%}
-.kbtitle{font-size:15px;font-weight:800;letter-spacing:-.01em}
+.kbtitle{font-size:15.5px;font-weight:700;letter-spacing:-.01em}
 .kbtags{display:flex;flex-wrap:wrap;gap:6px}
-.kbtag{font-size:11.5px;font-weight:600;color:var(--ink2);border:1px solid var(--hair);border-radius:999px;padding:4px 11px;white-space:nowrap}
-.kbfacts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.kbtag{font-size:11px;font-weight:700;color:var(--ink2);border:1px solid var(--hair);border-radius:999px;padding:4px 11px;white-space:nowrap}
+.kbfacts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
 @media(max-width:860px){.kbfacts{grid-template-columns:1fr}}
-.kbfact{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink2);line-height:1.55;padding:14px 16px;border:1px solid var(--hair);border-radius:13px;background:rgba(255,255,255,.02)}
+.kbfact{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--ink2);line-height:1.55;padding:14px 16px;border:1px solid var(--hair);border-radius:12px;background:rgba(255,255,255,.02)}
 .kbfact svg{width:16px;height:16px;flex:0 0 16px;stroke:var(--ok);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
 .paygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
 @media(max-width:860px){.paygrid{grid-template-columns:1fr}}
 .pay{display:flex}
-.pay .core{padding:26px 24px;display:flex;flex-direction:column;gap:9px;width:100%}
+.pay .core{padding:22px;display:flex;flex-direction:column;gap:9px;width:100%}
 .payv{font-family:'Prata',Georgia,serif;font-size:clamp(34px,3.6vw,44px);line-height:1.05;color:var(--goldB);font-variant-numeric:tabular-nums;letter-spacing:-.01em;white-space:nowrap}
-.payl{font-size:14px;font-weight:700;color:var(--ink);line-height:1.4}
+.payl{font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.4}
 .payd{font-size:12.5px;color:var(--ink3);line-height:1.6;margin-top:auto}
-details.acc{border:1px solid var(--hair);border-radius:14px;background:rgba(255,255,255,.02);margin-top:14px;transition:border-color .4s var(--ease)}
+details.acc{border:1px solid var(--hair);border-radius:12px;background:rgba(255,255,255,.02);margin-top:14px;transition:border-color .4s var(--ease)}
 details.acc:hover{border-color:var(--hair2)}
 details.acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:13px;padding:15px 20px;font-size:13.5px;font-weight:700;color:var(--ink2);transition:color .3s var(--ease)}
 details.acc summary::-webkit-details-marker{display:none}
@@ -237,12 +237,12 @@ details.acc .plus::after{width:1.5px;height:10px;transform:translate(-50%,-50%)}
 details.acc[open] .plus{transform:rotate(135deg)}
 details.acc .accb{padding:4px 20px 20px;color:var(--ink2);font-size:13.5px;line-height:1.7}
 details.acc .accb .tw{margin:8px 0 4px}
-.optrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.optrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
 @media(max-width:640px){.optrow{grid-template-columns:1fr}}
-.opt{border:1px solid var(--hair);border-radius:13px;padding:15px 17px;background:rgba(255,255,255,.02)}
-.opt em{font-style:normal;display:block;font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
-.opt b{display:block;font-size:14px;letter-spacing:-.01em}
-.opt span{font-size:12px;color:var(--ink3);line-height:1.55;display:block;margin-top:4px}
+.opt{border:1px solid var(--hair);border-radius:12px;padding:15px 17px;background:rgba(255,255,255,.02)}
+.opt em{font-style:normal;display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
+.opt b{display:block;font-size:13.5px;letter-spacing:-.01em}
+.opt span{font-size:12.5px;color:var(--ink3);line-height:1.55;display:block;margin-top:4px}
 .priceX{font-family:'Prata',Georgia,serif;font-size:clamp(46px,5vw,58px);color:var(--goldB);line-height:1;letter-spacing:-.01em;margin-top:4px}
 .priceSub{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .mangrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
@@ -287,10 +287,28 @@ details.acc .accb .tw{margin:8px 0 4px}
   border:1px solid var(--hair2);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
   font-family:'Prata',Georgia,serif;font-size:18px;color:var(--goldB)}
 .sbody{padding-top:4px}
-.sweek{display:inline-flex;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
-.stitle{font-size:16px;font-weight:800;letter-spacing:-.01em}
-.sdesc{font-size:13.5px;color:var(--ink2);line-height:1.65;margin-top:6px;max-width:640px}
+.sweek{display:inline-flex;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.stitle{font-size:15.5px;font-weight:700;letter-spacing:-.01em}
+.sdesc{font-size:13.5px;color:var(--ink2);line-height:1.65;margin-top:8px;max-width:640px}
 
+
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch}
+.mt1{margin-top:14px}.mt2{margin-top:26px}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mcell{border-radius:12px;padding:12px 14px;background:rgba(255,255,255,.035)}
+.mcell b{display:block;font-size:13.5px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.mcell span{display:block;font-size:11.5px;color:var(--ink3);margin-top:3px;line-height:1.4}
+.mcell a{color:var(--goldB);text-decoration:none}
+.mcell.next{border:1px dashed var(--hair2);background:transparent}
+.crit{display:flex;gap:9px;align-items:flex-start;margin-top:12px;font-size:13.5px;line-height:1.55;color:var(--ink2)}
+.crit svg{width:15px;height:15px;flex:none;margin-top:3px;color:var(--gold)}
+.crit b{color:var(--ink)}
+.nstep{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;line-height:1.6;padding:8px 0;border-bottom:1px solid var(--hair);color:var(--ink2)}
+.nstep:last-child{border-bottom:none}
+.nstep b{flex:none;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--goldB);border:1px solid var(--goldhair);margin-top:2px}
+.nstep i{font-style:normal;color:var(--ink)}
+@media(max-width:860px){.duo{grid-template-columns:1fr}}
+@media(max-width:640px){.mgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -309,29 +327,14 @@ details.acc .accb .tw{margin:8px 0 4px}
 
   <!-- Экран 1 -->
   <section id="scr-home">
-    <div class="rv"><div class="eyebrow">Радар спроса · две аудитории</div></div>
+    <div class="rv"><div class="eyebrow">Радар спроса · горячие лиды под запрос</div></div>
     <h1 class="rv">Покупатели уже пишут,<br>что ищут. Радар это слышит</h1>
-    <p class="mut rv" style="margin:18px 0 30px;max-width:680px">Каждый день люди публично спрашивают «кто привезёт такую-то машину из Европы» — в Telegram, VK, на клубных форумах. А салонам и автопаркам ваш сток нужен регулярно. Один инструмент закрывает обе аудитории.</p>
+    <p class="mut rv" style="margin:18px 0 30px;max-width:680px">Каждый день люди публично пишут «кто привезёт такую-то машину из Европы» — в Telegram, VK, на форумах. Радар слышит такие запросы, готовит персональный ответ и ведёт лид до сделки в amoCRM.</p>
 
-    <div class="grid2 rv" style="margin-bottom:26px">
-      <div class="shell lift" id="mc-hot" onclick="setMode('hot')" style="cursor:pointer;border-color:var(--goldhair)"><div class="core">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start">
-          <h3 style="font-size:17px;display:flex;align-items:center;gap:11px"><span class="icx" style="width:38px;height:38px;border-radius:11px;flex:0 0 38px"><svg viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M13 2 4.5 13.5h5L8 22l8.5-11.5h-5z"/></svg></span>Горячий спрос</h3>
-          <span class="chip c-gold" id="mchip-hot">выбран</span>
-        </div>
-        <p class="small mut" style="margin-top:6px">Люди, которые прямо сейчас ищут машину: комментарии и посты в Telegram, VK, клубных форумах и Drive2. Ответ — пока запрос горячий.</p>
-      </div></div>
-      <div class="shell lift" id="mc-cold" onclick="setMode('cold')" style="cursor:pointer"><div class="core">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start">
-          <h3 style="font-size:17px;display:flex;align-items:center;gap:11px"><span class="icx mono" style="width:38px;height:38px;border-radius:11px;flex:0 0 38px"><svg viewBox="0 0 24 24" style="width:18px;height:18px"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="8" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.4 6.7l7.2.9M7 8.2l3.8 7.6M16.8 10.3l-3.4 5.6"/></svg></span>Холодный поиск B2B</h3>
-          <span class="chip c-dim hidden" id="mchip-cold">выбран</span>
-        </div>
-        <p class="small mut" style="margin-top:6px">Салоны, лизинговые компании и автопарки, чей профиль совпадает с вашим стоком, — регулярные партнёрские сделки.</p>
-      </div></div>
-    </div>
+    
 
     <!-- HOT форма -->
-    <div id="hotform" class="rv">
+    <div id="hotform" class="rv" style="margin-top:26px">
       <div class="shell"><div class="core">
         <label class="f">Источники под наблюдением</label>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 18px">
@@ -353,35 +356,7 @@ details.acc .accb .tw{margin:8px 0 4px}
       </div>
     </div>
 
-    <!-- COLD форма -->
-    <div id="coldform" class="hidden">
-      <div class="shell"><div class="core">
-        <div class="grid2">
-          <div><label class="f">Сегмент</label>
-            <select id="seg">
-              <option value="all">Все сегменты</option>
-              <option value="Мультибренд премиум б/у">Мультибренд-салоны премиум б/у</option>
-              <option value="Лизинговая компания">Лизинговые компании</option>
-              <option value="Корпоративный автопарк">Корпоративные автопарки</option>
-              <option value="Оптовик / перекуп">Оптовики / перекупы</option>
-            </select>
-          </div>
-          <div><label class="f">Город</label>
-            <select id="city"><option>Москва</option><option>Санкт-Петербург</option></select>
-          </div>
-        </div>
-        <div style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
-          <button class="btnP" onclick="runSearch()">Найти покупателей <span class="arr">→</span></button>
-          <button class="btnG" onclick="toggleImport()">Импорт своих целей</button>
-        </div>
-        <div id="importbox" class="hidden" style="margin-top:14px">
-          <label class="f">Название; город; марки; телефон; сайт — по строке на компанию</label>
-          <textarea id="importcsv" rows="3" placeholder="Атлант Моторс; Москва; BMW, Porsche; +7 495 000-00-00; atlant-motors.ru"></textarea>
-          <div style="margin-top:10px;display:flex;gap:10px;align-items:center"><button class="btnG sm" onclick="doImport()">Добавить в результаты</button> <span id="impmsg" class="copied"></span></div>
-        </div>
-      </div></div>
-      <p class="small dim" style="margin-top:12px">Боевые источники: база «АвтоБизнесРевю» (4 230 действующих шоу-румов), каталоги Авто.ру и Дром, реестры юрлиц.</p>
-    </div>
+    
 
     <!-- Безопасность -->
     <div class="rv" style="margin-top:44px">
@@ -389,22 +364,22 @@ details.acc .accb .tw{margin:8px 0 4px}
       <div class="grid4">
         <div class="shell"><div class="core">
           <div class="icx mono" style="margin-bottom:2px"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"></path></svg></div>
-          <div class="bt" style="font-size:14.5px">Полуавтомат</div>
+          <div class="bt" style="font-size:13.5px">Полуавтомат</div>
           <p class="small mut" style="margin-top:4px">Система находит и готовит ответ. Отправляет человек — со своего аккаунта, 10–15 диалогов в день. Это лимиты площадок и живой тон.</p>
         </div></div>
         <div class="shell"><div class="core">
           <div class="icx mono" style="margin-bottom:2px"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round"><path d="M9 12l2 2 4-5"></path><circle cx="12" cy="12" r="9"></circle></svg></div>
-          <div class="bt" style="font-size:14.5px">VK — легально по API</div>
+          <div class="bt" style="font-size:13.5px">VK — легально по API</div>
           <p class="small mut" style="margin-top:4px">Поиск по открытым постам — официальный метод VK, без серого парсинга. Ответ — комментарием от сообщества компании.</p>
         </div></div>
         <div class="shell"><div class="core">
           <div class="icx mono" style="margin-bottom:2px"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="M3 9h18"></path></svg></div>
-          <div class="bt" style="font-size:14.5px">Авито — только входящие</div>
+          <div class="bt" style="font-size:13.5px">Авито — только входящие</div>
           <p class="small mut" style="margin-top:4px">«Куплю»-посты там запрещены правилами. Канал работает витриной и ответом в чатах за минуты — это закрывает «Пульс продаж».</p>
         </div></div>
         <div class="shell"><div class="core">
           <div class="icx mono" style="margin-bottom:2px"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round"><path d="M4 19c2-6 6-9 8-9s6 3 8 9"></path><circle cx="12" cy="6" r="2.6"></circle></svg></div>
-          <div class="bt" style="font-size:14.5px">Честные границы</div>
+          <div class="bt" style="font-size:13.5px">Честные границы</div>
           <p class="small mut" style="margin-top:4px">Каналы с выключенными комментариями не мониторятся. Закрытая личка — отвечаем реплаем. Ответ на явный запрос — переписка, не спам.</p>
         </div></div>
       </div>
@@ -417,13 +392,13 @@ details.acc .accb .tw{margin:8px 0 4px}
       <h2 id="loadtitle">Горячий спрос</h2>
       <p class="small mut" id="loadsub" style="margin-bottom:22px">источники за последние 24 часа</p>
       <div class="pbar"><div class="pfill" id="pfill" style="width:0%"></div></div>
-      <div id="stages" style="margin-top:18px"></div>
+      <div id="stages" style="margin-top:14px"></div>
     </div></div>
   </section>
 
   <!-- Экран 3: результаты -->
   <section id="scr-res" class="hidden">
-    <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px">
+    <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:8px">
       <h2 id="restitle">Находки</h2>
       <span class="chip c-gold" id="rescount"></span>
       <span class="small dim" style="margin-left:auto" id="resmeta"></span>
@@ -465,7 +440,7 @@ details.acc .accb .tw{margin:8px 0 4px}
 </div></div>
 
 <!-- ═══════════ ПРЕДЛОЖЕНИЕ ═══════════ -->
-<div class="main hidden" id="view-offer"><div class="wrap"><div class="eyebrow rv">Коммерческое предложение · Радар спроса</div><h1 class="rv">Система, которая слышит рынок<br>раньше конкурентов</h1><p class="mut rv" style="margin:18px 0 0;max-width:720px">Рядом, на вкладке «Демо», — работающий интерфейс. Ниже — что он меняет в деньгах: карта каналов спроса, цены рынка со ссылками и окупаемость, посчитанная на цифрах вашей таблицы.</p><div class="os rv"><div class="oshead"><span class="onum">01</span><h2>Два инструмента в одном продукте</h2></div><p class="osub">Горячий спрос от частных покупателей — и системный B2B-поиск партнёров. Обе машины продаж работают на одной базе.</p><div class="bgrid"><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M13 2 4.5 13.5h5L8 22l8.5-11.5h-5z"/></svg></div><div class="bt">Отвечаем первыми на горячий спрос</div><div class="bd">«Ищу G63 до 25 млн» в чате конкурента — через минуты у менеджера готовый личный ответ с машиной из наличия.</div></div></div></div><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M12 3l7.5 3.6v5.1c0 4.6-3.2 7.5-7.5 8.8-4.3-1.3-7.5-4.2-7.5-8.8V6.6z"/><path d="M8.8 12.2l2.3 2.3 4.4-4.9"/></svg></div><div class="bt">Каждый ответ продаёт прозрачность</div><div class="bd">В тексте — ваша фирменная раскладка: закуп, логистика, таможня с утилём, фиксированная комиссия.</div></div></div></div><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="8" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.4 6.7l7.2.9M7 8.2l3.8 7.6M16.8 10.3l-3.4 5.6"/></svg></div><div class="bt">B2B-радар: партнёрские сделки</div><div class="bd">Скоринг салонов, лизинга и автопарков под ваш сток — персональные предложения вместо холодного обзвона.</div></div></div></div><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l8.5-8.5M15.5 7.5L18 10M18.5 4.5L21 7"/></svg></div><div class="bt">База и система — ваша собственность</div><div class="bd">История касаний копится у вас, а не у агентства, которое уносит процесс с собой.</div></div></div></div></div></div><div class="os rv"><div class="oshead"><span class="onum">02</span><h2>Каналы: какие и сколько — все в цене</h2></div><p class="osub">Восемь каналов. Четыре — боевые с первого дня, четыре — в аккуратном тесте. Доплат за каналы нет.</p><div class="shell rv"><div class="chsum"><div class="b"><span class="n">8</span><span class="t">каналов в одной цене</span></div><div class="b"><span class="n">4</span><span class="t">боевых с первого дня</span></div><div class="b"><span class="n">4</span><span class="t">в тесте — включаем по данным</span></div><div class="b"><span class="n">0 ₽</span><span class="t">доплат за подключение канала</span></div></div></div><div class="chgrid"><div class="chx rv"><div class="shell lift"><div class="core"><div class="chtop"><span class="chname"><span class="icx mono"><svg viewBox="0 0 24 24"><path d="M4.5 6.5h15V16h-9l-4 3.5V16h-2z"/></svg></span>VK</span><span class="chip c-ok">боевой</span></div><div class="chn">93,4 млн<i>чел/мес · Mediascope, I кв. 2026</i></div></div></div></div><div class="chx rv"><div class="shell lift"><div class="core"><div class="chtop"><span class="chname"><span class="icx mono"><svg viewBox="0 0 24 24"><path d="M21 4 3.5 11l5.5 2.2M21 4l-3 15.5-6.8-6.3M21 4 9 13.2v5.3l2.9-2.6"/></svg></span>Telegram</span><span class="chip c-ok">боевой</span></div><div class="chn">75,7 млн<i>чел/мес · Mediascope, 06.2026</i></div></div></div></div><div class="chx rv"><div class="shell lift"><div class="core"><div class="chtop"><span class="chname"><span class="icx mono"><svg viewBox="0 0 24 24"><path d="M4.5 9.5 6 4h12l1.5 5.5M4.5 9.5V20h15V9.5M4.5 9.5h15M10 20v-6h4v6"/></svg></span>Авито Авто</span><span class="chip c-ok">боевой</span></div><div class="chn">36 млн<i>чел/мес · спрос на премиум +39% г/г</i></div></div></div><div class="chx rv"><div class="shell lift"><div class="core"><div class="chtop"><span class="chname"><span class="icx mono"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.6"/><path d="M12 3.5v5.9M4.7 16.3l5.1-2.8M19.3 16.3l-5.1-2.8"/></svg></span>Авто.ру</span><span class="chip c-ok">боевой</span></div><div class="chn">33 млн<i>польз/мес · по вашему опыту — канал №1 · витрина + входящие</i></div></div></div></div></div><div class="chx rv"><div class="shell lift"><div class="core"><div class="chtop"><span class="chname"><span class="icx mono"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.6"/><path d="M12 3.5v5.9M4.7 16.3l5.1-2.8M19.3 16.3l-5.1-2.8"/></svg></span>Клубы BMW / MB</span><span class="chip c-warn">тест</span></div><div class="chn">живые<i>темы 2026 г. · bmwclub, mbclub</i></div></div></div></div><div class="chx rv"><div class="shell lift"><div class="core"><div class="chtop"><span class="chname"><span class="icx mono"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.6"/><path d="M12 3.5v5.9M4.7 16.3l5.1-2.8M19.3 16.3l-5.1-2.8"/></svg></span>Drive2</span><span class="chip c-warn">тест</span></div><div class="chn">209 тыс<i>участников «Выбор Автомобиля»</i></div></div></div></div><div class="chx rv"><div class="shell lift"><div class="core"><div class="chtop"><span class="chname"><span class="icx mono"><svg viewBox="0 0 24 24"><path d="M9 4 5 20M15 4l4 16M12 5v3M12 11v3M12 17v3"/></svg></span>Дром · форумы</span><span class="chip c-warn">тест</span></div><div class="chn">18,3 тыс<i>тем в разделе «Выбор»</i></div></div></div></div><div class="chx rv"><div class="shell lift"><div class="core"><div class="chtop"><span class="chname"><span class="icx mono"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M10 8.8l5.2 3.2-5.2 3.2z"/></svg></span>YouTube</span><span class="chip c-warn">точечно</span></div><div class="chn">22,4 млн<i>DAU в РФ · точечные ответы</i></div></div></div></div><div class="chx rv" style="grid-column:1/-1"><div class="shell lift"><div class="core"><div class="chtop"><span class="chname"><span class="icx mono"><svg viewBox="0 0 24 24"><path d="M4.5 9h5l-5 6h5M14 4.5h5.5l-5.5 6h5.5"/></svg></span>ОК · Дзен · MAX · Кью</span><span class="chip c-dim">не тратим бюджет</span></div><div class="chn">—<i>спроса нет — проверено данными</i></div></div></div></div></div><details class="acc rv"><summary><span class="plus"></span>Механика каждого канала и источники цифр</summary><div class="accb"><div class="tw"><table class="cmp">
+<div class="main hidden" id="view-offer"><div class="wrap"><div class="eyebrow rv">Коммерческое предложение · Радар спроса</div><h1 class="rv">Система, которая слышит рынок<br>раньше конкурентов</h1><p class="mut rv" style="margin:18px 0 0;max-width:720px">Рядом, на вкладке «Демо», — работающий интерфейс. Ниже — что он меняет в деньгах: карта каналов спроса, цены рынка со ссылками и окупаемость, посчитанная на цифрах вашей таблицы.</p><div class="os rv"><div class="oshead"><span class="onum">00</span><h2>По итогам созвона и письма — всё учтено</h2></div><p class="osub">Шесть решений вашей команды — и как каждое отражено в этом предложении.</p><div class="bgrid"><div class="bx rv"><div class="shell lift" style="width:100%;border-color:var(--goldhair)"><div class="core"><div class="bt">B2B-поиск выключен</div><div class="bd">Холодный сбор юрлиц убран целиком — остаются только прямые горячие лиды под запрос. Состав пересобран, пересчёт ниже.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="bt">MAX — проанализирован</div><div class="bd">Бот-платформа официальная, но только для юрлиц-резидентов РФ, и спроса в нише не зафиксировано. Держим на мониторинге — разбор в карте каналов.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="bt">Instagram · Facebook · Threads</div><div class="bd">Технически возможно, но площадки Meta заблокированы в РФ, реклама на них запрещена законом. Для РФ-аудитории — риск; решение за вами, в ядро не ставим.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="bt">ИИ-поиск каналов — да</div><div class="bd">Просили — включили: на Шаге 0 ИИ находит и оценивает площадки, где ваш спрос уже есть; карта каналов — вам на утверждение.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="bt">Бот-квалификации входящих</div><div class="bd">В рабочее время первым отвечает скриптовый бот, сложное подхватывает Татьяна; ночью бот доводит диалог до заявки. Сценарии развилок — по процессу вашей команды.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="bt">Лид — не кнопкой</div><div class="bd">Каждый запрос сам падает карточкой в amoCRM + менеджеру приходит личное уведомление в Telegram со ссылкой на комментарий.</div></div></div></div></div></div><div class="os rv"><div class="oshead"><span class="onum">01</span><h2>Что делает Радар</h2></div><p class="osub">Услышали запрос первыми — ответили с вашим наличием — довели до сделки в amoCRM.</p><div class="bgrid"><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M13 2 4.5 13.5h5L8 22l8.5-11.5h-5z"/></svg></div><div class="bt">Отвечаем первыми на горячий спрос</div><div class="bd">«Ищу G63 до 25 млн» в чате конкурента — через минуты у менеджера готовый личный ответ с машиной из наличия.</div></div></div></div><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M12 3l7.5 3.6v5.1c0 4.6-3.2 7.5-7.5 8.8-4.3-1.3-7.5-4.2-7.5-8.8V6.6z"/><path d="M8.8 12.2l2.3 2.3 4.4-4.9"/></svg></div><div class="bt">Каждый ответ продаёт прозрачность</div><div class="bd">В тексте — ваша фирменная раскладка: закуп, логистика, таможня с утилём, фиксированная комиссия.</div></div></div></div><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="8" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.4 6.7l7.2.9M7 8.2l3.8 7.6M16.8 10.3l-3.4 5.6"/></svg></div><div class="bt">Бот-квалификации входящих</div><div class="bd">Рабочее время: бот отвечает первым, сложное — Татьяне с «маячком». Ночью бот доводит до заявки, не теряя лид.</div></div></div></div><div class="bx w6 rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l8.5-8.5M15.5 7.5L18 10M18.5 4.5L21 7"/></svg></div><div class="bt">База и система — ваша собственность</div><div class="bd">История касаний копится у вас, а не у агентства, которое уносит процесс с собой.</div></div></div></div></div></div><div class="os rv"><div class="oshead"><span class="onum">02</span><h2>Каналы: какие и сколько — все в цене</h2></div><p class="osub">Семь каналов в ядре: четыре боевых с первого дня, три в аккуратном тесте. Площадки из вашего письма — разобраны отдельно. Доплат за каналы нет.</p><div class="shell rv"><div class="chsum"><div class="b"><span class="n">7</span><span class="t">каналов в ядре</span></div><div class="b"><span class="n">4</span><span class="t">боевых с первого дня</span></div><div class="b"><span class="n">3</span><span class="t">в тесте — включаем по данным</span></div><div class="b"><span class="n">0 ₽</span><span class="t">доплат за подключение канала</span></div></div></div><div class="chgrid"><div class="chx rv"><div class="shell lift"><div class="core"><div class="chtop"><span class="chname"><span class="icx mono"><svg viewBox="0 0 24 24"><path d="M4.5 6.5h15V16h-9l-4 3.5V16h-2z"/></svg></span>VK</span><span class="chip c-ok">боевой</span></div><div class="chn">93,4 млн<i>чел/мес · Mediascope, I кв. 2026</i></div></div></div></div><div class="chx rv"><div class="shell lift"><div class="core"><div class="chtop"><span class="chname"><span class="icx mono"><svg viewBox="0 0 24 24"><path d="M21 4 3.5 11l5.5 2.2M21 4l-3 15.5-6.8-6.3M21 4 9 13.2v5.3l2.9-2.6"/></svg></span>Telegram</span><span class="chip c-ok">боевой</span></div><div class="chn">75,7 млн<i>чел/мес · Mediascope, 06.2026</i></div></div></div></div><div class="chx rv"><div class="shell lift"><div class="core"><div class="chtop"><span class="chname"><span class="icx mono"><svg viewBox="0 0 24 24"><path d="M4.5 9.5 6 4h12l1.5 5.5M4.5 9.5V20h15V9.5M4.5 9.5h15M10 20v-6h4v6"/></svg></span>Авито Авто</span><span class="chip c-ok">боевой</span></div><div class="chn">36 млн<i>чел/мес · спрос на премиум +39% г/г</i></div></div></div><div class="chx rv"><div class="shell lift"><div class="core"><div class="chtop"><span class="chname"><span class="icx mono"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.6"/><path d="M12 3.5v5.9M4.7 16.3l5.1-2.8M19.3 16.3l-5.1-2.8"/></svg></span>Авто.ру</span><span class="chip c-ok">боевой</span></div><div class="chn">33 млн<i>польз/мес · по вашему опыту — канал №1 · витрина + входящие</i></div></div></div></div></div><div class="chx rv"><div class="shell lift"><div class="core"><div class="chtop"><span class="chname"><span class="icx mono"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.6"/><path d="M12 3.5v5.9M4.7 16.3l5.1-2.8M19.3 16.3l-5.1-2.8"/></svg></span>Клубы BMW / MB</span><span class="chip c-warn">тест</span></div><div class="chn">живые<i>темы 2026 г. · bmwclub, mbclub</i></div></div></div></div><div class="chx rv"><div class="shell lift"><div class="core"><div class="chtop"><span class="chname"><span class="icx mono"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.6"/><path d="M12 3.5v5.9M4.7 16.3l5.1-2.8M19.3 16.3l-5.1-2.8"/></svg></span>Drive2</span><span class="chip c-warn">тест</span></div><div class="chn">209 тыс<i>участников «Выбор Автомобиля»</i></div></div></div></div><div class="chx rv"><div class="shell lift"><div class="core"><div class="chtop"><span class="chname"><span class="icx mono"><svg viewBox="0 0 24 24"><path d="M9 4 5 20M15 4l4 16M12 5v3M12 11v3M12 17v3"/></svg></span>Дром · форумы</span><span class="chip c-warn">тест</span></div><div class="chn">18,3 тыс<i>тем в разделе «Выбор»</i></div></div></div></div><div class="chx rv"><div class="shell lift"><div class="core"><div class="chtop"><span class="chname"><span class="icx mono"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M10 8.8l5.2 3.2-5.2 3.2z"/></svg></span>YouTube</span><span class="chip c-warn">точечно</span></div><div class="chn">22,4 млн<i>DAU в РФ · точечные ответы</i></div></div></div></div><div class="chx rv" style="grid-column:1/-1"><div class="shell lift"><div class="core"><div class="chtop"><span class="chname"><span class="icx mono"><svg viewBox="0 0 24 24"><path d="M4.5 9h5l-5 6h5M14 4.5h5.5l-5.5 6h5.5"/></svg></span>MAX · Instagram · Facebook · Threads · WhatsApp</span><span class="chip c-dim">ваш список — разобрано</span></div><div class="chn">—<i>причины честно — в аккордеоне ниже</i></div></div></div></div></div><details class="acc rv"><summary><span class="plus"></span>Механика каждого канала и источники цифр</summary><div class="accb"><div class="tw"><table class="cmp">
     <tr><th>Канал</th><th>Аудитория · источник</th><th>Механика</th><th>Статус</th></tr>
     <tr><td><b>VK</b></td><td class="num">93,4 млн/мес · Mediascope, I кв. 2026</td><td>официальный API поиска по открытым постам → ответ от сообщества компании</td><td><span class="chip c-ok">рабочий канал</span></td></tr>
     <tr><td><b>Авито Авто</b></td><td class="num">36 млн/мес · Авито, 12.2025; спрос на премиум +39% г/г (CNews)</td><td>витрина + мгновенный ответ на входящие чаты через официальный API («куплю»-посты запрещены правилами)</td><td><span class="chip c-ok">рабочий канал</span></td></tr>
@@ -476,7 +451,7 @@ details.acc .accb .tw{margin:8px 0 4px}
     <tr><td><b>Дром (форумы)</b></td><td class="num">раздел «Выбор»: 18,3 тыс. тем, посты ежедневно · снято 27.08.2026</td><td>RSS-мониторинг разделов → ответы постами</td><td><span class="chip c-warn">тест · аудитория смещена в регионы</span></td></tr>
     <tr><td><b>YouTube</b></td><td class="num">22,4 млн DAU в РФ, замедлен · Ъ, 07.2026</td><td>комментарии от бренд-канала под роликами о пригоне</td><td><span class="chip c-warn">точечно</span></td></tr>
     <tr><td class="dim">ОК · Дзен · MAX · Кью</td><td class="dim">группы мертвы / формат не про спрос / каналы пустые / сервис заморожен</td><td class="dim">—</td><td><span class="chip c-dim">не тратим ваш бюджет</span></td></tr>
-  </table></div><p class="small dim" style="margin-top:10px">Каждая цифра — с источником и датой: Mediascope, площадки, деловые СМИ 2025–2026; форумы проверены вживую 27.08.2026.</p></div></details></div><div class="os rv"><div class="oshead"><span class="onum">03</span><h2>Так уже делают в вашей нише</h2></div><p class="osub">Прозрачность стала инструментом продаж — проверьте по ссылкам. А горячий спрос пока не ловит никто.</p><div class="bgrid"><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx mono"><svg viewBox="0 0 24 24"><rect x="5.5" y="3" width="13" height="18" rx="2.5"/><path d="M9 7.5h6M9 12.3h2M13 12.3h2M9 16.3h2M13 16.3h2"/></svg></div><div class="bt"><a href="https://yankeemotors.by/blog/lgotnaya-rastamozhka-avto-v-belarusi" target="_blank" rel="noopener">Yankee Motors ↗</a></div><div class="bd">Публичный таможенный калькулятор — цифра до звонка.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx mono"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10.5 12h5M10.5 16h5"/></svg></div><div class="bt"><a href="https://avtogarant.by/stati/prigon-avto-iz-evropy-v-belarus-2026/" target="_blank" rel="noopener">Автогарант ↗</a></div><div class="bd">Открытая комиссия 2,5% и постатейная смета.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx mono"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5 16 16"/></svg></div><div class="bt"><a href="https://ooovig.ru/" target="_blank" rel="noopener">ВИГ ↗</a></div><div class="bd">Открытый пример расчёта сделки прямо на сайте.</div></div></div></div><div class="bx w12 rv"><div class="shell" style="width:100%;border-color:var(--goldhair)"><div class="core" style="flex-direction:row;display:flex;gap:16px;align-items:flex-start"><div class="icx"><svg viewBox="0 0 24 24"><path d="M13 2 4.5 13.5h5L8 22l8.5-11.5h-5z"/></svg></div><div><div class="bt">Горячий публичный спрос в нише — ничей</div><div class="bd" style="margin-top:6px">Наш замер 27.08.2026: ни один из 9 проверенных конкурентов (включая <a href="https://westmotors.ru/" target="_blank" rel="noopener">WESTMOTORS</a> с его 14 000+ клиентов) не отвечает на «ищу»-запросы в открытых обсуждениях. Кто начнёт первым — тот и заберёт эти сделки.</div></div></div></div></div></div></div><div class="os rv"><div class="oshead"><span class="onum">04</span><h2>Шаг 0 — база знаний компании</h2></div><p class="osub">Первое, что мы делаем, — собираем ваш «источник правды». На нём обучаются все ИИ-инструменты: они отвечают по вашим документам, а не «из головы».</p><div class="kbflow rv"><div class="kbnode"><div class="shell" style="width:100%"><div class="core"><div class="icx mono"><svg viewBox="0 0 24 24"><path d="M3.5 6.5c0-1.1.9-2 2-2h4l2 2.5h7a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/></svg></div><div class="kbtitle">Ваши документы</div><div class="kbtags"><span class="kbtag">Прайсы и опции</span><span class="kbtag">Регламенты</span><span class="kbtag">Маршруты и сроки</span><span class="kbtag">Лучшие ответы менеджеров</span><span class="kbtag">Вопросы клиентов</span></div></div></div></div><div class="kbarr"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M14 6.5l5.5 5.5-5.5 5.5"/></svg></div><div class="kbnode"><div class="shell" style="width:100%;border-color:var(--goldhair)"><div class="core"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%"><div class="icx"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7" ry="2.7"/><path d="M5 5.5V18c0 1.5 3.1 2.7 7 2.7s7-1.2 7-2.7V5.5"/><path d="M5 11.7c0 1.5 3.1 2.7 7 2.7s7-1.2 7-2.7"/></svg></div><span class="chip c-gold">входит в цену</span></div><div class="kbtitle">База знаний — источник правды</div><div class="bd">Единое, выверенное ядро: цены, сроки и формулировки, которым ИИ обязан следовать.</div></div></div></div><div class="kbarr"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M14 6.5l5.5 5.5-5.5 5.5"/></svg></div><div class="kbnode"><div class="shell" style="width:100%"><div class="core"><div class="icx mono"><svg viewBox="0 0 24 24"><path d="M12 3.5l8.5 4.7L12 12.9 3.5 8.2z"/><path d="M3.5 13l8.5 4.7L20.5 13"/><path d="M3.5 17.4l8.5 4.7 8.5-4.7"/></svg></div><div class="kbtitle">Все ИИ-системы компании</div><div class="kbtags"><span class="kbtag">Радар спроса</span><span class="kbtag">Готовые ответы клиентам</span><span class="kbtag">Каждая следующая система</span></div></div></div></div></div><div class="kbfacts rv"><div class="kbfact"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>ИИ <b style="color:var(--ink)">не выдумывает цены</b> — каждый ответ опирается на ваши документы</span></div><div class="kbfact"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Говорит <b style="color:var(--ink)">вашим языком</b> — формулировками ваших лучших менеджеров</span></div><div class="kbfact"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>База — <b style="color:var(--ink)">ваш актив</b>: каждая следующая система переиспользует её бесплатно</span></div></div><p class="small dim rv" style="margin-top:12px">Технически это RAG (retrieval-augmented generation) — отраслевой стандарт надёжных ИИ-ответов.</p></div><div class="os rv"><div class="oshead"><span class="onum">05</span><h2>Окупаемость — на ваших цифрах</h2></div><p class="osub">Не обещания, а арифметика по вашей рабочей таблице стоков и вашему плановому KPI.</p><div class="paygrid"><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">7 834</div><div class="payl">автомобиля — один лист BMW вашей таблицы</div><div class="payd">Медианная цена €76 000 · срез от 27.08.2026. Всего в таблице — 12 вкладок стоков.</div></div></div></div><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">≈ €8 000</div><div class="payl">маржа одной закрытой сделки</div><div class="payd">Медиана €76 000 × ваша плановая маржинальность 10,5%.</div></div></div></div><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">½ сделки</div><div class="payl">окупает Радар целиком</div><div class="payd">Даже при марже вдвое ниже плановой достаточно одной сделки.</div></div></div></div></div><p class="small dim rv" style="margin-top:12px">Для сравнения: та же сумма у рынка — 3,5 месяца аренды SDR-аутсорса, который уходит вместе с процессом.</p></div><div class="os rv"><div class="oshead"><span class="onum">06</span><h2>Цена: под ключ — против сборки из частей</h2></div><p class="osub">Цены исполнителей — с их публичных страниц, проверено 26–27.08.2026. Ссылки прямые.</p><div class="grid2 rv" style="margin-top:24px;align-items:stretch"><div class="shell"><div class="core">
+  <tr><td>MAX</td><td>— · dev.max.ru</td><td>официальная бот-платформа, но доступ только юрлицам-резидентам РФ; спроса в нише не зафиксировано (замер 27.08)</td><td class="dim">мониторим</td></tr><tr><td>Instagram · Facebook · Threads</td><td>аудитория за VPN</td><td>площадки Meta заблокированы в РФ (2022), реклама на них запрещена законом с 01.09.2025; для РФ-рынка — юридический риск</td><td class="dim">решение за вами</td></tr><tr><td>WhatsApp</td><td>—</td><td>заблокирован в РФ с 02.2026, доставка нестабильна — канал исключён</td><td class="dim">исключён</td></tr></table></div><p class="small dim" style="margin-top:12px">Каждая цифра — с источником и датой: Mediascope, площадки, деловые СМИ 2025–2026; форумы проверены вживую 27.08.2026.</p></div></details></div><div class="os rv"><div class="oshead"><span class="onum">03</span><h2>Из чего собран Радар</h2></div><p class="osub">Готовые сервисы + наш код, с прямыми ссылками на документацию. Без подрядчиков.</p><div class="duo mt2 rv"><div class="shell"><div class="core"><div class="eyebrow" style="color:var(--goldB)">Готовые сервисы и API</div><div class="mgrid"><div class="mcell"><b>Telegram API</b><span>мониторинг чатов · <a href="https://core.telegram.org/" target="_blank" rel="noopener">docs↗</a></span></div><div class="mcell"><b>VK API</b><span>поиск по открытым постам · <a href="https://dev.vk.com/ru/method/newsfeed.search" target="_blank" rel="noopener">метод↗</a></span></div><div class="mcell"><b>Авито Messenger API</b><span>входящие чаты · <a href="https://developers.avito.ru/" target="_blank" rel="noopener">docs↗</a></span></div><div class="mcell"><b>Авто.ру Бизнес API</b><span>витрина + входящие · <a href="https://yandex.ru/support/autoru-business/ru/integrations/api" target="_blank" rel="noopener">docs↗</a></span></div><div class="mcell"><b>amoCRM API</b><span>сделки + задачи · <a href="https://www.amocrm.ru/developers/" target="_blank" rel="noopener">docs↗</a></span></div><div class="mcell"><b>Claude API</b><span>ИИ-разбор и ответы · <a href="https://www.anthropic.com/pricing" target="_blank" rel="noopener">тарифы↗</a></span></div><div class="mcell next"><b>ChatPlace</b><span>опция бота-квалификации · <a href="https://chatplace.ru/" target="_blank" rel="noopener">сайт↗</a></span></div><div class="mcell next"><b>MAX Bot API</b><span>если решите — резидент РФ · <a href="https://dev.max.ru/" target="_blank" rel="noopener">docs↗</a></span></div></div></div></div><div class="shell"><div class="core"><div class="eyebrow" style="color:var(--goldB)">Наш код — остаётся вам</div><div class="mgrid"><div class="mcell"><b>Монитор каналов</b><span>TG · VK · форумы · Drive2</span></div><div class="mcell"><b>ИИ-разбор запроса</b><span>модель · бюджет · боль</span></div><div class="mcell"><b>Генератор ответов</b><span>на вашей базе знаний</span></div><div class="mcell"><b>Полуавтомат-очередь</b><span>лимиты 10–15/день</span></div><div class="mcell"><b>Коннектор amoCRM</b><span>карточка + TG-уведомление менеджеру</span></div><div class="mcell"><b>Бот-квалификации</b><span>скриптовый движок + «маячок» Татьяне</span></div><div class="mcell"><b>ИИ-поиск каналов</b><span>карта площадок под ваш спрос</span></div><div class="mcell"><b>Реестр аккаунтов</b><span>здоровье, лимиты, ротация</span></div></div></div></div></div></div><div class="os rv"><div class="oshead"><span class="onum">04</span><h2>Так уже делают в вашей нише</h2></div><p class="osub">Прозрачность стала инструментом продаж — проверьте по ссылкам. А горячий спрос пока не ловит никто.</p><div class="bgrid"><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx mono"><svg viewBox="0 0 24 24"><rect x="5.5" y="3" width="13" height="18" rx="2.5"/><path d="M9 7.5h6M9 12.3h2M13 12.3h2M9 16.3h2M13 16.3h2"/></svg></div><div class="bt"><a href="https://yankeemotors.by/blog/lgotnaya-rastamozhka-avto-v-belarusi" target="_blank" rel="noopener">Yankee Motors ↗</a></div><div class="bd">Публичный таможенный калькулятор — цифра до звонка.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx mono"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10.5 12h5M10.5 16h5"/></svg></div><div class="bt"><a href="https://avtogarant.by/stati/prigon-avto-iz-evropy-v-belarus-2026/" target="_blank" rel="noopener">Автогарант ↗</a></div><div class="bd">Открытая комиссия 2,5% и постатейная смета.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx mono"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5 16 16"/></svg></div><div class="bt"><a href="https://ooovig.ru/" target="_blank" rel="noopener">ВИГ ↗</a></div><div class="bd">Открытый пример расчёта сделки прямо на сайте.</div></div></div></div><div class="bx w12 rv"><div class="shell" style="width:100%;border-color:var(--goldhair)"><div class="core" style="flex-direction:row;display:flex;gap:16px;align-items:flex-start"><div class="icx"><svg viewBox="0 0 24 24"><path d="M13 2 4.5 13.5h5L8 22l8.5-11.5h-5z"/></svg></div><div><div class="bt">Горячий публичный спрос в нише — ничей</div><div class="bd" style="margin-top:8px">Наш замер 27.08.2026: ни один из 9 проверенных конкурентов (включая <a href="https://westmotors.ru/" target="_blank" rel="noopener">WESTMOTORS</a> с его 14 000+ клиентов) не отвечает на «ищу»-запросы в открытых обсуждениях. Кто начнёт первым — тот и заберёт эти сделки.</div></div></div></div></div></div></div><div class="os rv"><div class="oshead"><span class="onum">05</span><h2>Окупаемость — на ваших цифрах</h2></div><p class="osub">Не обещания, а арифметика по вашей рабочей таблице стоков и вашему плановому KPI.</p><div class="paygrid"><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">7 834</div><div class="payl">автомобиля — один лист BMW вашей таблицы</div><div class="payd">Медианная цена €76 000 · срез от 27.08.2026. Всего в таблице — 12 вкладок стоков.</div></div></div></div><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">≈ €8 000</div><div class="payl">маржа одной закрытой сделки</div><div class="payd">Медиана €76 000 × ваша плановая маржинальность 10,5%.</div></div></div></div><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">½ сделки</div><div class="payl">окупает Радар целиком</div><div class="payd">Даже при марже вдвое ниже плановой достаточно одной сделки.</div></div></div></div></div><p class="small dim rv" style="margin-top:12px">Для сравнения: та же сумма у рынка — 3,5 месяца аренды SDR-аутсорса, который уходит вместе с процессом.</p></div><div class="os rv"><div class="oshead"><span class="onum">06</span><h2>Цена: под ключ — против сборки из частей</h2></div><p class="osub">Цены исполнителей — с их публичных страниц, проверено 26–27.08.2026. Ссылки прямые.</p><div class="grid2 rv" style="margin-top:26px;align-items:stretch"><div class="shell"><div class="core">
       <div class="eyebrow" style="margin-bottom:12px">Как это покупает рынок — по частям</div>
       <div style="display:grid;gap:11px;font-size:13.5px">
         <div style="display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--hair);padding-bottom:10px"><span>Аутрич-кампания на 3 месяца<br><span class="dim small"><a href="https://polzaagency.ru/tarif" target="_blank" rel="noopener">агентства, Polza</a> · шаблонные письма, без вашей отрасли</span></span><b class="num">179–329 тыс ₽</b></div>
@@ -484,13 +459,13 @@ details.acc .accb .tw{margin:8px 0 4px}
         <div style="display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--hair);padding-bottom:10px"><span>Менеджер на прозвоне<br><span class="dim small"><a href="https://ojok.ru/pricing/uslugi-koll-czentra/autsorsing-prodazh" target="_blank" rel="noopener">SDR-аутсорс, Ojok</a> · уходит вместе с процессом</span></span><b class="num">90 тыс ₽/мес</b></div>
         <div style="display:flex;justify-content:space-between;gap:12px"><span>Готовые лиды на премиум-авто<br><span class="dim small"><a href="https://www.sostav.ru/blogs/287076/93036" target="_blank" rel="noopener">агентские прайсы, Sostav</a> · качество не гарантировано</span></span><b class="num">8–15 тыс ₽/лид</b></div>
       </div>
-      <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--hair2)">
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--hair2)">
         <div class="small dim">Первые 3 месяца по частям</div>
-        <div style="font-size:24px;font-weight:800">≈ 479 000 ₽</div>
+        <div style="font-size:24px;font-weight:700">≈ 479 000 ₽</div>
         <div class="small dim" style="margin-top:4px">179 000 (кампания, минимальный тариф) + 3 × 89 999 (SDR) + 3 × 9 990 (keyword-бот)</div>
         <div class="small mut" style="margin-top:4px">И в конце — ничего вашего: база у агентства, процесс у людей, горячий спрос так никто и не ловит.</div>
       </div>
-    </div></div><div class="vsmark"><span class="chip c-gold">сборка из частей — выше · у нас, под ключ — ниже ↓</span></div><div class="shell rv" style="border-color:var(--goldhair)"><div class="core"><div class="eyebrow" style="color:var(--goldB);margin-bottom:10px">У нас — всё это под ключ</div><div style="display:grid"><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span><b>Инструмент 1 — горячий спрос:</b> Telegram, VK, Авито, Авто.ру, клубы, Drive2 — все каналы</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>ИИ-разбор каждого запроса: модель, бюджет, боль</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Готовые персональные ответы с вашим наличием и расчётом</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Полуавтомат-отправка с безопасными лимитами — как в демо</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span><b>Инструмент 2 — B2B-поиск:</b> салоны, лизинг, автопарки под ваш сток</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Воронка и история каждого контакта в amoCRM</span></div></div><div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--goldhair)"><div class="small dim">Два инструмента · семь каналов · система ваша навсегда</div><div class="priceX">€3 000</div><div class="priceSub"><span class="chip c-gold">≈ 318 000 ₽</span><span class="chip c-dim">счёт в евро или в рублях — как удобнее вам</span><span class="chip c-dim">цены нетто — без налогов</span></div><div class="optrow"><div class="opt"><em>Дальше — вариант 1</em><b>Сопровождение · 25 000 ₽ в месяц</b><span>Поддержка, донастройка, расширение каналов.</span></div><div class="opt"><em>Дальше — вариант 2</em><b>Обучение команды · 50 000 ₽ разово</b><span>Передаём управление — дальше ведёте сами.</span></div></div><details class="acc rv"><summary><span class="plus"></span>Условия и гарантии</summary><div class="accb"><b style="color:var(--ink)">Все цены — нетто, без налогов.</b> <b style="color:var(--ink)">Состав фиксируем поимённым списком функций</b> в приложении к договору — никаких «примерно». Оплата 50/50: половина на старте, половина по приёмке. Два круга правок включены. Расширения по мере роста — по согласованному прайсу.</div></details></div></div></div></div></div><div class="os rv"><div class="oshead"><span class="onum">07</span><h2>Этапы внедрения</h2></div><p class="osub">От базы знаний до боевого режима. Сроки — с запасом на прогрев аккаунтов и согласования.</p><div class="tl"><div class="step rv"><div class="sdot">0</div><div class="sbody"><span class="sweek">Шаг 0 · неделя 1, параллельно</span><div class="stitle">База знаний — источник правды</div><div class="sdesc">Та же база, что и для остальных систем, — переиспользуется бесплатно. Дополняется тоном-оф-войс, стоп-словами и шаблонами ответов с вашей фирменной раскладкой цены.</div></div></div><div class="step rv"><div class="sdot">1</div><div class="sbody"><span class="sweek">Недели 1–2</span><div class="stitle">Горячий спрос — частные покупатели</div><div class="sdesc">Мониторинг Telegram-чатов и обсуждений + VK по официальному API; ИИ-разбор каждого запроса (модель, бюджет, боль); готовые персональные ответы; полуавтомат-отправка с лимитами 10–15 в день и прогревом аккаунтов. Авито и Авто.ру — витрина и мгновенный ответ на входящие (API-токен запрашиваем у менеджера Авто.ру).</div></div></div><div class="step rv"><div class="sdot">2</div><div class="sbody"><span class="sweek">Недели 3–4</span><div class="stitle">B2B-поиск</div><div class="sdesc">Сегменты — салоны, лизинг, автопарки; верификация карточек по нескольким источникам; скоринг под ваш сток; персональные предложения; воронка с синхронизацией в amoCRM и экспортом.</div></div></div><div class="step rv"><div class="sdot">3</div><div class="sbody"><span class="sweek">Недели 5–6 · запас</span><div class="stitle">Тест и расширение</div><div class="sdesc">A/B-тест трёх сценариев ответа — бот / менеджер / комбо: ~100 заявок на сценарий, замеряем конверсию, оставляем лучший. Подключение тестовых каналов (клубы BMW/MB, Drive2, Дром) по данным. Передача.</div></div></div></div><p class="small dim rv" style="margin-top:12px">Дальше — на выбор: сопровождение 25 000 ₽/мес или разовое обучение команды 50 000 ₽.</p></div><div class="os rv"><div class="oshead"><span class="onum">08</span><h2>Это ваша внутренняя инфраструктура</h2></div><p class="osub">Индивидуальная разработка под ваши процессы — корпоративный софт компании, а не аренда чужого сервиса.</p><div class="bgrid"><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l8.5-8.5M15.5 7.5L18 10M18.5 4.5L21 7"/></svg></div><div class="bt">Не подписка — собственность</div><div class="bd">Конкуренты в сравнении продают доступ. Мы строим актив: код, база и процесс остаются в компании навсегда.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.1"/><path d="M12 3v2.6M12 18.4V21M3 12h2.6M18.4 12H21M5.8 5.8l1.8 1.8M16.4 16.4l1.8 1.8M18.2 5.8l-1.8 1.8M7.6 16.4l-1.8 1.8"/></svg></div><div class="bt">Собран под ваши процессы</div><div class="bd">Ваши каналы, ваш сток, ваша amoCRM и ваша фирменная раскладка цены — не шаблон.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M3.5 17.5 9 12l3.8 3.8 7.7-7.7"/><path d="M14.8 8.1h5.7v5.7"/></svg></div><div class="bt">Актив, который растёт</div><div class="bd">База знаний и накопленная история работают на каждый следующий инструмент — бесплатно.</div></div></div></div></div></div><div class="grid2 rv" style="margin-top:56px"><div class="shell"><div class="core">
+    </div></div><div class="vsmark"><span class="chip c-gold">сборка из частей — выше · у нас, под ключ — ниже ↓</span></div><div class="shell rv" style="border-color:var(--goldhair)"><div class="core"><div class="eyebrow" style="color:var(--goldB);margin-bottom:10px">У нас — всё это под ключ</div><div style="display:grid"><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span><b>Горячий спрос:</b> Telegram, VK, Авито, Авто.ру, клубы, Drive2 — семь каналов ядра</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>ИИ-разбор каждого запроса: модель, бюджет, боль</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Готовые персональные ответы с вашим наличием и расчётом</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Полуавтомат-отправка с безопасными лимитами — как в демо</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Каждый запрос — карточкой в amoCRM + личное TG-уведомление менеджеру со ссылкой</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Бот-квалификации входящих: бот → Татьяна с «маячком», ночью — до заявки</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>ИИ-поиск каналов: карта площадок, где ваш спрос уже есть</span></div></div><div style="margin-top:14px;padding-top:16px;border-top:1px solid var(--goldhair)"><div class="small dim">Горячий спрос под ключ · без подрядчиков · система ваша навсегда</div><div class="priceX" style="font-size:clamp(26px,2.6vw,38px)">Цена — после вашего финального списка</div><div class="priceSub"><span class="chip c-gold">пересчёт за 1–2 дня</span><span class="chip c-dim">оплата 50/50</span><span class="chip c-dim">цены нетто — без налогов</span></div><details class="acc rv"><summary><span class="plus"></span>Условия и гарантии</summary><div class="accb"><b style="color:var(--ink)">Все цены — нетто, без налогов.</b> <b style="color:var(--ink)">Состав фиксируем поимённым списком функций</b> в приложении к договору — никаких «примерно». Оплата 50/50: половина на старте, половина по приёмке. Два круга правок включены. Расширения по мере роста — по согласованному прайсу.</div></details></div></div></div></div><div class="rv mt2"><div class="eyebrow" style="color:var(--goldB)">Постоянные расходы — напрямую провайдерам</div><div class="tw" style="margin-top:14px"><table class="t"><thead><tr><th>Статья</th><th>За что</th><th style="text-align:right">₽ в месяц</th><th>Прайс</th></tr></thead><tbody><tr><td><b>Claude API</b></td><td>ИИ-разбор запросов и ответы</td><td style="text-align:right">≈2 000 – 4 000</td><td><a href="https://www.anthropic.com/pricing" target="_blank" rel="noopener">тарифы↗</a></td></tr><tr><td><b>Рабочие TG-аккаунты</b></td><td>резерв и прокси для ротации</td><td style="text-align:right">≈1 000 – 2 000</td><td>оценка · по факту</td></tr><tr><td><b>ChatPlace</b></td><td>опция бота-квалификации (наш код — 0 ₽)</td><td style="text-align:right">0 или 2 000</td><td><a href="https://chatplace.ru/" target="_blank" rel="noopener">сайт↗</a></td></tr><tr><td><b>VK API</b></td><td>поиск по открытым постам</td><td style="text-align:right">0</td><td><a href="https://dev.vk.com/ru/method/newsfeed.search" target="_blank" rel="noopener">docs↗</a></td></tr><tr><td><b>Авито · Авто.ру</b></td><td>в рамках ваших текущих кабинетов</td><td style="text-align:right">0 доп.</td><td>ваши тарифы</td></tr><tr><td><b>Сервер</b></td><td>общий с контуром «Пульса»</td><td style="text-align:right">0 доп.</td><td>—</td></tr></tbody></table></div><div class="crit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span><b>Итого: ≈3–7 тыс ₽/мес</b> поверх инфраструктуры «Пульса». База «АвтоБизнесРевю» за 82 000 ₽ больше не нужна — B2B выключен.</span></div></div></div><div class="os rv"><div class="oshead"><span class="onum">07</span><h2>Этапы внедрения</h2></div><p class="osub">Каждый шаг — с измеримым критерием приёмки; запас времени уже заложен в сроки. Золотым отмечено, где темп зависит от площадок и вашей команды. Итого 5–6 недель.</p><div class="tl"><div class="step rv"><div class="sdot">0</div><div class="sbody"><span class="sweek">Шаг 0 · неделя 1 · параллельно</span><div class="stitle">Карта каналов и база знаний</div><div class="sdesc">ИИ-поиск каналов: находим и оцениваем площадки, где ваш спрос уже есть, — карта вам на утверждение. База знаний пополняется тоном-оф-войс, стоп-словами и шаблонами ответов с фирменной раскладкой цены.</div><div class="sdesc" style="margin-top:8px"><b style="color:var(--ink)">Мы:</b> поиск, скоринг, карта · <b style="color:var(--ink)">от вас:</b> утверждение карты и финальный список функций.</div><div class="crit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span><b>Принято, когда:</b> карта каналов утверждена; рабочие аккаунты заведены и поставлены на прогрев.</span></div></div></div><div class="step rv"><div class="sdot">1</div><div class="sbody"><span class="sweek">Шаг 1 · недели 1–3</span><div class="stitle">Радар слышит и отвечает</div><div class="sdesc">Мониторинг Telegram-чатов и VK по официальному API; ИИ-разбор каждого запроса (модель, бюджет, боль); готовый персональный ответ; полуавтомат-отправка. Каждый запрос — карточкой в amoCRM + личное TG-уведомление менеджеру.</div><div class="sdesc" style="margin-top:8px"><b style="color:var(--ink)">Мы:</b> весь контур · <b style="color:var(--ink)">от вас:</b> доступ к amoCRM. <b style="color:var(--goldB)">Темп задают площадки:</b> прогрев аккаунтов и лимиты 10–15 диалогов в день — защита от банов.</div><div class="crit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span><b>Принято, когда:</b> живой запрос из канала → готовый ответ → карточка в amoCRM и уведомление менеджеру: круг замкнут.</span></div></div></div><div class="step rv"><div class="sdot">2</div><div class="sbody"><span class="sweek">Шаг 2 · недели 3–5</span><div class="stitle">Бот-квалификации и входящие</div><div class="sdesc">Скриптовый бот по вашим развилкам: рабочее время — бот отвечает, сложное падает Татьяне с «маячком»; ночью бот ведёт до заявки. Авито и Авто.ру — мгновенный ответ на входящие. Спам-фильтры: стандартные + пополняемые.</div><div class="sdesc" style="margin-top:8px"><b style="color:var(--ink)">Мы:</b> движок, сценарии, фильтры · <b style="color:var(--goldB)">от вашей команды:</b> описанные развилки реального процесса — бот говорит вашим языком.</div><div class="crit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span><b>Принято, когда:</b> бот ведёт диалог по сценарию, передача Татьяне срабатывает, ни один входящий не потерян.</span></div></div></div><div class="step rv"><div class="sdot">3</div><div class="sbody"><span class="sweek">Шаг 3 · недели 5–6</span><div class="stitle">Тест сценариев и передача</div><div class="sdesc">A/B-тест трёх режимов ответа — бот / менеджер / комбо — на первых ~100 обращениях; замеряем конверсию, фиксируем лучший. Подключение тестовых каналов (клубы, Drive2, Дром) по данным. Передача и инструктаж.</div><div class="sdesc" style="margin-top:8px"><b style="color:var(--ink)">Мы:</b> тест и раскатка · <b style="color:var(--ink)">от вас:</b> полчаса на выбор сценария.</div><div class="crit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span><b>Принято, когда:</b> неделя боевого режима: находки → ответы → карточки идут потоком, лучший сценарий зафиксирован.</span></div></div></div></div></div><div class="os rv"><div class="oshead"><span class="onum">08</span><h2>Что дальше</h2></div><p class="osub">Один шаг с вашей стороны — дальше пересчёт и старт по этапам выше.</p><div class="shell mt2 rv"><div class="core"><div class="nstep"><b>1</b><span><i>Команда присылает финальный список</i> каналов и функций — «в столбик», как договорились.</span></div><div class="nstep"><b>2</b><span><i>За 1–2 дня — пересчёт:</i> состав поимённым списком, сроки, стоимость.</span></div><div class="nstep"><b>3</b><span><i>Стартуем параллельно с «Пульсом»</i> — база знаний у систем общая, Шаг 0 делается один раз.</span></div></div></div></div><div class="grid2 rv" style="margin-top:56px"><div class="shell"><div class="core">
       <h3 style="color:var(--ok)">Что обещаем</h3>
       <ul style="margin:10px 0 0 18px;display:grid;gap:8px" class="small">
         <li>Мониторинг согласованных источников 24/7, ИИ-разбор каждого запроса.</li>
@@ -504,13 +479,13 @@ details.acc .accb .tw{margin:8px 0 4px}
       <ul style="margin:10px 0 0 18px;display:grid;gap:8px" class="small">
         <li>«1000 лидов в месяц»: горячий спрос — десятки качественных запросов, не поток мусора.</li>
         <li>Массовой рассылки: только полуавтомат с лимитами — иначе баны и репутация спамера.</li>
-        <li>Каналов ради галочки: ОК, Дзен и MAX не дают спроса — показано данными.</li>
+        <li>Каналов ради галочки: включаем только площадки, где спрос показан данными.</li>
       </ul>
     </div></div></div>
   <p class="small dim rv" style="margin-top:22px">Источники аудиторий: Mediascope (I кв. и июнь 2026), данные площадок и деловых СМИ 2025–2026; форумы и сообщества проверены вживую 27.08.2026. Цены исполнителей — с их публичных страниц, 26–27.08.2026. Лицензии amoCRM оплачиваются отдельно у любого исполнителя.</p>
 </div></div>
 
-<div class="footer"><div class="wrap">Интерактивный прототип для Plutos Auto · данные на экране «Демо» вымышлены и показывают механику · подготовлено 27.08.2026</div></div>
+<div class="footer"><div class="wrap">Интерактивный прототип для Plutos Auto · данные на экране «Демо» вымышлены и показывают механику · подготовлено 27.08 · обновлено 11.09.2026</div></div>
 
 <script>
 /* ═══ ДАННЫЕ ═══ */
@@ -626,7 +601,7 @@ function go(k){
  if(k==="home")observeAll();
 }
 function setMode(m){
- mode=m;
+ return; mode=m;
  document.getElementById("mc-hot").style.borderColor=m==="hot"?"var(--goldhair)":"var(--hair)";
  document.getElementById("mc-cold").style.borderColor=m==="cold"?"var(--goldhair)":"var(--hair)";
  document.getElementById("mchip-hot").classList.toggle("hidden",m!=="hot");
@@ -648,12 +623,11 @@ function switchView(v){
 async function runSearch(){
  const isHot=mode==="hot";
  const stages=isHot?HOT_STAGES:STAGES;
- const seg=document.getElementById("seg").value, city=document.getElementById("city").value;
- document.getElementById("loadtitle").textContent=isHot?"Горячий спрос":city;
- document.getElementById("loadsub").textContent=isHot?"Telegram · VK · форумы · Drive2 — за последние 24 часа":document.getElementById("seg").selectedOptions[0].text;
+ document.getElementById("loadtitle").textContent="Горячий спрос";
+ document.getElementById("loadsub").textContent="Telegram · VK · форумы · Drive2 — за последние 24 часа";
  go("load");
  const stEl=document.getElementById("stages");
- stEl.innerHTML=stages.map((s,i)=>`<div id="st${i}" style="display:flex;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--hair);color:var(--ink3)"><span id="stb${i}" style="width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--hair);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800">${i+1}</span><span style="font-size:13.5px">${s}</span></div>`).join("");
+ stEl.innerHTML=stages.map((s,i)=>`<div id="st${i}" style="display:flex;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--hair);color:var(--ink3)"><span id="stb${i}" style="width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--hair);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">${i+1}</span><span style="font-size:13.5px">${s}</span></div>`).join("");
  for(let i=0;i<stages.length;i++){
   const row=document.getElementById("st"+i), b=document.getElementById("stb"+i);
   row.style.color="var(--ink)"; row.classList.add("pulse");
@@ -693,7 +667,7 @@ function renderHot(){
   <div class="shell lift fade lead-card"><div class="core">
    <div class="who">
      <span class="srcicon">${SRC[h.src].icon}</span>
-     <b style="font-size:14.5px">${h.u}</b>
+     <b style="font-size:13.5px">${h.u}</b>
      <span class="chip ${h.score==="hot"?"c-ok":"c-warn"}">${h.score==="hot"?"Горячий":"Тёплый"}</span>
      <span class="small dim">${h.ch} · «${h.post}» · ${h.ago}</span>
    </div>
@@ -717,13 +691,13 @@ function renderCold(){
   <div class="shell lift fade"><div class="core">
    <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
     <div style="flex:0 0 62px;text-align:center">
-      <div style="font-size:26px;font-weight:800;color:${d.a.s>=82?"var(--ok)":d.a.s>=68?"var(--warn)":"var(--bad)"};font-variant-numeric:tabular-nums">${d.a.s}</div>
+      <div style="font-size:26px;font-weight:700;color:${d.a.s>=82?"var(--ok)":d.a.s>=68?"var(--warn)":"var(--bad)"};font-variant-numeric:tabular-nums">${d.a.s}</div>
       <div class="small dim">fit</div>
     </div>
     <div style="flex:1;min-width:260px">
      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
        <span class="chip ${d.a.pr==="A"?"c-ok":d.a.pr==="B"?"c-warn":"c-bad"}">Приоритет ${d.a.pr}</span>
-       <b style="font-size:15px">${d.n}</b>
+       <b style="font-size:15.5px">${d.n}</b>
        <span class="chip c-dim">${d.seg}</span>
        ${d.srcImp?'<span class="chip c-warn">импорт</span>':""}
      </div>
@@ -733,7 +707,7 @@ function renderCold(){
        ${d.a.opts.map(o=>`<span class="chip c-blue">${o}</span>`).join("")}
        <span class="chip c-dim">потенциал: ${d.a.deals} сделки/мес</span>
      </div>
-     <div class="small dim" style="margin-top:10px">${d.site} · ${d.tg} · ${d.ph} · ${d.mail}</div>
+     <div class="small dim" style="margin-top:12px">${d.site} · ${d.tg} · ${d.ph} · ${d.mail}</div>
     </div>
    </div>
   </div></div>`).join("");
@@ -757,7 +731,7 @@ function renderHotMsgs(){
    <div class="msgbox" style="margin-top:12px">${h.dm}</div>
    <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
      <button class="btnG sm" onclick="copyHot(${i})">Копировать</button>
-     ${sent?'<span class="chip c-ok">Отправлено · диалог в воронке, колонка «Отправлено»</span>':`<button class="btnP" style="padding:6px 6px 6px 16px;font-size:13px" onclick="sendHot(${i})">Отправить <span class="arr" style="width:26px;height:26px">→</span></button>`}
+     ${sent?'<span class="chip c-ok">Отправлено · диалог в воронке, колонка «Отправлено»</span>':`<button class="btnP" style="padding:6px 6px 6px 16px;font-size:12.5px" onclick="sendHot(${i})">Отправить <span class="arr" style="width:26px;height:26px">→</span></button>`}
    </div>
   </div></div>`;}).join("");
  updQueue();
@@ -780,10 +754,10 @@ function renderColdMsgs(){
    </div>
    <div class="grid2" style="margin-top:12px">
     <div><label class="f">Письмо · ${m.mail.sub}</label><div class="msgbox">${m.mail.body}</div>
-      <div style="margin-top:10px"><button class="btnG sm" onclick="copyTxt(${i},'mail')">Копировать письмо</button></div></div>
+      <div style="margin-top:12px"><button class="btnG sm" onclick="copyTxt(${i},'mail')">Копировать письмо</button></div></div>
     <div><label class="f">Telegram</label><div class="msgbox">${m.tg}</div>
-      <div style="margin-top:10px;display:flex;gap:8px"><button class="btnG sm" onclick="copyTxt(${i},'tg')">Копировать</button>
-      <button class="btnP" style="padding:6px 6px 6px 16px;font-size:13px" onclick="sendCold(${i})">Отправить <span class="arr" style="width:26px;height:26px">→</span></button></div></div>
+      <div style="margin-top:12px;display:flex;gap:8px"><button class="btnG sm" onclick="copyTxt(${i},'tg')">Копировать</button>
+      <button class="btnP" style="padding:6px 6px 6px 16px;font-size:12.5px" onclick="sendCold(${i})">Отправить <span class="arr" style="width:26px;height:26px">→</span></button></div></div>
    </div></div></div>`;
  }).join("");
  updQueue();
