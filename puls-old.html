@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Плутос · Пульс продаж — прототип</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0A0A0C; --bg:#101014; --bg2:#131319; --card:#17171C;
+  --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.13);
+  --ink:rgba(255,255,255,.93); --ink2:rgba(255,255,255,.62); --ink3:rgba(255,255,255,.55);
+  --gold:#C9A45C; --goldB:#E4C078; --goldbg:rgba(201,164,92,.10); --goldhair:rgba(201,164,92,.32);
+  --ok:#4CC39A; --okbg:rgba(46,155,130,.13);
+  --warn:#D99A55; --warnbg:rgba(201,123,46,.13);
+  --bad:#E37E76; --badbg:rgba(179,53,46,.14);
+  --blue:#8FA8E8; --bluebg:rgba(109,138,224,.13);
+  --sBlue:#6D8AE0; --plan:rgba(255,255,255,.16);
+  --r:16px; --ri:12px; --ease:cubic-bezier(.32,.72,0,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--void)}
+body{background:var(--bg);color:var(--ink);font:15px/1.6 'Manrope',-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(900px 500px at 82% -10%, rgba(201,164,92,.08), transparent 60%),
+             radial-gradient(700px 480px at -8% 40%, rgba(109,138,224,.05), transparent 60%);}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");}
+h1{font-family:'Prata',Georgia,serif;font-weight:400;font-size:clamp(28px,4vw,42px);line-height:1.18;letter-spacing:-.012em}
+h2{font-family:'Prata',Georgia,serif;font-weight:400;font-size:clamp(21px,2.4vw,27px);line-height:1.25;letter-spacing:-.008em;margin:0 0 6px}
+h3{font-size:15.5px;font-weight:700;letter-spacing:-.01em}
+a{color:var(--goldB);text-decoration:none} a:hover{color:#F0D090}
+.mut{color:var(--ink2)} .dim{color:var(--ink3)} .small{font-size:12.5px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
+.nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:100;
+  display:flex;align-items:center;gap:6px;padding:7px 8px 7px 18px;border-radius:999px;
+  background:rgba(16,16,21,.72);border:1px solid var(--hair2);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  box-shadow:0 12px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06);white-space:nowrap}
+.brand{font-weight:700;letter-spacing:.1em;font-size:12.5px;margin-right:8px}
+.brand i{color:var(--gold);font-style:normal}
+.navtab{border:none;background:transparent;color:var(--ink2);font:600 13px/1 'Manrope',sans-serif;padding:9px 15px;border-radius:999px;cursor:pointer;transition:all .35s var(--ease)}
+.navtab.on{background:rgba(255,255,255,.95);color:#101014}
+.navtab:not(.on):hover{color:var(--ink)}
+.demopill{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--goldB);border:1px solid var(--goldhair);background:var(--goldbg);padding:5px 10px;border-radius:999px;margin-left:4px}
+@media(max-width:660px){.nav{left:12px;right:12px;transform:none;justify-content:space-between;padding-left:14px}.demopill{display:none}.navtab{padding:9px 11px}}
+.main{padding:108px 0 120px;position:relative;z-index:2}
+.shell{background:rgba(255,255,255,.028);border:1px solid var(--hair);border-radius:var(--r);padding:6px;transition:transform .5s var(--ease), border-color .5s var(--ease)}
+.shell>.core{background:var(--card);border-radius:var(--ri);padding:18px;height:100%;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.shell:hover{border-color:var(--hair2)}
+.lift:hover{transform:translateY(-3px)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--gold)}
+.btnP{display:inline-flex;align-items:center;gap:12px;border:none;cursor:pointer;background:rgba(255,255,255,.95);color:#101014;font:700 14px/1 'Manrope',sans-serif;padding:8px 8px 8px 22px;border-radius:999px;transition:all .4s var(--ease)}
+.btnP:hover{background:#fff;transform:translateY(-1px)} .btnP:active{transform:scale(.98)}
+.btnP .arr{width:32px;height:32px;border-radius:50%;background:#101014;color:#fff;display:flex;align-items:center;justify-content:center;transition:transform .4s var(--ease)}
+.btnP:hover .arr{transform:translate(2px,-2px)}
+.btnG{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--hair2);cursor:pointer;background:transparent;color:var(--ink);font:600 13.5px/1 'Manrope',sans-serif;padding:12px 20px;border-radius:999px;transition:all .35s var(--ease)}
+.btnG:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.04)} .btnG:active{transform:scale(.98)}
+.btnG.sm{padding:9px 14px;font-size:12.5px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:4px 11px;border-radius:999px;white-space:nowrap}
+.c-gold{background:var(--goldbg);color:var(--goldB);border:1px solid var(--goldhair)}
+.c-ok{background:var(--okbg);color:var(--ok)} .c-warn{background:var(--warnbg);color:var(--warn)}
+.c-bad{background:var(--badbg);color:var(--bad)} .c-blue{background:var(--bluebg);color:var(--blue)} .c-dim{background:rgba(255,255,255,.05);color:var(--ink2)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:920px){.grid2,.grid3{grid-template-columns:1fr}}
+.subtabs{display:flex;gap:2px;background:rgba(255,255,255,.03);border:1px solid var(--hair);border-radius:999px;padding:4px;margin:0 0 26px;max-width:560px;overflow-x:auto}
+.stab{flex:1;border:none;background:transparent;color:var(--ink3);font:700 12.5px/1 'Manrope',sans-serif;padding:10px 14px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:all .4s var(--ease)}
+.stab.on{background:rgba(255,255,255,.95);color:#101014}
+/* bento KPI */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.b4{grid-column:span 4}.b6{grid-column:span 6}.b8{grid-column:span 8}.b12{grid-column:span 12}
+@media(max-width:920px){.b4,.b6,.b8{grid-column:span 12}}
+.tile .tv{font-family:'Prata',Georgia,serif;font-size:clamp(28px,2.8vw,37px);font-weight:400;letter-spacing:-.01em;font-variant-numeric:tabular-nums;line-height:1.1}
+.tile .tv.north{font-size:clamp(44px,5vw,62px)}
+.tile .tv em{font-style:normal;color:var(--goldB)}
+.tile .tl{font-size:12.5px;color:var(--ink2);margin-top:8px;line-height:1.5}
+table.t{border-collapse:collapse;width:100%;font-size:13.5px}
+table.t th{text-align:left;padding:9px 12px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);border-bottom:1px solid var(--hair2);white-space:nowrap}
+table.t td{padding:9px 12px;border-bottom:1px solid var(--hair);vertical-align:middle;line-height:1.5}
+table.t tr:last-child td{border-bottom:none}
+table.t tr.clickable{cursor:pointer;transition:background .3s var(--ease)}
+table.t tr.clickable:hover td{background:rgba(255,255,255,.03)}
+.tw{overflow-x:auto;border:1px solid var(--hair);border-radius:12px;background:var(--card);margin:10px 0}
+.tw table.t{min-width:600px}
+.num{white-space:nowrap;font-variant-numeric:tabular-nums}
+.row{display:flex;align-items:center;gap:10px;padding:8px 0}
+.row .lbl{flex:0 0 170px;font-size:12.5px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .bars{flex:1;min-width:80px}
+.row .val{flex:0 0 auto;font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums;text-align:right;min-width:56px}
+@media(max-width:560px){.row{flex-wrap:wrap}.row .lbl{flex:1 1 100%;white-space:normal}.row .bars{min-width:0;flex:1 1 55%}}
+.bar{height:9px;border-radius:0 4px 4px 0;margin:2px 0;min-width:2px}
+.bar.plan{background:var(--plan)}
+.bar.fact{background:var(--sBlue)}
+.legend{display:flex;gap:16px;font-size:11px;color:var(--ink3);margin:2px 0 10px;flex-wrap:wrap}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:4px;margin-right:5px;vertical-align:-1px}
+.transcript{background:var(--bg2);border:1px solid var(--hair);border-radius:12px;padding:14px 16px;max-height:340px;overflow-y:auto;font-size:13.5px;line-height:1.7}
+.tr-line{margin:0 0 10px}
+.tr-line b{color:var(--blue)} .tr-line.client b{color:var(--goldB)}
+.tr-line .tc{color:var(--ink3);font-size:11px;margin-right:6px;font-variant-numeric:tabular-nums}
+.check{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--hair);font-size:12.5px}
+.check:last-child{border-bottom:none}
+.check .m{flex:0 0 20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:12px;margin:8px 0;font-size:12.5px;line-height:1.55;border:1px solid var(--hair)}
+.a-bad{background:var(--badbg)} .a-warn{background:var(--warnbg)}
+.flow{display:flex;gap:0;align-items:stretch;overflow-x:auto;padding:8px 0}
+.fnode{flex:1;min-width:132px;background:var(--card);border:1px solid var(--hair);border-radius:12px;padding:12px;font-size:12.5px;text-align:center;color:var(--ink2)}
+.fnode b{display:block;font-size:12.5px;margin-bottom:3px;color:var(--ink)}
+.farrow{flex:0 0 24px;display:flex;align-items:center;justify-content:center;color:var(--ink3)}
+table.cmp{border-collapse:collapse;width:100%;font-size:13.5px;min-width:700px}
+table.cmp th{text-align:left;padding:14px 16px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);border-bottom:1px solid var(--hair2);white-space:nowrap}
+table.cmp td{padding:14px 16px;border-bottom:1px solid var(--hair);vertical-align:top;line-height:1.55}
+table.cmp tr:last-child td{border-bottom:none}
+table.cmp tr.ours td{background:var(--goldbg)}
+table.cmp tr.ours td:first-child{border-left:2px solid var(--gold)}
+.rv{opacity:0;transform:translateY(22px);filter:blur(5px);transition:opacity .8s var(--ease),transform .8s var(--ease),filter .8s var(--ease)}
+.rv.in{opacity:1;transform:none;filter:none}
+.fade{animation:fu .5s var(--ease) both}
+@keyframes fu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hidden{display:none!important}
+.footer{border-top:1px solid var(--hair);color:var(--ink3);font-size:12.5px;padding:20px 0 26px;position:relative;z-index:2}
+.dark-cta{background:linear-gradient(160deg,#15151B,#101014 70%);border:1px solid var(--hair2);border-radius:16px;padding:34px 36px;position:relative;overflow:hidden}
+.dark-cta::before{content:"";position:absolute;right:-120px;top:-120px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle, rgba(201,164,92,.14), transparent 65%)}
+.benefit{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--hair)}
+.benefit:last-child{border-bottom:none}
+.benefit .ic{flex:0 0 36px;height:36px;border-radius:12px;background:var(--goldbg);border:1px solid var(--goldhair);display:flex;align-items:center;justify-content:center}
+.benefit .ic svg{stroke:var(--goldB)}
+.benefit b{display:block;margin-bottom:3px;font-size:13.5px}
+.benefit .val{color:var(--ink2);font-size:13.5px;line-height:1.6}
+
+/* ══ КП V3: редизайн предложения ══ */
+.os{margin-top:88px}
+.oshead{display:flex;align-items:baseline;gap:16px}
+.onum{font-family:'Prata',Georgia,serif;font-size:13.5px;color:var(--gold);letter-spacing:.1em;flex:0 0 auto;transform:translateY(-4px)}
+.onum::after{content:"";display:block;height:1px;background:linear-gradient(90deg,var(--goldhair),transparent);margin-top:7px}
+.os h2{font-size:clamp(25px,3vw,36px)}
+.osub{color:var(--ink2);font-size:13.5px;max-width:680px;margin-top:12px;line-height:1.65}
+.bgrid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:26px}
+.bx{grid-column:span 4;display:flex}
+.bx.w6{grid-column:span 6}
+.bx.w12{grid-column:span 12}
+@media(max-width:960px){.bx,.bx.w6{grid-column:span 6}}
+@media(max-width:640px){.bx,.bx.w6{grid-column:span 12}}
+.bx .core{display:flex;flex-direction:column;gap:12px;padding:22px}
+.icx{width:46px;height:46px;border-radius:12px;flex:0 0 46px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(155deg,rgba(255,255,255,.07),rgba(255,255,255,.015));
+  border:1px solid var(--hair2);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);color:var(--goldB)}
+.icx svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.icx.mono{color:var(--ink2)}
+.bt{font-size:15.5px;font-weight:700;letter-spacing:-.01em;line-height:1.35}
+.bd{font-size:13.5px;color:var(--ink2);line-height:1.62}
+.caserow{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+a.case{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--ink2);
+  border:1px solid var(--hair);border-radius:999px;padding:7px 14px;transition:all .35s var(--ease)}
+a.case:hover{color:var(--goldB);border-color:var(--goldhair);transform:translateY(-1px)}
+a.case .go{color:var(--goldB)}
+.chsum{display:flex;flex-wrap:wrap;gap:8px 36px;align-items:baseline;margin-top:26px;padding:22px 26px}
+.chsum .b{display:flex;flex-direction:column;gap:4px}
+.chsum .n{font-family:'Prata',Georgia,serif;font-size:clamp(26px,3vw,34px);color:var(--goldB);line-height:1}
+.chsum .t{font-size:12.5px;color:var(--ink2);font-weight:700}
+.chgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+@media(max-width:960px){.chgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.chgrid{grid-template-columns:1fr}}
+.chx .core{padding:18px;display:flex;flex-direction:column;gap:12px}
+.chtop{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.chname{font-weight:700;font-size:13.5px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.chname .icx{width:36px;height:36px;border-radius:12px;flex:0 0 36px}
+.chname .icx svg{width:17px;height:17px}
+.chn{font-family:'Prata',Georgia,serif;font-size:20px;line-height:1.15}
+.chn i{font-style:normal;font-family:'Manrope',sans-serif;font-size:11px;color:var(--ink3);font-weight:700;display:block;margin-top:4px;letter-spacing:.01em}
+
+
+
+
+
+
+
+
+
+
+
+
+.paygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+@media(max-width:860px){.paygrid{grid-template-columns:1fr}}
+.pay{display:flex}
+.pay .core{padding:22px;display:flex;flex-direction:column;gap:9px;width:100%}
+.payv{font-family:'Prata',Georgia,serif;font-size:clamp(34px,3.6vw,44px);line-height:1.05;color:var(--goldB);font-variant-numeric:tabular-nums;letter-spacing:-.01em;white-space:nowrap}
+.payl{font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.4}
+.payd{font-size:12.5px;color:var(--ink3);line-height:1.6;margin-top:auto}
+details.acc{border:1px solid var(--hair);border-radius:12px;background:rgba(255,255,255,.02);margin-top:14px;transition:border-color .4s var(--ease)}
+details.acc:hover{border-color:var(--hair2)}
+details.acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:13px;padding:15px 20px;font-size:13.5px;font-weight:700;color:var(--ink2);transition:color .3s var(--ease)}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary:hover{color:var(--ink)}
+details.acc .plus{width:26px;height:26px;border-radius:50%;border:1px solid var(--hair2);flex:0 0 26px;position:relative;transition:transform .5s var(--ease)}
+details.acc .plus::before,details.acc .plus::after{content:"";position:absolute;left:50%;top:50%;background:var(--goldB)}
+details.acc .plus::before{width:10px;height:1.5px;transform:translate(-50%,-50%)}
+details.acc .plus::after{width:1.5px;height:10px;transform:translate(-50%,-50%)}
+details.acc[open] .plus{transform:rotate(135deg)}
+details.acc .accb{padding:4px 20px 20px;color:var(--ink2);font-size:13.5px;line-height:1.7}
+details.acc .accb .tw{margin:8px 0 4px}
+.optrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+@media(max-width:640px){.optrow{grid-template-columns:1fr}}
+.opt{border:1px solid var(--hair);border-radius:12px;padding:15px 17px;background:rgba(255,255,255,.02)}
+.opt em{font-style:normal;display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
+.opt b{display:block;font-size:13.5px;letter-spacing:-.01em}
+.opt span{font-size:12.5px;color:var(--ink3);line-height:1.55;display:block;margin-top:4px}
+.priceX{font-family:'Prata',Georgia,serif;font-size:clamp(46px,5vw,58px);color:var(--goldB);line-height:1;letter-spacing:-.01em;margin-top:4px}
+.priceSub{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.mangrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+@media(max-width:860px){.mangrid{grid-template-columns:1fr}}
+.veri{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;line-height:1.6;padding:9px 0;border-bottom:1px solid var(--hair)}
+.veri:last-child{border-bottom:none}
+.veri svg{width:15px;height:15px;flex:0 0 15px;margin-top:4px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+@media(max-width:640px){.num{white-space:normal}.chip{white-space:normal}}
+
+/* ── мобильный полишинг (по итогам созвона 01.09) ── */
+.vsmark{display:none}
+@media(max-width:860px){
+  .vsmark{display:flex;justify-content:center;margin:4px 0}
+  .os{margin-top:64px}
+  .oshead{gap:12px}
+  .shell>.core{padding:18px}
+  .dark-cta{padding:26px 22px}
+  .chsum{padding:18px;gap:14px 28px}
+  .navtab{padding:10px 12px;font-size:12.5px}
+  .bx .core,.pay .core,
+}
+@media(max-width:640px){
+  .paygrid,.bgrid,.chgrid{gap:12px}
+  .payv{font-size:32px}
+  h1{font-size:clamp(27px,7.4vw,34px)}
+  .os h2{font-size:clamp(22px,6vw,28px)}
+  .priceX{font-size:clamp(40px,11vw,48px)}
+  
+  .caserow a.case{padding:8px 13px}
+}
+
+
+/* ── этапы внедрения ── */
+.steps{margin-top:26px;display:grid;gap:0}
+.step{display:grid;grid-template-columns:52px 1fr;gap:0 18px;position:relative;padding-bottom:26px}
+.step:last-child{padding-bottom:0}
+.step::before{content:"";position:absolute;left:25px;top:52px;bottom:0;width:1px;background:var(--hair2)}
+.step:last-child::before{display:none}
+.sdot{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(155deg,rgba(255,255,255,.07),rgba(255,255,255,.015));
+  border:1px solid var(--hair2);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+  font-family:'Prata',Georgia,serif;font-size:18px;color:var(--goldB)}
+.sbody{padding-top:4px}
+.sweek{display:inline-flex;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.stitle{font-size:15.5px;font-weight:700;letter-spacing:-.01em}
+.sdesc{font-size:13.5px;color:var(--ink2);line-height:1.65;margin-top:8px;max-width:640px}
+
+</style>
+<style>
+/* ── доп-система: сетки, ритм, плитки, анимация ── */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch}
+.mt1{margin-top:14px}.mt2{margin-top:26px}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mcell{border-radius:12px;padding:12px 14px;background:rgba(255,255,255,.035)}
+.mcell b{display:block;font-size:13.5px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.mcell span{display:block;font-size:11px;color:var(--ink3);margin-top:3px;line-height:1.4}
+.mcell.next{border:1px dashed var(--hair2);background:transparent}
+.mcell.next b{color:var(--ink2)}
+.sli{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;line-height:1.6;padding:8px 0;border-bottom:1px solid var(--hair);color:var(--ink2)}
+.sli:last-child{border-bottom:none}
+.sli svg{width:15px;height:15px;flex:none;margin-top:4px;color:var(--gold)}
+.sli.x svg{color:var(--ink3)}
+.sli b{color:var(--ink)}
+.vsvg{width:100%;height:auto;display:block;margin:14px 0 6px;color:var(--ink3)}
+.who{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.crit{display:flex;gap:9px;align-items:flex-start;margin-top:12px;font-size:13.5px;line-height:1.55;color:var(--ink2)}
+.crit svg{width:15px;height:15px;flex:none;margin-top:3px;color:var(--gold)}
+.crit b{color:var(--ink)}
+.pcolB{border-left:1px solid var(--goldhair);padding-left:26px}
+.fdrow{display:flex;align-items:flex-start;margin-top:12px}
+.fd{display:flex;flex-direction:column;align-items:center;gap:8px;flex:0 0 auto;width:78px;text-align:center}
+.fdic{width:44px;height:44px;border-radius:12px;border:1px solid var(--hair2);display:flex;align-items:center;justify-content:center;color:var(--ink2);background:var(--card);transition:all .45s var(--ease)}
+.fdic svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.fd.on .fdic{border-color:var(--goldhair);color:var(--goldB);box-shadow:0 0 0 4px rgba(201,164,92,.09)}
+.fd.on .fdlb{color:var(--goldB)}
+.fd.done .fdic{color:var(--goldB);border-color:var(--goldhair);opacity:.7}
+.fdlb{font-size:11px;line-height:1.35;color:var(--ink3)}
+.fdln{flex:1 1 0;height:44px;display:flex;align-items:center;min-width:10px}
+.fdln i{display:block;width:100%;height:1px;background:var(--hair2);position:relative;overflow:hidden}
+.fdln i::after{content:"";position:absolute;left:-35%;top:-1px;height:3px;width:35%;background:linear-gradient(90deg,transparent,var(--gold));opacity:0}
+.fdln.go i::after{opacity:1;animation:fdpulse .55s linear forwards}
+.fdln.done i{background:var(--goldhair)}
+@keyframes fdpulse{from{left:-35%}to{left:100%}}
+.fdcap{margin-top:14px;font-size:13.5px;color:var(--ink2);min-height:40px}
+.fdcap b{color:var(--goldB);font-weight:700}
+@media(max-width:860px){
+.duo{grid-template-columns:1fr}
+.fdrow{flex-wrap:wrap;row-gap:14px}.fdln{display:none}.fd{width:25%}
+.pcolB{border-left:none;padding-left:0;border-top:1px solid var(--goldhair);padding-top:16px;margin-top:8px}
+}
+@media(max-width:640px){.fd{width:33.3%}.mgrid{grid-template-columns:1fr}.vsvg{display:none}}
+
+table.econ th:nth-child(2),table.econ td:nth-child(2),table.econ th:nth-child(3),table.econ td:nth-child(3){text-align:right}
+table.costs th:nth-child(3),table.costs td:nth-child(3){text-align:right;white-space:nowrap}
+.mcell a{color:var(--goldB);text-decoration:none}
+</style></head>
+<body>
+
+<nav class="nav">
+  <span class="brand">PLUTOS<i>·</i>AUTO</span>
+  <button class="navtab on" data-v="demo" onclick="switchView('demo')">Демо</button>
+  <button class="navtab" data-v="offer" onclick="switchView('offer')">Предложение</button>
+  <span class="demopill">ДЕМО-ДАННЫЕ</span>
+</nav>
+
+<!-- ═══════ ДЕМО ═══════ -->
+<div class="main" id="view-demo"><div class="wrap">
+  <div class="eyebrow rv">Пульс продаж · август 2026</div>
+  <h1 class="rv">Компания на одном экране</h1>
+  <p class="mut rv" style="margin:14px 0 26px;max-width:720px">Каждый показатель — из списка KPI собственника. В боевой версии данные приходят сами: из телефонии, amoCRM и логистики. Здесь — реалистичная демонстрация.</p>
+
+  <div class="subtabs rv" style="max-width:400px">
+    <button class="stab on" data-st="pulse" onclick="subTab('pulse')">Пульс · KPI</button>
+    <button class="stab" data-st="calls" onclick="subTab('calls')">Звонки и качество</button>
+  </div>
+
+  <!-- ПУЛЬС -->
+  <section id="st-pulse">
+    <div class="bento rv">
+      <div class="shell b4"><div class="core tile">
+        <div class="tv north"><em>14</em><span style="font-size:22px;color:var(--ink3);font-weight:700"> / 16</span></div>
+        <div class="tl">сделок закрыто к плану месяца — главная цифра компании</div>
+        <div style="margin-top:12px"><span class="chip c-warn">▲ нужно +2 до плана</span></div>
+      </div></div>
+      <div class="shell b4"><div class="core tile">
+        <div class="tv">9,8%</div>
+        <div class="tl">средняя маржинальность (план 10,5%)</div>
+        <div style="margin-top:12px"><span class="chip c-warn">−0,7 п.п. · разбор: конвертация</span></div>
+      </div></div>
+      <div class="shell b4"><div class="core tile">
+        <div class="tv">6,3 <span style="font-size:16px;color:var(--ink3)">млн ₽</span></div>
+        <div class="tl">допы: лизинг, кредит, страховка, детейлинг, тюнинг</div>
+        <div style="margin-top:12px"><span class="chip c-ok">112% плана</span></div>
+      </div></div>
+      <div class="shell b4"><div class="core tile">
+        <div class="tv">2 ч 40 м</div>
+        <div class="tl">медианное время ответа (SLA — 1 рабочий день)</div>
+        <div style="margin-top:12px"><span class="chip c-ok">в SLA</span></div>
+      </div></div>
+      <div class="shell b4"><div class="core tile">
+        <div class="tv">11 <span style="font-size:16px;color:var(--ink3)">дней</span></div>
+        <div class="tl">среднее время авто в шоуруме (план 14)</div>
+        <div style="margin-top:12px"><span class="chip c-ok">быстрее плана</span></div>
+      </div></div>
+      <div class="shell b4"><div class="core tile">
+        <div class="tv">214</div>
+        <div class="tl">звонков за неделю · расшифровано 100%</div>
+        <div style="margin-top:12px"><span class="chip c-bad">3 алерта — см. «Звонки»</span></div>
+      </div></div>
+    </div>
+
+    <div class="shell rv mt1"><div class="core"><div class="eyebrow" style="color:var(--goldB)">Как данные попадают на этот экран</div><div class="bd">Путь одного звонка — от трубки до цифры. Анимация идёт по кругу.</div><div class="fdrow" id="fdrow"><div class="fd"><div class="fdic"><svg viewBox="0 0 24 24"><path d="M7 3.5h3.2l1.6 4.2-2.2 1.6a12.5 12.5 0 0 0 5.1 5.1l1.6-2.2 4.2 1.6V17a2.5 2.5 0 0 1-2.7 2.5C11.5 19 5 12.5 4.5 6.2A2.5 2.5 0 0 1 7 3.5z"/></svg></div><div class="fdlb">Звонок·<br>Telegram</div></div><div class="fdln"><i></i></div><div class="fd"><div class="fdic"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div><div class="fdlb">Запись</div></div><div class="fdln"><i></i></div><div class="fd"><div class="fdic"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7" ry="2.7"/><path d="M5 5.5V18c0 1.5 3.1 2.7 7 2.7s7-1.2 7-2.7V5.5"/><path d="M5 11.7c0 1.5 3.1 2.7 7 2.7s7-1.2 7-2.7"/></svg></div><div class="fdlb">Хранилище</div></div><div class="fdln"><i></i></div><div class="fd"><div class="fdic"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10.5 12h5M10.5 16h5"/></svg></div><div class="fdlb">Расшифровка</div></div><div class="fdln"><i></i></div><div class="fd"><div class="fdic"><svg viewBox="0 0 24 24"><path d="M12 3l7.5 3.6v5.1c0 4.6-3.2 7.5-7.5 8.8-4.3-1.3-7.5-4.2-7.5-8.8V6.6z"/><path d="M8.8 12.2l2.3 2.3 4.4-4.9"/></svg></div><div class="fdlb">ИИ-оценка</div></div><div class="fdln"><i></i></div><div class="fd"><div class="fdic"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14.5" rx="2.5"/><path d="M3.5 9.5h17M8.2 13h7.6M8.2 16h4.5"/></svg></div><div class="fdlb">amoCRM</div></div><div class="fdln"><i></i></div><div class="fd"><div class="fdic"><svg viewBox="0 0 24 24"><path d="M4 20v-8M9.3 20V4.5M14.6 20v-9M20 20V8"/></svg></div><div class="fdlb">Дашборд</div></div><div class="fdln"><i></i></div><div class="fd"><div class="fdic"><svg viewBox="0 0 24 24"><path d="M21 4.5L3.5 11.5l5.5 2.2M21 4.5l-4.6 15-5.4-5.8M21 4.5L9 13.7"/></svg></div><div class="fdlb">Боты·<br>отчёт и алерт</div></div></div><div class="fdcap" id="fdcap">&nbsp;</div></div></div><div class="bento rv" style="margin-top:14px">
+      <div class="shell b6"><div class="core">
+        <h3>Экономика последней сделки · план / факт</h3>
+        <p class="small dim" style="margin:2px 0 8px">BMW X5 40d '21 · передан 22.08 · клиент: салон, Москва</p>
+        <div class="tw"><table class="t econ">
+          <tr><th>Статья</th><th class="num">План</th><th class="num">Факт</th><th>Отклонение</th></tr>
+          <tr><td>Закуп у дилера (DE)</td><td class="num">€61 500</td><td class="num">€62 300</td><td><span class="chip c-warn">▲ +1,3%</span></td></tr>
+          <tr><td>Логистика DE→Москва</td><td class="num">180 000 ₽</td><td class="num">195 000 ₽</td><td><span class="chip c-warn">▲ +8,3%</span></td></tr>
+          <tr><td>Таможня + утильсбор</td><td class="num">3 150 000 ₽</td><td class="num">3 150 000 ₽</td><td><span class="chip c-ok">0%</span></td></tr>
+          <tr><td>Конвертация EUR→RUB</td><td class="num">1,5%</td><td class="num">1,9%</td><td><span class="chip c-bad">▲ +0,4 п.п.</span></td></tr>
+          <tr><td>Комиссия (фикс)</td><td class="num">450 000 ₽</td><td class="num">450 000 ₽</td><td><span class="chip c-ok">0%</span></td></tr>
+          <tr><td><b>Маржа сделки</b></td><td class="num"><b>10,2%</b></td><td class="num"><b>9,1%</b></td><td><span class="chip c-bad">▼ −1,1 п.п.</span></td></tr>
+        </table></div>
+      </div></div>
+      <div class="shell b6"><div class="core">
+        <h3>Сроки логистики · план / факт, дни</h3>
+        <div class="legend"><span><i style="background:var(--plan)"></i>план</span><span><i style="background:var(--sBlue)"></i>факт</span></div>
+        <div id="logistics"></div>
+        <h3 style="margin-top:14px">Оформление документов, дни</h3>
+        <div id="docs" style="margin-top:8px"></div>
+      </div></div>
+      <div class="shell b6"><div class="core">
+        <h3>Конверсия лид → сделка по источникам</h3>
+        <div id="conv" style="margin-top:8px"></div>
+        <p class="small dim" style="margin-top:8px">Считается по связке «источник в amoCRM → закрытая сделка». Сейчас этот показатель не считается нигде.</p>
+      </div></div>
+      <div class="shell b6"><div class="core">
+        <h3>Стоимость лида по каналам, ₽</h3>
+        <div id="cpl" style="margin-top:8px"></div>
+        <p class="small dim" style="margin-top:8px">Ориентир владельца: Tank ≈ 40 000 ₽/лид у классических дилеров — ваши каналы кратно дешевле.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ЗВОНКИ -->
+  <section id="st-calls" class="hidden">
+    <div class="bento">
+      <div class="shell b8"><div class="core">
+        <h3>Звонки за неделю — 100% расшифровано и оценено · показана выборка 6 из 214</h3>
+        <div class="tw"><table class="t" id="calltable"></table></div>
+        <p class="small dim">Нажмите на строку — откроется разбор звонка.</p>
+      </div></div>
+      <div class="b4" style="display:grid;gap:14px;align-content:start">
+        <div class="shell"><div class="core">
+          <h3>Рейтинг менеджеров · балл из 100</h3>
+          <div id="rating" style="margin-top:8px"></div>
+          <p class="small dim" style="margin-top:8px">Не для наказаний — видно, кому какой навык подтянуть.</p>
+        </div></div>
+        <div class="shell"><div class="core">
+          <h3>Алерты — система заметила сама</h3>
+          <div class="alert a-bad"><span style="flex:0 0 18px;margin-top:2px"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--bad);fill:none;stroke-width:1.7;stroke-linecap:round"><circle cx="12" cy="12" r="8.5"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span><div><b>Обещал перезвонить — задачи нет.</b> Артём, звонок по Cayenne 24.08: «наберу завтра». <span class="chip c-ok" style="margin-top:8px">задача создана автоматически</span></div></div>
+          <div class="alert a-warn"><span style="flex:0 0 18px;margin-top:2px"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--warn);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round"><path d="M12 4l8.5 15h-17z"/><path d="M12 10.5v3.6M12 16.9v.2"/></svg></span><div><b>Допы не предложены в 3 звонках</b> — потенциал ≈ 340 тыс ₽.</div></div>
+          <div class="alert a-warn"><span style="flex:0 0 18px;margin-top:2px"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--warn);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round"><path d="M12 4l8.5 15h-17z"/><path d="M12 10.5v3.6M12 16.9v.2"/></svg></span><div><b>SLA под угрозой:</b> заявка с сайта ждала 9 часов.</div></div>
+        </div></div>
+      </div>
+      <div class="shell b12"><div class="core" id="callview"></div></div>
+    </div>
+  </section>
+
+
+</div></div>
+
+<!-- ═══════ ПРЕДЛОЖЕНИЕ ═══════ -->
+<div class="main hidden" id="view-offer"><div class="wrap"><div class="eyebrow rv">Коммерческое предложение · Пульс продаж</div><h1 class="rv">Каждый звонок записан, оценён<br>и превращён в цифры управления</h1><p class="mut rv" style="margin:18px 0 0;max-width:720px">Сейчас 90% ваших звонков живут в Telegram и ещё 10% — в сим-картах: их не слышно, и они не превращаются в управленческие цифры. Ниже — что меняется, что это стоит у других и когда окупается.</p><div class="os rv"><div class="oshead"><span class="onum">00</span><h2>По итогам всех созвонов — всё учтено</h2></div><p class="osub">Шесть решений ваших созвонов и писем — и как каждое отражено в этом предложении.</p><div class="bgrid"><div class="bx rv"><div class="shell lift" style="width:100%;border-color:var(--goldhair)"><div class="core"><div class="bt">Запускаем запись</div><div class="bd">Телефония + звонки и переписка Telegram. Состав ниже собран ровно под это: база и модуль «Контур Telegram» — ничего лишнего.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="bt">5 номеров переданы</div><div class="bd">Проверяем оператора каждого и подключаем к АТС Т2; переоформление на юрлицо — бесплатно. Сами номера публично не показываем.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="bt">KPI — в дашборде</div><div class="bd">Все 9 метрик уже в демо: план/факт по статьям, сроки логистики, конверсия, время ответа, маржа, допы, ₽/лид, документы, дни в шоуруме.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="bt">Аналитика — дошлёте позже</div><div class="bd">Заложено в цену: два круга правок включены; новые отчёты дальше — по согласованному прайсу.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="bt">СофтСервис не требуется</div><div class="bd">Их настройка АТС — 2 375 BYN; после созвона проверили: то же самое делает готовая АТС Т2, без посредника и дешевле. Их предложение остаётся вашей опцией.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="bt">Сроки и счёт</div><div class="bd">Сроки — в этапах ниже, с запасом на риски. Счёт выставляем сразу после вашего подтверждения.</div></div></div></div></div></div><div class="os rv"><div class="oshead"><span class="onum">01</span><h2>Что вы получаете</h2></div><p class="osub">Шесть эффектов — от контроля до легальной телефонии. Каждый проверен в автобизнесе, кейсы кликаются.</p><div class="bgrid"><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div><div class="bt">100% звонков — оценка по вашему чек-листу</div><div class="bd">Весь отдел слышно за 15 минут в неделю вместо выборочной прослушки.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M4 20v-8M9.3 20V4.5M14.6 20v-9M20 20V8"/></svg></div><div class="bt">Дашборд ровно по вашим KPI</div><div class="bd">План/факт по статьям, маршруты, конверсия, допы, ₽/лид — считается само, без Excel.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3.2 2"/></svg></div><div class="bt">Скорость ответа — по каждому менеджеру</div><div class="bd">Ваш SLA «предложение за 1 день» становится измеримым. Скорость — это конверсия.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M12 4l8.5 15h-17z"/><path d="M12 10.5v3.6M12 16.9v.2"/></svg></div><div class="bt">Алерты спасают живые сделки</div><div class="bd">«Обещал перезвонить — задачи нет» → система сама ставит задачу в amoCRM.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10.5 12h5M10.5 16h5"/></svg></div><div class="bt">Слышно всё: IP-телефония + Telegram</div><div class="bd">Маркировка по закону, +7 и +375 в одной системе — и запись звонков Telegram, где живут 90% ваших разговоров.</div></div></div></div><div class="bx rv"><div class="shell lift" style="width:100%"><div class="core"><div class="icx"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M9 10.2h6M9 13.8h6"/></svg></div><div class="bt">Фикс за внедрение — без скрытых наценок</div><div class="bd">Цена работ фиксированная. Инфраструктура — подписки, минуты, сервера — отдельно и прозрачно, по себестоимости.</div></div></div></div></div><div class="eyebrow rv" style="margin:26px 0 0">Проверено в автобизнесе</div><div class="caserow rv" style="margin-top:0"><a class="case" href="https://sber.pro/cases/sila-tehnologii-kak-rechevaya-analitika-pomogla-frank-auto-uvelichit-prodazhi/" target="_blank" rel="noopener">Frank Auto: контроль 10 ч → 30 мин <span class="go">↗</span></a><a class="case" href="https://sber.pro/cases/tsifrovoi-razgovor-kak-v-forvard-avto-vnedrili-rechevuyu-analitiku-dlya-otdela-prodazh/" target="_blank" rel="noopener">Форвард-Авто: допродажи 3% → 20% <span class="go">↗</span></a><a class="case" href="https://www.calltouch.ru/blog/analiz-kachestva-zvonkov-v-novom-kuzove-kak-v-avtoindustrii-povyshat-konversiyu-iz-lida-v-prodazhu-s-pomoshhyu-ii-tehnologij-kejs-avto-ru-biznes/" target="_blank" rel="noopener">Авто.ру Бизнес: +1,2 млн ₽ за неделю <span class="go">↗</span></a></div></div><div class="os rv"><div class="oshead"><span class="onum">02</span><h2>Из чего собрана система</h2></div><p class="osub">Все разговоры стекаются в одну систему: готовые сервисы + наш код. Полный состав с прайс-ссылками — под плюсиком ниже.</p><div class="duo mt2 rv"><div class="shell"><div class="core"><div class="eyebrow" style="color:var(--goldB)">Готовые сервисы — оплачиваются напрямую</div><div class="mgrid"><div class="mcell"><b>АТС Т2</b><span>телефония + запись · <a href="https://msk.t2.ru/journal/article/corporate-ats-2-0-from-tele2" target="_blank" rel="noopener">цены↗</a></span></div><div class="mcell"><b>Yandex SpeechKit</b><span>расшифровка · <a href="https://aistudio.yandex.ru/docs/ru/speechkit/pricing" target="_blank" rel="noopener">тарифы↗</a></span></div><div class="mcell"><b>amoCRM</b><span>ваша CRM · <a href="https://www.amocrm.ru/buy/" target="_blank" rel="noopener">тарифы↗</a></span></div><div class="mcell"><b>Telegram Business</b><span>переписка · <a href="https://telegram.org/blog/telegram-business" target="_blank" rel="noopener">о сервисе↗</a></span></div><div class="mcell"><b>Audio Hijack</b><span>запись на Mac · <a href="https://rogueamoeba.com/audiohijack/" target="_blank" rel="noopener">сайт↗</a></span></div><div class="mcell"><b>Cube ACR</b><span>запись на Android · <a href="https://cubeacr.app/" target="_blank" rel="noopener">сайт↗</a></span></div><div class="mcell"><b>Yandex DataLens</b><span>дашборд KPI · <a href="https://datalens.yandex.ru/" target="_blank" rel="noopener">сайт↗</a></span></div><div class="mcell next"><b>ChatPlace</b><span>бот-квалификации * · <a href="https://chatplace.ru/" target="_blank" rel="noopener">сайт↗</a></span></div></div></div></div><div class="shell"><div class="core"><div class="eyebrow" style="color:var(--goldB)">Наш код — остаётся вам</div><div class="mgrid"><div class="mcell"><b>Конвейер записей</b><span>сбор со всех устройств</span></div><div class="mcell"><b>ИИ-оценка</b><span>по вашему чек-листу</span></div><div class="mcell"><b>Коннектор amoCRM</b><span>записи в сделки + задачи</span></div><div class="mcell"><b>Витрины и дашборд</b><span>девять ваших KPI</span></div><div class="mcell"><b>Отчёт- и алерт-боты</b><span>сводка и тревоги в Telegram</span></div><div class="mcell"><b>База знаний (RAG)</b><span>источник правды</span></div><div class="mcell"><b>Health-монитор</b><span>ни один звонок не потерян</span></div><div class="mcell next"><b>Боты этапов</b><span>квалификация · калькулятор *</span></div></div></div></div></div><p class="small dim rv" style="margin-top:14px">* — модули следующих этапов: подключаются к той же базе знаний, когда скажете.</p><div class="crit rv mt1" style="margin-top:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Путь звонка — живой анимацией на вкладке <a href="#" onclick="switchView('demo');window.scrollTo({top:0,behavior:'smooth'});return false" style="color:var(--goldB)">«Демо»</a>: от трубки до цифры на дашборде.</span></div></div><div class="os rv"><div class="oshead"><span class="onum">03</span><h2>Один подрядчик — одна ответственность</h2></div><p class="osub">Такие системы обычно собирают из четырёх исполнителей. Ломается всё на стыках — а за стыки не отвечает никто.</p><div class="duo mt2"><div class="shell"><div class="core"><span class="chip c-bad">как обычно</span><svg class="vsvg" viewBox="0 0 320 150" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="8" y="10" width="130" height="38" rx="9"/><rect x="182" y="10" width="130" height="38" rx="9"/><rect x="8" y="102" width="130" height="38" rx="9"/><rect x="182" y="102" width="130" height="38" rx="9"/><path d="M138 29h44M73 48v54M247 48v54M138 121h44M120 44l84 62M200 44l-84 62" stroke-dasharray="4 5" opacity=".55"/><g stroke-width="2.2" opacity=".95" style="color:var(--bad)"><path d="M156 24l8 10M164 24l-8 10M68 71l10 8M78 71l-10 8M242 71l10 8M252 71l-10 8M156 116l8 10M164 116l-8 10"/></g><g fill="currentColor" stroke="none" font-family="Manrope,sans-serif" font-size="10.5" font-weight="600"><text x="73" y="33" text-anchor="middle">Телеком</text><text x="247" y="33" text-anchor="middle">CRM-интегратор</text><text x="73" y="125" text-anchor="middle">Речевая аналитика</text><text x="247" y="125" text-anchor="middle">BI-аналитик</text></g></svg><div class="sli x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>4 договора, 4 счёта, 4 зоны ответственности</span></div><div class="sli x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Стыки — ничьи: «у нас всё работает, проблема на их стороне»</span></div><div class="sli x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Речевая аналитика — подписка: процесс уходит вместе с подрядчиком</span></div><div class="sli x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Единого экрана нет ни у одного из четырёх</span></div></div></div><div class="shell" style="border-color:var(--goldhair)"><div class="core"><span class="chip c-gold">у нас</span><svg class="vsvg" viewBox="0 0 320 150" fill="none" stroke="currentColor" stroke-width="1.3" style="color:var(--gold)"><rect x="6" y="6" width="308" height="138" rx="16" opacity=".7"/><rect x="26" y="24" width="118" height="34" rx="8" opacity=".85"/><rect x="176" y="24" width="118" height="34" rx="8" opacity=".85"/><rect x="26" y="92" width="118" height="34" rx="8" opacity=".85"/><rect x="176" y="92" width="118" height="34" rx="8" opacity=".85"/><path d="M144 41h32M85 58v34M235 58v34M144 109h32" opacity=".85"/><g fill="currentColor" stroke="none" font-family="Manrope,sans-serif" font-size="10.5" font-weight="600" opacity=".95"><text x="85" y="45" text-anchor="middle">Телефония</text><text x="235" y="45" text-anchor="middle">amoCRM</text><text x="85" y="113" text-anchor="middle">ИИ-оценка</text><text x="235" y="113" text-anchor="middle">Дашборд</text></g></svg><div class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span><b>Одна точка ответственности за все стыки:</b> если запись не дошла до сделки — это наша проблема, а не спор вендоров</span></div><div class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Один чат для любых вопросов — от симки до дашборда</span></div><div class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Состав — поимённым списком функций в договоре, оплата 50/50</span></div><div class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Система и код — ваша собственность, не аренда</span></div></div></div></div></div><div class="os rv"><div class="oshead"><span class="onum">04</span><h2>Окупаемость — временем и сделками</h2></div><p class="osub">Эффекты измерены в автобизнесе — кейсы выше кликаются. Ваш план — 16 сделок в месяц.</p><div class="paygrid" style="grid-template-columns:1fr 1fr"><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">40–50 ч</div><div class="payl">в месяц возвращаем руководителю</div><div class="payd">Контроль 10 ч/нед → 30 мин (Frank Auto) плюс отчёты без ручной сборки. Окупаемость временем — 2–3 месяца.</div></div></div></div><div class="pay rv"><div class="shell lift" style="width:100%"><div class="core"><div class="payv">+1–2</div><div class="payl">сделки в месяц — эффект на продажи</div><div class="payd">Конверсия +2 п.п. (Frank Auto) на вашем плане 16 сделок; допродажи 3% → 20% (Форвард-Авто).</div></div></div></div></div></div><div class="os rv"><div class="oshead"><span class="onum">05</span><h2>Цена: под ключ — против сборки из частей</h2></div><p class="osub">Цены исполнителей — с их публичных страниц, проверено 26.08.2026. Ссылки прямые.</p><details class="acc rv mt2"><summary><span class="plus"></span>Сравнить с рынком: то же самое по частям — ≈549 000 ₽ за первые 3 месяца</summary><div class="accb"><div style="max-width:720px"><div class="shell"><div class="core">
+      <div class="eyebrow">Как это покупает рынок — по частям</div>
+      <div style="display:grid;gap:11px;font-size:13.5px">
+        <div style="display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--hair);padding-bottom:10px"><span>AI-оценка звонков<br><span class="dim small"><a href="https://salesai.ru/pricing/" target="_blank" rel="noopener">подписка SalesAI, тариф Team</a> · только звонки, без вашего дашборда</span></span><b class="num">49 000 ₽/мес<br><span class="dim small" style="font-weight:500">предоплата за 3 мес — 147 000 ₽</span></b></div>
+        <div style="display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--hair);padding-bottom:10px"><span>Дашборд руководителя<br><span class="dim small"><a href="https://kokoc.com/razrabotka-dashborda-dlya-biznesa/" target="_blank" rel="noopener">студии, Kokoc</a> · только дашборд</span></span><b class="num">от 300 тыс ₽</b></div>
+        <div style="display:flex;justify-content:space-between;gap:12px"><span>Контроль качества руками<br><span class="dim small"><a href="https://ropsharing.ru/okk-2" target="_blank" rel="noopener">РОП-шеринг</a> · выборочно, навсегда</span></span><b class="num">34–91 тыс ₽/мес</b></div>
+      </div>
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--hair2)">
+        <div class="small dim">Первые 3 месяца по частям</div>
+        <div style="font-size:24px;font-weight:700">≈ 549 000 ₽</div>
+        <div class="small dim" style="margin-top:4px">147 000 (SalesAI, предоплата) + 300 000 (дашборд) + 3 × 34 000 (контроль руками)</div>
+        <div class="small mut" style="margin-top:4px">И это два разных подрядчика, единого экрана нет, а подписки после трёх месяцев продолжаются.</div>
+      </div>
+    </div></div></div></div></details><div class="rv mt2"><div class="shell rv" style="border-color:var(--goldhair)"><div class="core"><div class="eyebrow" style="color:var(--goldB)">У нас — всё это под ключ</div><div class="duo" style="gap:26px;align-items:start"><div style="display:grid"><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Телефония +7 и +375: запись, маркировка по закону</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Расшифровка 100% разговоров — звонки и переписка</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Интеграция с вашей amoCRM</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>AI-оценка 100% звонков по вашему чек-листу</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Дашборд всех ваших KPI — тот, что в демо</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Алерты и еженедельный отчёт в Telegram</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Запуск, настройка и передача — целиком на нас</span></div><div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--goldhair)"><div class="eyebrow" style="color:var(--goldB)">+ Модуль «Контур Telegram» — ваши 90% звонков · €1 500</div><div style="display:grid"><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Запись TG-звонков на устройствах: компьютер — гарантированно, Android — после недельного пилота на ваших моделях</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Переписка рабочих аккаунтов — официальный Telegram Business, плюс разовая выгрузка истории чатов</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Автодоставка записей со всех устройств и привязка каждой к сделке amoCRM</span></div><div class="veri"><svg viewBox="0 0 24 24" style="stroke:var(--ok)"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span>Рабочий сценарий каждому менеджеру + обучение</span></div></div></div></div><div class="pcolB"><div class="small dim">База + модуль Telegram · один подрядчик · система ваша</div><div class="priceX">€4 500</div><div class="priceSub"><span class="chip c-gold">≈ 477 000 ₽</span><span class="chip c-dim">база €3 000 + модуль «Контур Telegram» €1 500</span><span class="chip c-dim">счёт в евро или в рублях — как удобнее вам</span><span class="chip c-dim">цены нетто — без налогов</span></div><div class="optrow"><div class="opt"><em>Дальше — вариант 1</em><b>Сопровождение · €500 в месяц</b><span>≈ 53 000 ₽ · поддержка, донастройка, новые отчёты и парк устройств записи.</span></div><div class="opt"><em>Дальше — вариант 2</em><b>Обучение команды · €1 000 разово</b><span>≈ 106 000 ₽ · передаём управление всем контуром, включая устройства, — дальше ведёте сами.</span></div></div><details class="acc rv"><summary><span class="plus"></span>Условия и гарантии</summary><div class="accb"><b style="color:var(--ink)">Все цены — нетто, без налогов.</b> Инфраструктура (Telegram Premium, лицензии программ записи, тарифы АТС Т2 и amoCRM) — напрямую провайдерам, без нашей наценки, ориентир 8–12 тыс ₽/мес на команду — построчная таблица с прайс-ссылками ниже. <b style="color:var(--ink)">Состав фиксируем поимённым списком функций</b> в приложении к договору — никаких «примерно». Оплата 50/50: половина на старте, половина по приёмке. Два круга правок включены. Расширения — сквозная аналитика до маржи, новые отчёты — по согласованному прайсу.</div></details></div></div></div></div></div></div><div class="os rv"><div class="eyebrow rv" style="color:var(--goldB)">Постоянные расходы — напрямую провайдерам</div><p class="osub">Мы не наценяем: каждая строка — с прямой ссылкой на прайс. Ориентир для команды из пяти человек.</p><div class="tw rv" style="margin-top:14px"><table class="t costs"><thead><tr><th>Сервис</th><th>За что</th><th>₽ в месяц</th><th>Прайс</th></tr></thead><tbody><tr><td><b>АТС Т2</b></td><td>телефония 5 номеров + запись</td><td>от 700</td><td><a href="https://msk.t2.ru/journal/article/corporate-ats-2-0-from-tele2" target="_blank" rel="noopener">страница Т2↗</a></td></tr><tr><td><b>Yandex SpeechKit</b></td><td>расшифровка разговоров, 0,15 ₽/мин</td><td>≈300 – 600</td><td><a href="https://aistudio.yandex.ru/docs/ru/speechkit/pricing" target="_blank" rel="noopener">тарифы↗</a></td></tr><tr><td><b>ИИ-анализ (Claude API)</b></td><td>оценка каждого разговора</td><td>≈4 000 – 6 000</td><td><a href="https://www.anthropic.com/pricing" target="_blank" rel="noopener">тарифы↗</a></td></tr><tr><td><b>VPS-сервер в РФ</b></td><td>хранилище записей и конвейер</td><td>≈500 – 1 500</td><td>выбор на Шаге 0</td></tr><tr><td><b>Telegram Premium</b></td><td>Business-механизм переписки</td><td>≈2 000 на команду</td><td><a href="https://telegram.org/blog/telegram-business" target="_blank" rel="noopener">подробнее↗</a></td></tr><tr><td><b>Cube ACR</b></td><td>запись на Android-устройствах</td><td>≈1 000</td><td><a href="https://cubeacr.app/" target="_blank" rel="noopener">сайт↗</a></td></tr><tr><td><b>amoCRM</b></td><td>ваша CRM — уже оплачиваете</td><td>599 – 1 799 за пользователя</td><td><a href="https://www.amocrm.ru/buy/" target="_blank" rel="noopener">тарифы↗</a></td></tr></tbody></table></div><div class="crit rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span><b>Итого ориентир: ≈8–12 тыс ₽/мес на команду.</b> Разово — лицензия Audio Hijack для Mac: $64 ≈ 6–7 тыс ₽ (<a href="https://rogueamoeba.com/audiohijack/" target="_blank" rel="noopener">страница↗</a>).</span></div><div class="shell mt1 rv"><div class="core"><div class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span><b>Подписки — сервисам напрямую.</b> Кабинеты и счета — ваши с первого дня, без нашей наценки. Уходим мы — всё продолжает работать.</span></div><div class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span><b>Поддержка кастомной части.</b> Это и есть сопровождение €500/мес; либо после обучения €1 000 ведёте сами — код ваш.</span></div></div></div></div><div class="os rv"><div class="oshead"><span class="onum">06</span><h2>Этапы внедрения</h2></div><p class="osub">Каждый шаг — с исполнителями и измеримым критерием приёмки. Чистая длительность — 5 недель; риск-буфер 20% — отдельной строкой, честно.</p><div class="steps"><div class="step rv"><div class="sdot">0</div><div class="sbody"><span class="sweek">Шаг 0 · неделя 1 · параллельно</span><div class="stitle">База знаний — источник правды</div><div class="sdesc">Прайсы, регламенты, скрипты, статьи сделки, лучшие ответы менеджеров — переводим на язык ИИ. На этом ядре работают все системы; входит в цену.</div><div class="who"><span class="chip c-dim">мы: сборка и разметка</span><span class="chip c-dim">вы: документы + чек-лист оценки</span></div><div class="crit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span><b>Принято, когда:</b> ИИ отвечает по вашим прайсам и правилам — проверяем вместе на 10 контрольных вопросах.</span></div></div></div><div class="step rv"><div class="sdot">1</div><div class="sbody"><span class="sweek">Шаг 1 · недели 1–2</span><div class="stitle">Записывается всё</div><div class="sdesc">Телефония: АТС Т2 на ваших существующих номерах — заявка, переоформление на юрлицо, маркировка по закону. Mac-станция записи Telegram; недельный пилот Cube ACR на 2–3 моделях Android; Telegram Business-бот + разовая выгрузка истории чатов.</div><div class="who"><span class="chip c-dim">мы: настройка всего контура</span><span class="chip c-dim">вы: доступ к amoCRM, телефоны на пилот</span><span class="chip c-dim">оператор: включение АТС и маркировка</span></div><div class="crit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span><b>Принято, когда:</b> звонок каждого типа — телефон, TG-звонок, переписка — записан и лежит в хранилище.</span></div></div></div><div class="step rv"><div class="sdot">2</div><div class="sbody"><span class="sweek">Шаг 2 · недели 3–4</span><div class="stitle">Всё расшифровывается и анализируется</div><div class="sdesc">Расшифровка всех записей, автодоставка со всех устройств, привязка каждой записи к сделке amoCRM, ИИ-оценка по вашему чек-листу, дашборд с девятью вашими KPI, автозадачи-алерты.</div><div class="who"><span class="chip c-dim">мы: конвейер, оценка, дашборд</span><span class="chip c-dim">вы: 30 минут на сверку чек-листа</span></div><div class="crit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span><b>Принято, когда:</b> новый звонок появляется в сделке с оценкой не дольше чем через 30 минут; все 9 KPI на дашборде живые.</span></div></div></div><div class="step rv"><div class="sdot">3</div><div class="sbody"><span class="sweek">Шаг 3 · неделя 5</span><div class="stitle">Боевой режим и передача</div><div class="sdesc">Раскатка записи на весь отдел, правки чек-листа по живым звонкам, рейтинг менеджеров, еженедельный отчёт в Telegram, инструктаж команды.</div><div class="who"><span class="chip c-dim">мы: раскатка и обучение</span><span class="chip c-dim">вы: час команды на инструктаж</span></div><div class="crit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span><b>Принято, когда:</b> неделя боевого режима без потерь — монитор здоровья зелёный, отчёт пришёл в Telegram, приёмка по поимённому списку функций.</span></div></div></div><div class="step rv"><div class="sdot">+1</div><div class="sbody"><span class="sweek">Неделя 6 · риск-буфер 20%</span><div class="stitle">Запас на то, что не зависит от нас</div><div class="sdesc">Согласования и маркировка у оператора (до 10 рабочих дней по закону), пилот Android на ваших моделях, доступы и согласия сотрудников. Не понадобился — сдаём раньше.</div><div class="crit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></svg><span><b>Итог:</b> чистые 5 недель + буфер 1 неделя = обещаем 4–6 недель.</span></div></div></div></div><div class="rv mt2"><details class="acc rv"><summary><span class="plus"></span>Как именно пишем Telegram — точный стек (проверено 11.09.2026)</summary><div class="accb"><b style="color:var(--ink)">Android:</b> Cube ACR + модуль Helper — запись VoIP-звонков без root (<a href="https://cubeacr.app/helper.html" target="_blank" rel="noopener">официальная справка</a>); работу именно с Telegram подтверждаем недельным пилотом на ваших моделях: часть устройств пишет только одну сторону, это ограничение железа.<br><b style="color:var(--ink)">Рабочий Mac:</b> Audio Hijack — Telegram в <a href="https://rogueamoeba.com/support/knowledgebase/?showArticle=Misc-SupportedVoiceChatApps&product=Audio+Hijack" target="_blank" rel="noopener">официальном списке приложений</a>; обе стороны пишутся в раздельные каналы — идеально для расшифровки «кто что сказал».<br><b style="color:var(--ink)">Переписка:</b> Telegram Business с подключённым ботом — официальный канал Bot API, сообщения рабочих аккаунтов собираются в базу знаний легально и в реальном времени.<br><b style="color:var(--ink)">Честно:</b> на iPhone запись звонков Telegram невозможна технически — менеджеров с iPhone переводим на звонки с рабочего Mac или Android.</div></details><details class="acc rv"><summary><span class="plus"></span>Телефония этапа 1 — АТС Т2 на ваших номерах (проверено 11.09.2026)</summary><div class="accb"><b style="color:var(--ink)">Корпоративная АТС Т2:</b> ваши номера уже в Т2 — АТС подключается к существующим номерам, никуда их не перенося («услуга подключится к указанным вами номерам» — <a href="https://msk.t2.ru/journal/article/corporate-ats-2-0-from-tele2" target="_blank" rel="noopener">официальная страница Т2</a>). Запись звонков в составе, тариф «Базовый» от 700 ₽/мес, подключение от 5 сотрудников — ровно ваша команда. Маркировка вызовов по закону — услугой оператора.<br><b style="color:var(--ink)">Номер +375</b> берём у белорусского оператора и заводим в АТС по SIP/переадресации.<br><b style="color:var(--ink)">Детали записи</b> (все ли типы вызовов пишутся, как выгружаем) закрываем одним вопросом менеджеру Т2 на неделе 1. Если ответ не устроит — есть проверенный запасной путь: цена и сроки те же, номера сохраняются.</div></details></div><p class="small dim rv" style="margin-top:12px">Дальше — на выбор: сопровождение €500/мес (≈53 000 ₽) или разовое обучение команды €1 000 (≈106 000 ₽). Расширения — сквозная аналитика до маржи, новые отчёты — по согласованному прайсу.</p></div>
+  <p class="small dim rv" style="margin-top:34px">Кейсы Frank Auto, Форвард-Авто и Авто.ру Бизнес — публикации СберПро и Calltouch, 2025. Инфраструктура оплачивается отдельно у любого исполнителя — наша таблица расходов выше, с прайс-ссылками.</p>
+</div></div>
+
+<div class="footer"><div class="wrap">Интерактивный прототип для Plutos Auto · все цифры на экране «Демо» — вымышленные и показывают механику · подготовлено 27.08 · обновлено 11.09.2026</div></div>
+
+<script>
+function pfRow(label,plan,fact,max,unit){
+ const pw=Math.round(plan/max*100), fw=Math.round(fact/max*100);
+ const diff=fact-plan;
+ const chip=diff>0?`<span class="chip ${diff/plan>0.07?"c-bad":"c-warn"}">▲ +${diff}${unit}</span>`:diff<0?`<span class="chip c-ok">${diff}${unit}</span>`:`<span class="chip c-ok">в плане</span>`;
+ return `<div class="row"><div class="lbl">${label}</div>
+   <div class="bars"><div class="bar plan" style="width:${pw}%"></div><div class="bar fact" style="width:${fw}%"></div></div>
+   <div class="val">${fact}${unit}</div><div style="flex:0 0 auto">${chip}</div></div>`;
+}
+function barRow(label,val,max,unit,color){
+ const w=Math.max(2,Math.round(val/max*100));
+ return `<div class="row"><div class="lbl">${label}</div>
+   <div class="bars"><div class="bar fact" style="width:${w}%;background:${color||"var(--sBlue)"}"></div></div>
+   <div class="val">${val.toLocaleString("ru-RU")}${unit}</div></div>`;
+}
+document.getElementById("logistics").innerHTML=[
+ pfRow("Германия → Москва",21,24,30," дн"),
+ pfRow("Словакия → Москва",18,19,30," дн"),
+ pfRow("Венгрия → Москва",20,20,30," дн"),
+ pfRow("Польша → Москва",17,16,30," дн")
+].join("");
+document.getElementById("docs").innerHTML=[
+ pfRow("Контракт и оплата",2,2,8," дн"),
+ pfRow("СБКТС",4,6,8," дн"),
+ pfRow("ЭПТС",3,3,8," дн"),
+ pfRow("Постановка на учёт",2,2,8," дн")
+].join("");
+document.getElementById("conv").innerHTML=[
+ barRow("Пул партнёров / рекомендации",24,26,"%"),
+ barRow("Сайт (квиз)",8,26,"%"),
+ barRow("Telegram-группа",6,26,"%"),
+ barRow("Радар спроса (новый канал)",4,26,"%")
+].join("");
+document.getElementById("cpl").innerHTML=[
+ barRow("Радар спроса",1100,8000," ₽"),
+ barRow("Авито",1900,8000," ₽"),
+ barRow("Telegram",3500,8000," ₽"),
+ barRow("Сайт (Директ)",7400,8000," ₽")
+].join("");
+document.getElementById("rating").innerHTML=[
+ barRow("Олег",84,100,""),
+ barRow("Евгений",76,100,""),
+ barRow("Артём",61,100,"")
+].join("");
+
+const CALLS=[
+ {t:"25.08 10:12",m:"Олег",c:"Салон «Гранд Моторс»",dir:"вх.",len:"6:24",sc:92,al:""},
+ {t:"25.08 11:40",m:"Евгений",c:"Лизинг «Меркурий»",dir:"исх.",len:"4:03",sc:81,al:""},
+ {t:"24.08 16:55",m:"Артём",c:"Частный клиент, Cayenne",dir:"вх.",len:"3:12",sc:54,al:"⛔"},
+ {t:"24.08 12:30",m:"Олег",c:"Салон «Люкс-Парк»",dir:"исх.",len:"7:48",sc:88,al:""},
+ {t:"23.08 15:04",m:"Евгений",c:"Автопарк «Дельта»",dir:"исх.",len:"5:31",sc:74,al:"▲"},
+ {t:"23.08 10:20",m:"Артём",c:"Частный клиент, G 63",dir:"вх.",len:"2:47",sc:66,al:"▲"}
+];
+const TRANSCRIPTS={
+ 0:{title:"Входящий · салон «Гранд Моторс» · Олег · 92/100",
+   lines:[["0:04","К","client","Добрый день, у клиента запрос на X5 40d, свежий, до семи миллионов на круг. Реально из Европы в сентябре?"],
+   ["0:12","Олег","","Добрый! Да, есть прямо в наличии: X5 40d двадцать первого года, сорок тысяч пробега, уже в Москве — и могу под заказ из Германии, три-четыре недели. Под ваш бюджет посчитаю оба варианта по статьям: закуп, логистика, таможня с утилём, наша комиссия фиксированная."],
+   ["1:05","К","client","А по документам что?"],
+   ["1:09","Олег","","СБКТС и ЭПТС делаем сами, в цене. Если клиент берёт в лизинг — у нас партнёрские условия, и страховку сразу посчитаем. Отправлю расчёт сегодня до 18:00, и предлагаю созвон завтра в 11 — покажу сток-лист под ваши марки."]],
+   checks:[["✓","Представился, узнал потребность и бюджет"],["✓","Предложил два варианта: наличие + под заказ"],["✓","Озвучил прозрачный расчёт по статьям"],["✓","Предложил допы: лизинг, страховка"],["✓","Назначил следующий шаг со сроком"],["✓","Задача в amoCRM: «Расчёт до 18:00» — создана"],["—","Возражений не было"]],
+   result:'<span class="chip c-ok">Сделка продвинута: расчёт + созвон назначен</span>'},
+ 2:{title:"Входящий · частный клиент, Porsche Cayenne · Артём · 54/100",
+   lines:[["0:03","К","client","Здравствуйте, видел у вас Cayenne. А чего так дорого выходит-то? Мне считали дешевле."],
+   ["0:10","Артём","","Ну, там таможня сейчас дорогая, утильсбор подняли…"],
+   ["0:31","К","client","А если через Беларусь? Говорят, дешевле выходит."],
+   ["0:36","Артём","","Через Беларусь можно, да… там по-разному считается. Я вам, наверное, завтра наберу, посчитаю."],
+   ["1:40","К","client","Ну ладно, жду."]],
+   checks:[["✗","Не выявил бюджет и сроки клиента"],["✗","Возражение «дорого» не отработано: нет разложения цены по статьям — главного аргумента компании"],["✗","Про Беларусь ответил неуверенно: не объяснил правила утильсбора"],["✗","Допы не предложены"],["✗","Следующий шаг без конкретики («наверное завтра»)"],["✗","Задача в amoCRM не создана — <b>создана системой автоматически</b>"],["✓","Вежлив, не перебивал"]],
+   result:'<span class="chip c-bad">Риск потери сделки · рекомендация: скрипт «прозрачный расчёт» + шпаргалка по утильсбору-2026</span>'}
+};
+function renderCalls(){
+ document.getElementById("calltable").innerHTML=`<tr><th>Когда</th><th>Менеджер</th><th>Контрагент</th><th></th><th class="num">Длит.</th><th class="num">Оценка</th><th></th></tr>`+
+ CALLS.map((c,i)=>`<tr class="clickable" onclick="openCall(${i})"><td class="num">${c.t}</td><td>${c.m}</td><td>${c.c}</td><td class="dim">${c.dir}</td><td class="num">${c.len}</td><td class="num"><b style="color:${c.sc>=80?"var(--ok)":c.sc>=68?"var(--warn)":"var(--bad)"}">${c.sc}</b></td><td>${c.al}</td></tr>`).join("");
+ openCall(0);
+}
+function openCall(i){
+ const t=TRANSCRIPTS[i]||null;
+ const el=document.getElementById("callview");
+ if(!t){el.innerHTML=`<p class="small mut">Для этого звонка в демо показан только рейтинг. Откройте звонки Олега (10:12) или Артёма (16:55) — там полный разбор.</p>`;return;}
+ el.innerHTML=`<h3>${t.title}</h3>
+  <div class="grid2" style="margin-top:12px">
+   <div><label class="small dim" style="display:block;margin-bottom:8px">Транскрипт (фрагмент) · стерео-линия, роли разделены автоматически</label>
+     <div class="transcript">${t.lines.map(l=>`<div class="tr-line ${l[2]}"><span class="tc">${l[0]}</span><b>${l[1]}:</b> ${l[3]}</div>`).join("")}</div></div>
+   <div><label class="small dim" style="display:block;margin-bottom:8px">Оценка по чек-листу компании</label>
+     ${t.checks.map(c=>`<div class="check"><span class="m" style="background:${c[0]==="✓"?"var(--okbg)":c[0]==="✗"?"var(--badbg)":"rgba(255,255,255,.06)"};color:${c[0]==="✓"?"var(--ok)":c[0]==="✗"?"var(--bad)":"var(--ink3)"}">${c[0]}</span><span>${c[1]}</span></div>`).join("")}
+     <div style="margin-top:12px">${t.result}</div></div>
+  </div>`;
+}
+function subTab(k){
+ document.querySelectorAll(".stab").forEach(b=>b.classList.toggle("on",b.dataset.st===k));
+ ["pulse","calls"].forEach(s=>document.getElementById("st-"+s).classList.toggle("hidden",s!==k));
+ document.getElementById("st-"+k).classList.add("fade");
+ if(k==="calls")renderCalls();
+}
+function switchView(v){
+ document.querySelectorAll(".navtab").forEach(t=>t.classList.toggle("on",t.dataset.v===v));
+ document.getElementById("view-demo").classList.toggle("hidden",v!=="demo");
+ document.getElementById("view-offer").classList.toggle("hidden",v!=="offer");
+ window.scrollTo({top:0,behavior:"instant"});
+ observeAll();
+}
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }),{threshold:.1});
+function observeAll(){ document.querySelectorAll(".rv:not(.in)").forEach(el=>io.observe(el)); }
+observeAll();
+</script>
+<script>
+(function(){
+const CAPS=['Менеджер говорит с клиентом — обычный звонок или Telegram.','Разговор записан сам: АТС на вашем номере, Mac или Android.','Запись улетела в ваше хранилище — монитор подтвердил доставку.','Из записи — текст: каждое слово разговора.','ИИ прошёл по вашему чек-листу: приветствие, допы, обещания.','amoCRM: запись и оценка легли в сделку, «обещал перезвонить» — задача.','Дашборд обновился: +1 звонок в цифрах недели.','<b>Отчёт-бот прислал сводку в Telegram, алерт-бот — тревогу. Команда в курсе.</b>'];
+const fds=[].slice.call(document.querySelectorAll('#fdrow .fd'));
+const lns=[].slice.call(document.querySelectorAll('#fdrow .fdln'));
+const cap=document.getElementById('fdcap');
+if(!fds.length||!cap)return;
+let i=-1;
+function tick(){
+ i++;
+ if(i>=CAPS.length){fds.forEach(function(x){x.classList.remove('on','done')});lns.forEach(function(x){x.classList.remove('go','done')});i=-1;setTimeout(tick,1100);return}
+ if(i>0){fds[i-1].classList.remove('on');fds[i-1].classList.add('done');lns[i-1].classList.remove('go');lns[i-1].classList.add('done')}
+ fds[i].classList.add('on');cap.innerHTML=CAPS[i];
+ if(i<lns.length)setTimeout(function(){lns[i]&&lns[i].classList.add('go')},700);
+ setTimeout(tick,i===CAPS.length-1?3000:1350)}
+setTimeout(tick,900)})();
+</script></body>
+</html>
